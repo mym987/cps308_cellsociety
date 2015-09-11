@@ -58,3 +58,19 @@ current state.  The default states are on and off, but like the other classes,
 cell state can also be extended. If sometime in the future, a model is created
 where there need to be cells with three possible states, this will not be
 difficult to implement because it simply requires writing a new subclass.
+
+##Design Considerations
+Our highest design consideration will mainly focus on the extendibility of our code. All conditions for each cellular automata model (CA) will be specified in our XML file. Thus, we must take into consideration all potential conditions and how to interpret them into useful and volatile parameters in our code. 
+
+The primary conditions our group discussed in preparing for the design of our game include the rules for change in cell state and the number of possible states a cell can hold. For both these conditions, we decided it would be necessary to create separate classes for these as these conditions differ greatly from model to model. We will call these the “Model” class and the “States” class as reference. 
+
+While this will create more classes in our project and potentially high dependency within classes, we decided that this method would be most effective when we are challenged to extend our code to other models. For example, the Model class will probably have dependencies on the States class and Cell class, using get methods from the States class to determine a current state, and change a state based on a set of rules defined in Model.  
+
+Furthermore, we decided that Model should be an abstract class, with the different types of models (ex. Schelling’s segregation model, Wa-tor prey-predator model, etc.) extending the Model class. Thus, we will have to take into consideration the types of methods within the Model class as well.
+
+##Team Responsibilities
+(One person) will work on the XML processing portion of the project. This entails formatting the XML file containing the rules for each model, and also creating the Model abstract class which translates the XML file rules into appropriate parameters, and methods that change. 
+
+(Another person) will work on the Grid and Cell classes. This person may also need to work with (State class person) to make sure Cell extracts the correct dependencies from the State class to get its current state.
+
+(This person) will work on the State class and the Game Manager class. This person will also work with (grid and cell person). 
