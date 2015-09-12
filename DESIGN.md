@@ -156,8 +156,8 @@ While this will create more classes in our project and potentially high dependen
 Furthermore, we decided that Model should be an abstract class, with the different types of models (ex. Schelling’s segregation model, Wa-tor prey-predator model, etc.) extending the Model class. Thus, we will have to take into consideration the types of methods within the Model class as well.
 
 ##Team Responsibilities
-(One person) will work on the XML processing portion of the project. This entails formatting the XML file containing the rules for each model, and also creating the Model abstract class which translates the XML file rules into appropriate parameters, and methods that change. 
+Mike will work on the XML processing portion of the project. This entails formatting the XML file, parsing the XML file through the Game Manager class (which in turn returns a data structure storing the model information), and also creating the Model abstract class which translates the data structure from the Game Manager class to set the rules for each separate model. 
 
-(Another person) will work on the Grid and Cell classes. This person may also need to work with (State class person) to make sure Cell extracts the correct dependencies from the State class to get its current state.
+Karen will work on the Grid, Cell, and Location classes. This person may also need to work with Cameron to make sure Cell extracts the correct dependencies from the State class to get its current state.
 
-(This person) will work on the State class and the Game Manager class. This person will also work with (grid and cell person). 
+Cameron will work on the State class and the remaining portion of the Game Manager class that manages the game setup and GUI. This person will also work with Karen. 
