@@ -77,17 +77,22 @@ Erroneous situations:
 
 ## Design Details
 
-`Game` Class: 
+`GameManager` Class: 
 
 `myGrid`, `myModel`, `myMenu`, `myTitle`, `myTimer`
 -	`newAnimation(int number)`
   Start a new animation. Model is specified by number. Return model.
+-	`step(double elapsedTime)`
+  Steps the animation.
 -	`start()`
  	Start the animation. Void.
 -	`stop()`
   Pause the animation. Void.
 -	`reset()`
   Reset the animation, reset all cells to initial configuration. Void.
+-	`parseXML()`
+- 	`createModel(XML)`
+  Determines which type of model to create based on XML and creates it.
 
 `Grid` Class: 
 
@@ -99,7 +104,7 @@ Grid maintains a 2D array of cells. Cells should never move, but their states ca
   Get the height of the grid. Return `int`.
 - `isValid(Location loc)`
   Return if the location is Valid. Return `boolean`.
-- `E get(Location loc)`
+- `Cell get(Location loc)`
   Get the cell on loc. Return `cell`.
 - `getNeighbors(Location loc)`
   Return a list of neighbor cells. Return `ArrayList<Cell>`
