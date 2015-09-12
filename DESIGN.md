@@ -78,7 +78,8 @@ Erroneous situations:
 ## Design Details
 
 Game Class: 
-`myGrid`, `myModel`, `myMenu`, `myControlPanel`, `myAdjustPanel`, `myGraph`, `myTitle`, `myTimer`
+
+`myGrid`, `myModel`, `myMenu`, `myTitle`, `myTimer`
 -	`newAnimation(int number)`
   Start a new animation. Model is specified by number. Return model.
 -	`start()`
@@ -89,7 +90,9 @@ Game Class:
   Reset the animation, reset all cells to initial configuration. Void.
 
 Grid Class: 
-It has width and height. It has cells and a model.
+
+Grid maintains a 2D array of cells. Cells should never move, but their states can be updated.
+
 - `getNumRows()`
   Get the width of the grid. Return `int`.
 - `getNumCols()`
@@ -110,13 +113,26 @@ It has a control panel
 
 Abstract Cell Class:
 - public Cell()
+  Consturctor, construct a cell
 - public getState()
-- public setState()
+  Return the current state of the cell. Return `State`
+- public setState(State s)
+  Set the state of the cell.
 - public Grid<Cell> getGrid()
 - public Location getLocation()
-- public void putSelfInGrid(Grid<Cell> gr, Location loc)
-- public void removeSelfFromGrid()
-- public void moveTo(Location newLocation)
+  Return `Location`
+- public setNeighbors
+  Takes in an `ArrayList<Cell>`, and set them as its neighbors
+- public determineNextState()
+  Determine the next state of the cell based on the list of neighbors
+- public setNextState()
+  Should only called by the grid class in one pass to update the state of the cell
+
+Subclasses of `Cell`:
+- Predator&Prey cells
+- Fire cells
+- Segregation cells
+- Game of Life cells
 
 Location Class:
 Convension: Top left corner is (0,0)
