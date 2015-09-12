@@ -107,8 +107,7 @@ Grid maintains a 2D array of cells. Cells should never move, but their states ca
 Abstract Model Class: 
 It has a control panel
 -	`generateGrid(XML)`
--	`placeCellOnGrid(Grid,XML)`
--	`calculateState(ArrayList<Cell> neighbors, Cell cell)`
+  Create grids and cells based on the XML file
 
 
 Abstract Cell Class:
@@ -118,10 +117,9 @@ Abstract Cell Class:
   Return the current state of the cell. Return `State`
 - public `setState(State s)`
   Set the state of the cell.
-- public `Grid<Cell> getGrid()`
-- public Location getLocation()
+- public `Location getLocation()`
   Return `Location`
-- public setNeighbors(ArrayList<Cell> neighbors)
+- public `setNeighbors(ArrayList<Cell> neighbors)`
   Takes in an `ArrayList<Cell>`, and set them as its neighbors
 - public `determineNextState()`
   Determine the next state of the cell based on the list of neighbors
