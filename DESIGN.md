@@ -121,12 +121,13 @@ Abstract Cell Class:
 - public `Grid<Cell> getGrid()`
 - public Location getLocation()
   Return `Location`
-- public setNeighbors
+- public setNeighbors(ArrayList<Cell> neighbors)
   Takes in an `ArrayList<Cell>`, and set them as its neighbors
-- public determineNextState()
+- public `determineNextState()`
   Determine the next state of the cell based on the list of neighbors
 - public `setNextState()`
   Should only called by the grid class in one pass to update the state of the cell
+- public `goToNextState()`
 
 Subclasses of `Cell`:
 - Predator&Prey cells
@@ -135,6 +136,7 @@ Subclasses of `Cell`:
 - Game of Life cells
 
 `Location` Class:
+This corresponds to the location of a cell within the grid
 Convension: Top left corner is (0,0)
 - `public Location(int x, int y)`
 - `public int getX()`
