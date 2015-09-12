@@ -91,20 +91,15 @@ Game Class:
 Grid Class: 
 It has width and height. It has cells and a model.
 - `getNumRows()`
-  Get the width of the grid. Return an integer.
+  Get the width of the grid. Return `int`.
 - `getNumCols()`
-  Get the height of the grid. Return an integer.
+  Get the height of the grid. Return `int`.
 - `isValid(Location loc)`
-  Return if the stat
-- E put(Location loc, E obj)
-- E remove(Location loc)
+  Return if the location is Valid. Return `boolean`.
 - E get(Location loc)
-- getOccupiedLocations()
-- getValidAdjacentLocations(Location loc)
-- getEmptyAdjacentLocations(Location loc)
-- getOccupiedAdjacentLocations(Location loc)
+  Get the cell on loc. Return `cell`.
 - getNeighbors(Location loc)
-- updateCells()
+  Return a list of neighbor cells. Return `ArrayList<Cell>`
 
 Abstract Model Class: 
 It has a control panel
