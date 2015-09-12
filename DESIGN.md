@@ -75,6 +75,7 @@ The main screen of the program contains five blocks. As seen from the screenshot
 * Start
 * Stop
 * Reset
+
 The slider panel is unique for each type of animation.
 Erroneous situations:
 1.	File name exists when saving: ask user whether to overwrite or not; if not, return to saving screen to change file name
