@@ -77,7 +77,7 @@ Erroneous situations:
 
 ## Design Details
 
-Game Class: 
+`Game` Class: 
 
 `myGrid`, `myModel`, `myMenu`, `myTitle`, `myTimer`
 -	`newAnimation(int number)`
@@ -89,7 +89,7 @@ Game Class:
 -	`reset()`
   Reset the animation, reset all cells to initial configuration. Void.
 
-Grid Class: 
+`Grid` Class: 
 
 Grid maintains a 2D array of cells. Cells should never move, but their states can be updated.
 
@@ -99,33 +99,33 @@ Grid maintains a 2D array of cells. Cells should never move, but their states ca
   Get the height of the grid. Return `int`.
 - `isValid(Location loc)`
   Return if the location is Valid. Return `boolean`.
-- E get(Location loc)
+- `E get(Location loc)`
   Get the cell on loc. Return `cell`.
-- getNeighbors(Location loc)
+- `getNeighbors(Location loc)`
   Return a list of neighbor cells. Return `ArrayList<Cell>`
 
 Abstract Model Class: 
 It has a control panel
--	generateGrid(XML)
--	placeCellOnGrid(Grid,XML)
--	calculateState(ArrayList<Cell> neighbors, Cell cell)
+-	`generateGrid(XML)`
+-	`placeCellOnGrid(Grid,XML)`
+-	`calculateState(ArrayList<Cell> neighbors, Cell cell)`
 
 
 Abstract Cell Class:
-- public Cell()
+- public `Cell()`
   Consturctor, construct a cell
-- public getState()
+- public `getState()`
   Return the current state of the cell. Return `State`
-- public setState(State s)
+- public `setState(State s)`
   Set the state of the cell.
-- public Grid<Cell> getGrid()
+- public `Grid<Cell> getGrid()`
 - public Location getLocation()
   Return `Location`
 - public setNeighbors
   Takes in an `ArrayList<Cell>`, and set them as its neighbors
 - public determineNextState()
   Determine the next state of the cell based on the list of neighbors
-- public setNextState()
+- public `setNextState()`
   Should only called by the grid class in one pass to update the state of the cell
 
 Subclasses of `Cell`:
@@ -134,18 +134,17 @@ Subclasses of `Cell`:
 - Segregation cells
 - Game of Life cells
 
-Location Class:
+`Location` Class:
 Convension: Top left corner is (0,0)
-- public Location(int x, int y)
-- public int getX()
-- public int getY()
+- `public Location(int x, int y)`
+- `public int getX()`
+- `public int getY()`
 
-State Class:
-- State()
-- public void setState(int state)
-- public int getState()
-- public boolean equals(State s)
-- public double compareTo(State s)
+`State` Class:
+- `State()`
+- `public void setState(int state)`
+- `public int getState()`
+- `public boolean equals(State s)`
 
 ##Design Considerations
 Our highest design consideration will mainly focus on the extendibility of our code. All conditions for each cellular automata model (CA) will be specified in our XML file. Thus, we must take into consideration all potential conditions and how to interpret them into useful and volatile parameters in our code. 
