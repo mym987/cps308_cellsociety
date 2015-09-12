@@ -61,13 +61,16 @@ difficult to implement because it simply requires writing a new subclass.
 
 ## User Interface
 The main screen of the program contains five blocks. As seen from the screenshot below, there is a menu toolbar on the top. The grid is displayed on the left. On the right panel, there are control buttons, sliders/input boxes for adjusting animation parameters and a graph display area for plotting some relevant statistics.
-![This is cool, too bad you can't see it](screenshot.png "Main Screen")
+
+![This is cool, too bad you can't see it](Screenshot.png "Main Screen")
+
 **File menu contains the following:**
 * New Animation
 * Save XML
 * Open XML
 * (Save Screenshot)
 * (Save Graph)
+
 **Animation menu contains the following:**
 * Start
 * Stop
