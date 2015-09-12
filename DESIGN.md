@@ -78,18 +78,24 @@ Erroneous situations:
 ## Design Details
 
 Game Class: 
-myGrid, myModel, myMenu, myControlPanel, myAdjustPanel, myGraph, myTitle, myTimer
--	newAnimation(int number)
--	start()
--	pause()
--	step()
--	reset()
+`myGrid`, `myModel`, `myMenu`, `myControlPanel`, `myAdjustPanel`, `myGraph`, `myTitle`, `myTimer`
+-	`newAnimation(int number)`
+  Start a new animation. Model is specified by number. Return model.
+-	`start()`
+ 	Start the animation. Void.
+-	`stop()`
+  Pause the animation. Void.
+-	`reset()`
+  Reset the animation, reset all cells to initial configuration. Void.
 
 Grid Class: 
 It has width and height. It has cells and a model.
-- getNumRows()
-- getNumCols()
-- isValid(Location loc)
+- `getNumRows()`
+  Get the width of the grid. Return an integer.
+- `getNumCols()`
+  Get the height of the grid. Return an integer.
+- `isValid(Location loc)`
+  Return if the stat
 - E put(Location loc, E obj)
 - E remove(Location loc)
 - E get(Location loc)
@@ -118,13 +124,10 @@ Abstract Cell Class:
 - public void moveTo(Location newLocation)
 
 Location Class:
-- public Location(int r, int c)
-- public int getRow()
-- public int getCol()
-- public Location getAdjacentLocation(int direction)
-- public int getDirectionToward(Location target)
-- public boolean equals(Object other)
-- public int hashCode()
+Convension: Top left corner is (0,0)
+- public Location(int x, int y)
+- public int getX()
+- public int getY()
 
 State Class:
 - State()
