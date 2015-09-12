@@ -86,6 +86,59 @@ Erroneous situations:
 
 ## Design Details
 
+Game Class: 
+myGrid,myModel,myMenu,myControlPanel, myAdjustPanel, myGraph, myTitle, myTimer
+-	newAnimation(int number)
+-	start()
+-	pause()
+-	stop()
+-	reset()
+
+Grid Class: 
+It has width and height. It has cells and a model.
+- getNumRows()
+- getNumCols()
+- isValid(Location loc)
+- E put(Location loc, E obj)
+- E remove(Location loc)
+- E get(Location loc)
+- getOccupiedLocations()
+- getValidAdjacentLocations(Location loc)
+- getEmptyAdjacentLocations(Location loc)
+- getOccupiedAdjacentLocations(Location loc)
+- getNeighbors(Location loc)
+- updateCells()
+
+Abstract Model Class: 
+It has a control panel
+-	generateGrid(XML)
+-	placeCellOnGrid(Grid,XML)
+-	calculateState(ArrayList<Cell> neighbors, Cell cell)
+
+
+Abstract Cell Class:
+- public Cell()
+- public getState()
+- public setState()
+- public Grid<Cell> getGrid()
+- public Location getLocation()
+- public void putSelfInGrid(Grid<Cell> gr, Location loc)
+- public void removeSelfFromGrid()
+- public void moveTo(Location newLocation)
+
+Location Class:
+- public Location(int r, int c)
+- public int getRow()
+- public int getCol()
+- public Location getAdjacentLocation(int direction)
+- public int getDirectionToward(Location target)
+- public boolean equals(Object other)
+- public int hashCode()
+
+State Class:
+Enum class? On/off
+
+
 
 ##Design Considerations
 Our highest design consideration will mainly focus on the extendibility of our code. All conditions for each cellular automata model (CA) will be specified in our XML file. Thus, we must take into consideration all potential conditions and how to interpret them into useful and volatile parameters in our code. 
