@@ -81,10 +81,7 @@ The slider panel is unique for each type of animation.
 Erroneous situations:
 
 1.	File name exists when saving: ask user whether to overwrite or not; if not, return to saving screen to change file name
-
 2.	Corrupted XML file when opening XML: when user clicks OK, return to file selection window and ask user to select a new file
-
-
 3.	Parameters in the XML file out of range: when user clicks OK, return to file selection window and ask user to select a new file
 
 ## Design Details
