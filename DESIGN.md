@@ -55,9 +55,9 @@ different parameters and different ways to interact with other cells.
 Finally, each cell will have an instance variable of their state.  This cell
 state class will contain all information the cell needs to know about its
 current state.  The default states are on and off, but like the other classes,
-cell state can also be extended. If sometime in the future, a model is created
-where there need to be cells with three possible states, this will not be
-difficult to implement because it simply requires writing a new subclass.
+cell state can also be extended. If a model is created where there need to be
+cells with three possible states, this will not be difficult to implement
+because it simply requires writing a new subclass.
 
 ## User Interface
 The main screen of the program contains three elements. As seen in the screenshot below, there is a menu toolbar on the top that can open xml files and quit. The grid is the main part of the UI, with buttons on the right to start, stop and reset the simulation.  In addition, there will be a slider to control the amount of time between frames.
@@ -82,7 +82,7 @@ myGrid, myModel, myMenu, myControlPanel, myAdjustPanel, myGraph, myTitle, myTime
 -	newAnimation(int number)
 -	start()
 -	pause()
--	stop()
+-	step()
 -	reset()
 
 Grid Class: 
@@ -128,10 +128,10 @@ Location Class:
 
 State Class:
 - State()
-- public setState(int state)
+- public void setState(int state)
 - public int getState()
-- public equals()
-- public compareTo()
+- public boolean equals(State s)
+- public double compareTo(State s)
 
 ##Design Considerations
 Our highest design consideration will mainly focus on the extendibility of our code. All conditions for each cellular automata model (CA) will be specified in our XML file. Thus, we must take into consideration all potential conditions and how to interpret them into useful and volatile parameters in our code. 
