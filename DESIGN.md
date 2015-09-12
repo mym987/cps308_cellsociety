@@ -59,6 +59,28 @@ cell state can also be extended. If sometime in the future, a model is created
 where there need to be cells with three possible states, this will not be
 difficult to implement because it simply requires writing a new subclass.
 
+## User Interface
+The main screen of the program contains five blocks. As seen from the screenshot below, there is a menu toolbar on the top. The grid is displayed on the left. On the right panel, there are control buttons, sliders/input boxes for adjusting animation parameters and a graph display area for plotting some relevant statistics.
+![This is cool, too bad you can't see it](screenshot.png "Main Screen")
+**File menu contains the following:**
+* New Animation
+* Save XML
+* Open XML
+* (Save Screenshot)
+* (Save Graph)
+**Animation menu contains the following:**
+* Start
+* Stop
+* Reset
+The slider panel is unique for each type of animation.
+Erroneous situations:
+1.	File name exists when saving: ask user whether to overwrite or not; if not, return to saving screen to change file name
+2.	Corrupted XML file when opening XML: when user clicks OK, return to file selection window and ask user to select a new file
+3.	Parameters in the XML file out of range: when user clicks OK, return to file selection window and ask user to select a new file
+
+## Design Details
+
+
 ##Design Considerations
 Our highest design consideration will mainly focus on the extendibility of our code. All conditions for each cellular automata model (CA) will be specified in our XML file. Thus, we must take into consideration all potential conditions and how to interpret them into useful and volatile parameters in our code. 
 
