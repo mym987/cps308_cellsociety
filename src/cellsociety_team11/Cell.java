@@ -75,4 +75,9 @@ public class Cell extends Polygon{
 	public void goToNextState(){
 
 	}
+
+	public State determineNextState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
