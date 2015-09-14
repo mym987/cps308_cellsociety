@@ -18,8 +18,8 @@ public class Location {
 		return myY;
 	}
 	
-	public boolean isValid(){
-		if(getX() < 0 || getX() > Grid.myNumCols || getY() < 0 || getY() > Grid.myNumCols){
+	public boolean isValid(){ // This method is very specific to squareGrid.  Let's try to make it more general
+		if(getX() < 0 || getX() > SquareGrid.myNumCols || getY() < 0 || getY() > SquareGrid.myNumCols){
 			return false;
 		}else{
 			return true;
