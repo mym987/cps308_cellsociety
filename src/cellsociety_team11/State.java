@@ -1,6 +1,10 @@
 package cellsociety_team11;
 
-public class State {
+import javafx.scene.paint.Color;
+
+public abstract class State {
+
+	public abstract Color getColor();
 	
 	
 }
