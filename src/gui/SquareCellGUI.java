@@ -4,7 +4,7 @@ import cellsociety_team11.State;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class GOLCellGUI {
+public class SquareCellGUI {
 
 	private Color myColor;
 	private int myPosX;
@@ -12,15 +12,15 @@ public class GOLCellGUI {
 	private Rectangle myRect;
 	CellSocietyGUI myGUI;
 
-	public GOLCellGUI(CellSocietyGUI CS, State initialState, int xCoord, int yCoord) {
+	public SquareCellGUI(CellSocietyGUI CS, State initialState, int xCoord, int yCoord) {
 		myRect = new Rectangle();
 		myGUI = CS;
-		setX(xCoord, yCoord);
-		setColor(initialState.getColor());
+		setPosition(xCoord, yCoord);
+		updateState(initialState);
 		CS.addToScreen(myRect);
 	}
 	
-	private void setX(int xCoord, int yCoord) {
+	private void setPosition(int xCoord, int yCoord) {
 		myPosX = xCoord;
 		myPosY = yCoord;
 		myRect.setX(xCoord);
@@ -31,5 +31,8 @@ public class GOLCellGUI {
 		myColor = color;
 		myRect.setFill(color);
 	}
-
+	
+	public void updateState(State state) {
+		setColor(state.getColor());
+	}
 }
