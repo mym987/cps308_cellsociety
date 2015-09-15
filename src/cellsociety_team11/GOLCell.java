@@ -6,11 +6,9 @@ public class GOLCell extends Cell{
 	public static final double CELL_SIZE = 70;
 	
 	private Integer[] myStateInts = {0,1};  //0=dead, 1=live
-	private Location myLoc;
 
 	GOLCell(State s, Location l) {
 		super(s, l);
-		myLoc = l;
 
 		double x1 = myLoc.getX()*CELL_SIZE;
 		double y1 = myLoc.getY()*CELL_SIZE;
