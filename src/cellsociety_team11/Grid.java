@@ -31,6 +31,17 @@ public class Grid {
 		return myNumCols;
 	}
 	
+	public Map<Location, Cell> step() {
+		
+		for (Location l : myCells.keySet()) {
+			Cell c = myCells.get(l);
+			c.setNextState();
+			myCells.put(l, c);
+		}
+		
+		return myCells;
+	}
+	
 
 }
 

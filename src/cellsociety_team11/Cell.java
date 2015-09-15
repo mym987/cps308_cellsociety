@@ -37,8 +37,9 @@ public abstract class Cell extends Polygon{
 
 	public abstract State determineNextState();
 
-	public void setNextState(State s){
+	public void setNextState(){
 		myState = this.determineNextState();
+		this.setState(myState);
 	}
 
 	public void goToNextState(){
