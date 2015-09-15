@@ -1,10 +1,12 @@
 package cellsociety_team11;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class Grid {
 
-	protected ArrayList<Cell> myCells;
+	protected static int myNumCols;
+	protected static int myNumRows;
+	protected Map<Location, Cell> myCells;
 
 	//	//different model cells
 	//    private Cell[] myPossibleCells = { 
@@ -14,6 +16,21 @@ public class Grid {
 	//	Group group = new Group();
 
 	// private GridPane gp = new GridPane();
+	
+	Grid(int c, int r, Map<Location, Cell> cells){
+		myNumCols = c;
+		myNumRows = r;
+		myCells = cells;
+	}
+	
+	public static int getNumRows() {
+		return myNumRows;
+	}
+
+	public static int getNumCols() {
+		return myNumCols;
+	}
+	
 
 }
 

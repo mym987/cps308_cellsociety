@@ -9,8 +9,8 @@ public class GOLCell extends Cell{
 	private Color[] symbols = {Color.AQUAMARINE , Color.RED};
 	private Location myLoc;
 
-	GOLCell(Location l) {
-		super();
+	GOLCell(State s, Location l) {
+		super(s, l);
 		myLoc = l;
 
 		double x1 = myLoc.getX()*CELL_SIZE;
@@ -27,10 +27,6 @@ public class GOLCell extends Cell{
 		});
 		this.setFill(Color.WHITE);
 		this.setStroke(Color.BLACK);
-	}
-
-	public Location getLocation(){
-		return myLoc;
 	}
 	
 	@Override

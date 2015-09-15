@@ -1,21 +1,20 @@
 package cellsociety_team11;
 
 import java.util.ArrayList;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public abstract class Cell extends Polygon{
 
 	private State myState;
-	private ArrayList<? extends Cell> myNeighborCells;
+	private ArrayList<Cell> myNeighborCells;
+	private Location myLoc;
 
-	Cell(){
-
+	Cell(State s, Location l){
+		myState = s;
+		myLoc = l;
 	}
-
-	//	public double getSize(){
-	//		return CELL_SIZE;
-	//	}
 
 	public State getState(){
 		return myState;
@@ -25,19 +24,19 @@ public abstract class Cell extends Polygon{
 		myState = s;
 	}
 
-	public ArrayList<? extends Cell> getNeighborCells(){
+	public ArrayList<Cell> getNeighborCells(){
 		return myNeighborCells;
 	}
 
-	public void setNeighborCells(ArrayList<? extends Cell> neighbors){ //
+	public void setNeighborCells(ArrayList<Cell> neighbors){ //
 		myNeighborCells = neighbors;
-		
-//		Location currLoc = getLocation();
-
-
+	}
+	
+	public Location getLocation(){
+		return myLoc;
 	}
 
-//	public abstract State determineNextState();
+	public abstract State determineNextState();
 
 	public void setNextState(){
 
@@ -47,8 +46,4 @@ public abstract class Cell extends Polygon{
 
 	}
 
-	public State determineNextState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
