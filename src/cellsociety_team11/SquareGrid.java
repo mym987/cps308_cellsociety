@@ -17,20 +17,7 @@ public class SquareGrid extends Grid {
 		myWidthPixels = myNumCols * GOLCell.CELL_SIZE;
 		myHeightPixels = myNumRows * GOLCell.CELL_SIZE;
 	}
-
-//	protected void createGrid() {
-//
-//		Location loc = new Location(myNumCols, myNumRows);
-//
-//		for (int x = 0; x < myNumRows; x++) {
-//			for (int y = 0; y < myNumCols; y++) {
-//				loc = new Location(x, y);
-//				Cell cell = new GOLCell(loc);
-//				myCells.put(loc, cell);
-//			}
-//		}
-//
-//	}
+	
 
 	public void setNeighbors() {
 
