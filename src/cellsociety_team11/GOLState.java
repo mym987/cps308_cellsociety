@@ -1,9 +1,16 @@
 package cellsociety_team11;
 
+import javafx.scene.paint.Color;
+
 public class GOLState extends State {
 
-	public GOLState() {
-		// TODO Auto-generated constructor stub
+	GOLState(int s) {
+		super(s);
 	}
 
+	@Override
+	public Color getColor() {
+		return Color.RED;
+	}
+	
 }
