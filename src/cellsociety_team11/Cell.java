@@ -6,9 +6,10 @@ import javafx.scene.shape.Polygon;
 
 public abstract class Cell extends Polygon{
 
-	private State myState;
-	private ArrayList<Cell> myNeighborCells;
-	private Location myLoc;
+	protected State myState;
+	//protected State myNextState;
+	protected ArrayList<Cell> myNeighborCells;
+	protected Location myLoc;
 
 	Cell(State s, Location l){
 		myState = s;
@@ -27,7 +28,7 @@ public abstract class Cell extends Polygon{
 		return myNeighborCells;
 	}
 
-	public void setNeighborCells(ArrayList<Cell> neighbors){ //
+	public void setNeighborCells(ArrayList<Cell> neighbors){ 
 		myNeighborCells = neighbors;
 	}
 	
@@ -37,12 +38,12 @@ public abstract class Cell extends Polygon{
 
 	public abstract State determineNextState();
 
-	public void setNextState(){
-
+	public void setNextState(State s){
+		myState = this.determineNextState();
 	}
 
 	public void goToNextState(){
-
+		
 	}
 
 }
