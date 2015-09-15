@@ -6,7 +6,6 @@ public class GOLCell extends Cell{
 	public static final double CELL_SIZE = 70;
 	
 	private Integer[] myStateInts = {0,1};  //0=dead, 1=live
-	private Color[] myColors = {Color.AQUAMARINE , Color.RED};
 	private Location myLoc;
 
 	GOLCell(State s, Location l) {

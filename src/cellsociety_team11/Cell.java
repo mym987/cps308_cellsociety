@@ -7,7 +7,6 @@ import javafx.scene.shape.Polygon;
 public abstract class Cell extends Polygon{
 
 	protected State myState;
-	//protected State myNextState;
 	protected ArrayList<Cell> myNeighborCells;
 	protected Location myLoc;
 
