@@ -1,5 +1,7 @@
 package cellsociety_team11;
 
+import java.util.ArrayList;
+
 import javafx.scene.shape.Polygon;
 
 public abstract class Cell extends Polygon{
@@ -7,6 +9,7 @@ public abstract class Cell extends Polygon{
 	protected State myState;
 	protected Location myLoc;
 	protected boolean visited;
+	protected ArrayList<Cell> myNeighborCells;
 	
 	Cell(State s, Location l){
 		myState = s;
@@ -34,7 +37,13 @@ public abstract class Cell extends Polygon{
 		visited = b;
 	}
 
-	public abstract void setNeighborCells();
+	public ArrayList<Cell> getNeighborCells(){
+		return myNeighborCells;
+	}
+	
+	public void setNeighborCells(ArrayList<Cell> neighbors) {
+		myNeighborCells = neighbors;		
+	}
 	
 	public abstract State determineNextState();
 

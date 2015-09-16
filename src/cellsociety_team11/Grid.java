@@ -9,7 +9,7 @@ public class Grid {
 	
 	protected static int myNumCols;
 	protected static int myNumRows;
-	protected static Map<Location, Cell> myCells;
+	protected Map<Location, Cell> myCells;
 
 //	//different model cells
 //	private Cell[] myPossibleCells = { 
