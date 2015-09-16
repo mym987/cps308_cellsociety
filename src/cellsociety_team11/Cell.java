@@ -1,18 +1,17 @@
 package cellsociety_team11;
 
-import java.util.ArrayList;
-
 import javafx.scene.shape.Polygon;
 
 public abstract class Cell extends Polygon{
 
 	protected State myState;
-	protected ArrayList<Cell> myNeighborCells;
 	protected Location myLoc;
-
+	protected boolean visited;
+	
 	Cell(State s, Location l){
 		myState = s;
 		myLoc = l;
+		visited = false;
 	}
 
 	public State getState(){
@@ -22,19 +21,21 @@ public abstract class Cell extends Polygon{
 	public void setState(State s){
 		myState = s;
 	}
-
-	public ArrayList<Cell> getNeighborCells(){
-		return myNeighborCells;
-	}
-
-	public void setNeighborCells(ArrayList<Cell> neighbors){ 
-		myNeighborCells = neighbors;
-	}
 	
 	public Location getLocation(){
 		return myLoc;
 	}
+	
+	public boolean getVisited(){
+		return visited;
+	}
+	
+	public void setVisited(boolean b){
+		visited = b;
+	}
 
+	public abstract void setNeighborCells();
+	
 	public abstract State determineNextState();
 
 	public void setNextState(){
