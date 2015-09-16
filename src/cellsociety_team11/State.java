@@ -12,10 +12,10 @@ public abstract class State {
 		this.setColor(s);
 	}
 	
-//	public Color getColor() {
-//		return myColor;
-//	}
-//	
+	public Color getColor() {
+		return myColor;
+	}
+	
 	public void setColor(int s) {
 		myColor = myColors[s];
 	}
