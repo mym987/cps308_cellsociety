@@ -1,7 +1,5 @@
 package cellsociety_team11;
 
-import javafx.scene.paint.Color;
-
 public class PredCell extends Cell{
 	public static final double CELL_SIZE = 70;
 
@@ -9,25 +7,10 @@ public class PredCell extends Cell{
 	private int numChronon;
 	private int sharkEnergy;
 	
-	private static final int CHRONON_REPR = 5; //This is meaningless to me... can we remove abbreviations?
+	private static final int LIVES_REPRODUCE = 5; 
 
 	PredCell(State s, Location l) {
 		super(s, l);
-		
-		double x1 = myLoc.getX()*CELL_SIZE;
-		double y1 = myLoc.getY()*CELL_SIZE;
-		double x2 = myLoc.getX()*CELL_SIZE + CELL_SIZE;
-		double y2 = myLoc.getY()*CELL_SIZE + CELL_SIZE;
-
-
-		this.getPoints().addAll(new Double[]{ // This should be in SquareCellGUI
-				x1, y1,
-				x2, y1,
-				x2, y2,
-				x1, y2
-		});
-		this.setFill(Color.WHITE);
-		this.setStroke(Color.BLACK); // Same
 		
 		numChronon = 0;
 		if (s.getStateInt() == myStateInts[1]) {
@@ -52,14 +35,6 @@ public class PredCell extends Cell{
 	public void setSharkEnergy(int x){
 		sharkEnergy = x;
 	}
-	
-//	public boolean getVisited(){
-//		return visited;
-//	}
-//	
-//	public void setVisited(boolean b){
-//		visited = b;
-//	}
 
 	@Override
 	public State determineNextState() { 		//This method is enormous and seems very repetitive.  Let's try to split it up
@@ -77,7 +52,7 @@ public class PredCell extends Cell{
 					int currNumChronon = pc.getNumChronon();
 					pc.setNumChronon(currNumChronon++);
 
-					if (pc.getNumChronon() >= CHRONON_REPR) {
+					if (pc.getNumChronon() >= LIVES_REPRODUCE) {
 						State fishState = new PredState(myStateInts[2]); //the current cell will be a fish
 						this.setNumChronon(0); //reproductive state reset
 						//this.setState(fishState);
@@ -106,7 +81,7 @@ public class PredCell extends Cell{
 					pc.setNumChronon(currNumChronon++);
 					pc.setVisited(true);
 
-					if (pc.getNumChronon() >= CHRONON_REPR) {
+					if (pc.getNumChronon() >= LIVES_REPRODUCE) {
 						State sharkState = new PredState(myStateInts[1]); //the current cell will be a shark
 						this.setNumChronon(0); //reproductive state reset
 						//this.setState(sharkState);
@@ -144,7 +119,7 @@ public class PredCell extends Cell{
 					}
 
 
-					if (pc.getNumChronon() >= CHRONON_REPR) {
+					if (pc.getNumChronon() >= LIVES_REPRODUCE) {
 						State sharkState = new PredState(myStateInts[1]); //the current cell will be a shark
 						this.setNumChronon(0); //reproductive state reset
 						//this.setState(sharkState);

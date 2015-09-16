@@ -2,9 +2,7 @@ package cellsociety_team11;
 
 import java.util.ArrayList;
 
-import javafx.scene.shape.Polygon;
-
-public abstract class Cell extends Polygon{ // This should not extend Polygon.  SquareCellGUI should be the class that updates the GUI
+public abstract class Cell{ 
 
 	protected State myState;
 	protected Location myLoc;
@@ -29,7 +27,7 @@ public abstract class Cell extends Polygon{ // This should not extend Polygon.  
 		return myLoc;
 	}
 	
-	public boolean getVisited(){ // What's the purpose of this method?  All methods should have comments
+	public boolean getVisited(){ //determines if a cell has been visited as a neighbor
 		return visited;
 	}
 	
