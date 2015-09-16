@@ -26,46 +26,14 @@ public class GOLCell extends Cell{
 	}
 	
 	@Override
-	public State determineNextState() { // This should be split up into smaller functions.
-		State nextState;
-		int numLiveNeighbors = 0;
+	public void determineNextState() { // This should be split up into smaller functions.
+		GOLState nextState = new GOLState(0);
+		int numLiveNeighbors = getNumNeighborsInState(nextState);
 		
-		if (this.getState().getStateInt() == myStateInts[0]) {  //dead cell with exactly 3 neighbors comes to life
-			for(Cell c : myNeighborCells) {
-				GOLCell golCell = (GOLCell) c;
-				if (golCell.getState().getStateInt() == myStateInts[1]) {
-					numLiveNeighbors ++;
-				}
-			}
-			
-			if(numLiveNeighbors == 3) {
-				nextState = new GOLState(myStateInts[1]);
-			} else {
-				nextState = new GOLState(myStateInts[0]);
-			}
-			
-		} else if (this.getState().getStateInt() == myStateInts[1]) {
-			for(Cell c : myNeighborCells) {
-				GOLCell golCell = (GOLCell) c;
-				if (golCell.getState().getStateInt() == myStateInts[1]) {
-					numLiveNeighbors ++;
-				}
-			}
-			
-			if (numLiveNeighbors < 2) {
-				nextState = new GOLState(myStateInts[0]);
-			} else if (numLiveNeighbors == 2 || numLiveNeighbors == 3){
-				nextState = new GOLState(myStateInts[1]);
-			} else {
-				nextState = new GOLState(myStateInts[0]);
-			}
-					
-		} else {
-			return null;
+		if(numLiveNeighbors > 3 || numLiveNeighbors < 2) {
+			myState.setNextState(myStateInts[0]);
+		} else if (numLiveNeighbors == 3) {
+			myState.setNextState(myStateInts[1]);
 		}
-		
-		return nextState;
-		
 	}
-
 }

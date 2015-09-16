@@ -10,9 +10,14 @@ public class FireCell extends Cell{
 	}
 
 	@Override
-	public State determineNextState() {
+	public void determineNextState() {
 		// TODO Auto-generated method stub
-		return null;
+	}
+
+	@Override
+	public void goToNextState() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

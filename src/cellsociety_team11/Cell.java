@@ -43,15 +43,21 @@ public abstract class Cell{
 		myNeighborCells = neighbors;		
 	}
 	
-	public abstract State determineNextState();
-
-	public void setNextState(){  // What is the difference between this and goToNextState?
-		myState = this.determineNextState(); // MyState should not be updated until goToNextState
-		this.setState(myState);				 // because other cells rely on the previous state
+	protected int getNumNeighborsInState(State s) {
+		int numNeighbors = 0;
+		for(Cell c : myNeighborCells) {
+			GOLCell golCell = (GOLCell) c;
+			if (golCell.getState().equals(s)) {
+				++numNeighbors;
+			}
+		}
+		return numNeighbors;
 	}
-
-	public void goToNextState(){
-		
+	
+	public abstract void determineNextState();
+	
+	public void goToNextState() {
+		myState.goToNextState();
 	}
 
 }

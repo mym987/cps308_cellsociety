@@ -36,16 +36,23 @@ public class Grid {
 		return myNumCols;
 	}
 	
-	public Map<Location, Cell> step() {
-		
-		for (Location l : myCells.keySet()) {
-			Cell c = myCells.get(l);
-			c.setNextState();
-			myCells.put(l, c);
-		}
-		
-		return myCells;
+	public void step() {
+		determineNextStates();
+		goToNextStates();
 	}
 	
+	private void determineNextStates() {
+		for (Location l : myCells.keySet()) {
+			Cell c = myCells.get(l);
+			c.determineNextState();
+		}
+	}
+	
+	private void goToNextStates() {
+		for(Location l : myCells.keySet()) {
+			Cell c = myCells.get(l);
+			c.goToNextState();
+		}
+	}
 
 }
