@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javafx.scene.shape.Polygon;
 
-public abstract class Cell extends Polygon{
+public abstract class Cell extends Polygon{ // This should not extend Polygon.  SquareCellGUI should be the class that updates the GUI
 
 	protected State myState;
 	protected Location myLoc;
@@ -29,7 +29,7 @@ public abstract class Cell extends Polygon{
 		return myLoc;
 	}
 	
-	public boolean getVisited(){
+	public boolean getVisited(){ // What's the purpose of this method?  All methods should have comments
 		return visited;
 	}
 	
@@ -47,9 +47,9 @@ public abstract class Cell extends Polygon{
 	
 	public abstract State determineNextState();
 
-	public void setNextState(){
-		myState = this.determineNextState();
-		this.setState(myState);
+	public void setNextState(){  // What is the difference between this and goToNextState?
+		myState = this.determineNextState(); // MyState should not be updated until goToNextState
+		this.setState(myState);				 // because other cells rely on the previous state
 	}
 
 	public void goToNextState(){

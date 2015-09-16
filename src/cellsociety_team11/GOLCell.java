@@ -7,7 +7,8 @@ import javafx.scene.paint.Color;
 public class GOLCell extends Cell{
 	public static final double CELL_SIZE = 70;
 	
-	private Integer[] myStateInts = {0,1};  //0=dead, 1=live
+	private Integer[] myStateInts = {0,1};  //0=dead, 1=live 
+											// Maybe this should be an ENUM to make it more readable?
 
 	GOLCell(State s, Location l) {
 		super(s, l);
@@ -24,12 +25,12 @@ public class GOLCell extends Cell{
 				x2, y2,
 				x1, y2
 		});
-		this.setFill(Color.WHITE);
+		this.setFill(Color.WHITE);		// These should be methods in CellGUI
 		this.setStroke(Color.BLACK);
 	}
 	
 	@Override
-	public State determineNextState() {
+	public State determineNextState() { // This should be split up into smaller functions.
 		State nextState;
 		int numLiveNeighbors = 0;
 		

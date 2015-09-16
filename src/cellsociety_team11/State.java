@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public abstract class State {
 	protected Color[] myColors;
 	protected Color myColor;
-	protected int myStateInt;
+	protected int myStateInt;		// State maybe instead of int?
 	
 	State(int s){
 		myStateInt = s;
@@ -21,7 +21,7 @@ public abstract class State {
 	}
 	
 	public int getStateInt(){
-		return myStateInt;
-	}
+		return myStateInt;		// We might want to return a State instead of an int
+	}							// Or make this abstract
 	
 }

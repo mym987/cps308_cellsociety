@@ -9,7 +9,7 @@ public class PredCell extends Cell{
 	private int numChronon;
 	private int sharkEnergy;
 	
-	private static final int CHRONON_REPR = 5;
+	private static final int CHRONON_REPR = 5; //This is meaningless to me... can we remove abbreviations?
 
 	PredCell(State s, Location l) {
 		super(s, l);
@@ -20,14 +20,14 @@ public class PredCell extends Cell{
 		double y2 = myLoc.getY()*CELL_SIZE + CELL_SIZE;
 
 
-		this.getPoints().addAll(new Double[]{
+		this.getPoints().addAll(new Double[]{ // This should be in SquareCellGUI
 				x1, y1,
 				x2, y1,
 				x2, y2,
 				x1, y2
 		});
 		this.setFill(Color.WHITE);
-		this.setStroke(Color.BLACK);
+		this.setStroke(Color.BLACK); // Same
 		
 		numChronon = 0;
 		if (s.getStateInt() == myStateInts[1]) {
@@ -62,7 +62,7 @@ public class PredCell extends Cell{
 //	}
 
 	@Override
-	public State determineNextState() {
+	public State determineNextState() { 		//This method is enormous and seems very repetitive.  Let's try to split it up
 		State nextState;
 
 		//problem: if a fish moves to an empty cell that is after this cell in the myCells map,

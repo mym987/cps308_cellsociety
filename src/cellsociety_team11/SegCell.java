@@ -16,7 +16,7 @@ public class SegCell extends Cell {
 		double y2 = myLoc.getY()*CELL_SIZE + CELL_SIZE;
 
 
-		this.getPoints().addAll(new Double[]{
+		this.getPoints().addAll(new Double[]{ // This should be in SquareCellGUI
 				x1, y1,
 				x2, y1,
 				x2, y2,
