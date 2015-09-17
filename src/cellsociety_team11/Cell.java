@@ -26,32 +26,23 @@ public abstract class Cell{
 	public Location getLocation(){
 		return myLoc;
 	}
-	
-	public boolean getVisited(){ //determines if a cell has been visited as a neighbor
-		return visited;
-	}
-	
-	public void setVisited(boolean b){
-		visited = b;
-	}
 
-	public ArrayList<Cell> getNeighborCells(){
-		return myNeighborCells;
-	}
+//	public ArrayList<Cell> getNeighborCells(){
+//		return myNeighborCells;
+//	}
 	
 	public void setNeighborCells(ArrayList<Cell> neighbors) {
 		myNeighborCells = neighbors;		
 	}
 	
-	protected int getNumNeighborsInState(State s) {
-		int numNeighbors = 0;
+	protected ArrayList<Cell> getNeighborsInState(State s) {
+		ArrayList<Cell> neighbors = new ArrayList<Cell>();
 		for(Cell c : myNeighborCells) {
-			GOLCell golCell = (GOLCell) c;
-			if (golCell.getState().equals(s)) {
-				++numNeighbors;
+			if (c.getState().equals(s)) {
+				neighbors.add(c);
 			}
 		}
-		return numNeighbors;
+		return neighbors;
 	}
 	
 	public abstract void determineNextState();

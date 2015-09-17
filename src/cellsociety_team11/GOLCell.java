@@ -28,7 +28,7 @@ public class GOLCell extends Cell{
 	@Override
 	public void determineNextState() { // This should be split up into smaller functions.
 		GOLState nextState = new GOLState(0);
-		int numLiveNeighbors = getNumNeighborsInState(nextState);
+		int numLiveNeighbors = getNeighborsInState(nextState).size();
 		
 		if(numLiveNeighbors > 3 || numLiveNeighbors < 2) {
 			myState.setNextState(myStateInts[0]);

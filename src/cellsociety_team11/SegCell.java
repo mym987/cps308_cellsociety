@@ -18,9 +18,8 @@ public class SegCell extends Cell {
 	}
 
 	@Override
-	public State determineNextState() {
+	public void determineNextState() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
