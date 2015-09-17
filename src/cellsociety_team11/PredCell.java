@@ -3,52 +3,31 @@ package cellsociety_team11;
 import java.util.ArrayList;
 
 public class PredCell extends Cell {
-	public static final double CELL_SIZE = 70;
+	private static final double CELL_SIZE = 70;
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
-
 	private static int FISH_ENERGY = 2; // THIS CAN BE WHATEVER WE WANT
 
-	// private Integer[] myStateInts = {0,1,2};
-	private int numChronon;
-	private int sharkEnergy;
+	private int numChronon = 0;
+	private int sharkEnergy = 5;
+	private boolean visited;
 
 	private static final int LIVES_REPRODUCE = 5;
 
 	PredCell(State s, Location l) {
 		super(s, l);
-
-		numChronon = 0;
-		if (s.getStateInt() == SHARK_STATE) {
-			sharkEnergy = 5;
-		}
-		visited = false;
-
 	}
-
-	public int getNumChronon() {
-		return numChronon;
-	}
-
-	public void setNumChronon(int x) {
-		numChronon = x;
-	}
-
-	public void incrementChronon() {
-		++numChronon;
-	}
-
-	public int getSharkEnergy() {
-		return sharkEnergy;
+	
+	public void setNumChronon(int chronon) {
+		numChronon = chronon;
 	}
 
 	public void setSharkEnergy(int x) {
 		sharkEnergy = x;
 	}
 
-	public boolean getVisited() { // determines if a cell has been visited as a
-									// neighbor
+	public boolean getVisited() { // determines if a cell has been visited as a neighbor
 		return visited;
 	}
 
@@ -56,83 +35,57 @@ public class PredCell extends Cell {
 		visited = b;
 	}
 
-	@Override
-	public void determineNextState() { // This method is enormous and seems very
-										// repetitive. Let's try to split it up
-		// State nextState;
+	private PredCell getRandomNeighborInState(int state) {
+		State stateVar = new PredState(state);
+		ArrayList<Cell> neighbors = getNeighborsInState(stateVar);
+		int randNeighbor = (int) (Math.random() * neighbors.size());
+		PredCell potentialCell = (PredCell) neighbors.get(randNeighbor);
 
+		for (int i = 0; i < neighbors.size(); i++) {
+			if (!potentialCell.getVisited()) {
+				return potentialCell;
+			}
+			randNeighbor = (randNeighbor == neighbors.size() - 1) ? 0 : randNeighbor + 1;
+			potentialCell = (PredCell) neighbors.get(randNeighbor);
+		}
+		return null;
+	}
+
+	private boolean moveMyStateToCell(PredCell chosenCell) {
+		if (chosenCell == null)
+			return false;
+		chosenCell.getState().setNextState(myState.getStateInt()); // This can be improved
+		chosenCell.setNumChronon(numChronon);
+		chosenCell.setVisited(true);
+		if (numChronon < LIVES_REPRODUCE) {
+			myState.setNextState(EMPTY_STATE);
+		}
+		setNumChronon(0);// reproductive state reset
+		return true;
+	}
+
+	@Override
+	public void determineNextState() {
 		if (visited) {
 			return;
 		}
-
 		++numChronon;
+		PredCell chosenCell;
 
-		if (myState.getStateInt() == FISH_STATE) { // Move to empty cell
-			ArrayList<Cell> emptyNeighbors = getNeighborsInState(new PredState(EMPTY_STATE));		// THIS WHOLE SECTION CAN BE TURNED INTO A METHOD
-			int randNeighbor = (int) (Math.random() * emptyNeighbors.size());						// See Cell.getRandomNeighborInState(State s)
-			PredCell pc = (PredCell) emptyNeighbors.get(randNeighbor);
-
-			for (int i = 0; i < emptyNeighbors.size(); i++) {
-				if (!pc.getVisited()) {
-					pc.getState().setNextState(FISH_STATE);
-					pc.setVisited(true);
-					pc.incrementChronon();
-					if (pc.getNumChronon() < LIVES_REPRODUCE) {
-						myState.setNextState(EMPTY_STATE);
-					}
-					this.setNumChronon(0);// reproductive state reset
-					return;
-				}
-				randNeighbor = (randNeighbor == emptyNeighbors.size() - 1) ? 0 : randNeighbor + 1;
-			}
-
-		} else if (myState.getStateInt() == SHARK_STATE) {
-
-			ArrayList<Cell> fishNeighbors = getNeighborsInState(new PredState(FISH_STATE));		// THIS WHOLE SECTION CAN BE TURNED INTO A METHOD
-			int randFish = (int) (Math.random() * fishNeighbors.size());
-			PredCell pc = (PredCell) fishNeighbors.get(randFish);
-
-			for (int i = 0; i < fishNeighbors.size(); i++) {
-				if (!pc.getVisited()) {
-					pc.getState().setNextState(SHARK_STATE);
-					pc.setSharkEnergy(sharkEnergy + FISH_ENERGY);
-					pc.setNumChronon(++numChronon);
-					pc.setVisited(true);
-					if (pc.getNumChronon() < LIVES_REPRODUCE) {
-						myState.setNextState(EMPTY_STATE);
-					}
-					this.setNumChronon(0); // reproductive state reset
-					return;
-				}
-				randFish = (randFish == fishNeighbors.size() - 1) ? 0 : randFish + 1;
-			}
-			
+		if (myState.getStateInt() == SHARK_STATE) {
 			--sharkEnergy;
-			
-			if(sharkEnergy == 0) {
+			if (sharkEnergy == 0) {
 				myState.setNextState(EMPTY_STATE);
-				this.setNumChronon(0);// reproductive state reset
+				setNumChronon(0);
 				return;
 			}
-
-			ArrayList<Cell> emptyNeighbors = getNeighborsInState(new PredState(EMPTY_STATE));		// THIS WHOLE SECTION CAN BE TURNED INTO A METHOD
-			int randNeighbor = (int) (Math.random() * emptyNeighbors.size());
-			pc = (PredCell) emptyNeighbors.get(randNeighbor);
-
-			for (int i = 0; i < emptyNeighbors.size(); i++) {
-				if (!pc.getVisited()) {
-					pc.getState().setNextState(SHARK_STATE);
-					pc.setVisited(true);
-					pc.setNumChronon(++numChronon);
-					if (pc.getNumChronon() < LIVES_REPRODUCE) {
-						myState.setNextState(EMPTY_STATE);
-					}
-					this.setNumChronon(0);// reproductive state reset
-					return;
-				}
-				randNeighbor = (randNeighbor == emptyNeighbors.size() - 1) ? 0 : randNeighbor + 1;
+			chosenCell = getRandomNeighborInState(FISH_STATE);
+			if (moveMyStateToCell(chosenCell)) {
+				chosenCell.setSharkEnergy(sharkEnergy + FISH_ENERGY);
+				return;
 			}
 		}
+		chosenCell = getRandomNeighborInState(EMPTY_STATE);
+		moveMyStateToCell(chosenCell);
 	}
-
 }

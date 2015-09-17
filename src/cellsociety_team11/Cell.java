@@ -6,13 +6,11 @@ public abstract class Cell{
 
 	protected State myState;
 	protected Location myLoc;
-	protected boolean visited;
 	protected ArrayList<Cell> myNeighborCells;
 	
 	Cell(State s, Location l){
 		myState = s;
 		myLoc = l;
-		visited = false;
 	}
 
 	public State getState(){
@@ -43,10 +41,6 @@ public abstract class Cell{
 			}
 		}
 		return neighbors;
-	}
-	
-	protected Cell getRandomNeighborInState(State s) {
-		return null;
 	}
 	
 	public abstract void determineNextState();
