@@ -45,6 +45,10 @@ public abstract class Cell{
 		return neighbors;
 	}
 	
+	protected Cell getRandomNeighborInState(State s) {
+		return null;
+	}
+	
 	public abstract void determineNextState();
 	
 	public void goToNextState() {

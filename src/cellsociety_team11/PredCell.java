@@ -69,7 +69,7 @@ public class PredCell extends Cell {
 
 		if (myState.getStateInt() == FISH_STATE) { // Move to empty cell
 			ArrayList<Cell> emptyNeighbors = getNeighborsInState(new PredState(EMPTY_STATE));		// THIS WHOLE SECTION CAN BE TURNED INTO A METHOD
-			int randNeighbor = (int) (Math.random() * emptyNeighbors.size());
+			int randNeighbor = (int) (Math.random() * emptyNeighbors.size());						// See Cell.getRandomNeighborInState(State s)
 			PredCell pc = (PredCell) emptyNeighbors.get(randNeighbor);
 
 			for (int i = 0; i < emptyNeighbors.size(); i++) {
