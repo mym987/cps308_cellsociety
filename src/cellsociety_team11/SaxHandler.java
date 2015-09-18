@@ -23,7 +23,7 @@ public class SaxHandler extends DefaultHandler {
 	private String currentValue = null;
 	
 	public SaxHandler() {
-		myNodeName = "Model";
+		myNodeName = "model";
 	}
 
 	public Model getModel() {
@@ -66,10 +66,10 @@ public class SaxHandler extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		System.out.println("--endElement()--" + qName);
-		if (qName.equals("Model")) {
-			String name = attributeMap.get("Name");
-			int rows = Integer.parseInt(attributeMap.get("Rows"));
-			int columns = Integer.parseInt(attributeMap.get("Columns"));
+		if (qName.equals("model")) {
+			String name = attributeMap.get("name");
+			int rows = Integer.parseInt(attributeMap.get("rows"));
+			int columns = Integer.parseInt(attributeMap.get("columns"));
 			try {
 				Constructor c = Class.forName(name).getConstructor(Integer.TYPE, Integer.TYPE);
 				myModel = (Model) c.newInstance(rows, columns);
@@ -77,10 +77,10 @@ public class SaxHandler extends DefaultHandler {
 					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
-			myNodeName = "Cell";
+			myNodeName = "cell";
 			myCells = new ArrayList<>(rows*columns);
 		}
-		else if (qName.equals("Cell")) {
+		else if (qName.equals("cell")) {
 			myCells.add(attributeMap);
 			attributeMap = null;
 		}
