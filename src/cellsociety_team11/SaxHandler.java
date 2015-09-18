@@ -18,10 +18,10 @@ public class SaxHandler extends DefaultHandler {
 	private String myNodeName;
 	private Map<String, String> attributeMap = null;
 	private List<Map<String, String>> myCells;
-	
+
 	private String currentTag = null;
 	private String currentValue = null;
-	
+
 	public SaxHandler() {
 		myNodeName = "model";
 	}
@@ -37,7 +37,7 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		System.out.println("--startElement()--" + qName);
+		//System.out.println("--startElement()--" + qName);
 		if (qName.equals(myNodeName)) {
 			attributeMap = new HashMap<String, String>();
 		}
@@ -56,31 +56,37 @@ public class SaxHandler extends DefaultHandler {
 			currentValue = new String(ch, start, length);
 			if (currentValue != null && !currentValue.trim().equals("") && !currentValue.trim().equals("\n")) {
 				attributeMap.put(currentTag, currentValue);
-				System.out.println("-----" + currentTag + " " + currentValue);
+				//System.out.println("-----" + currentTag + " " + currentValue);
 			}
 			currentTag = null;
 			currentValue = null;
 		}
 	}
 
+	private Model createModel(String name, int r, int c) {
+		name = getClass().getPackage().getName() + "." + name;
+		try {
+			Class[] types = { Integer.TYPE, Integer.TYPE };
+			Constructor constructor = Class.forName(name).getDeclaredConstructor(types);
+			return (Model) constructor.newInstance(r, c);
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		System.out.println("--endElement()--" + qName);
+		//System.out.println("--endElement()--" + qName);
 		if (qName.equals("model")) {
 			String name = attributeMap.get("name");
 			int rows = Integer.parseInt(attributeMap.get("rows"));
 			int columns = Integer.parseInt(attributeMap.get("columns"));
-			try {
-				Constructor c = Class.forName(name).getConstructor(Integer.TYPE, Integer.TYPE);
-				myModel = (Model) c.newInstance(rows, columns);
-			} catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException
-					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				e.printStackTrace();
-			}
+			myModel = createModel(name, rows, columns);
 			myNodeName = "cell";
-			myCells = new ArrayList<>(rows*columns);
-		}
-		else if (qName.equals("cell")) {
+			myCells = new ArrayList<>(rows * columns);
+		} else if (qName.equals("cell")) {
 			myCells.add(attributeMap);
 			attributeMap = null;
 		}

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class SegModel extends Model {
 
-	SegModel(int rows, int columns) {
+	public SegModel(int rows, int columns) {
 		super(rows, columns);
 	}
 

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class FireModel extends Model {
 
-	FireModel(int rows, int columns) {
+	public FireModel(int rows, int columns) {
 		super(rows, columns);
 	}
 

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GOLModel extends Model {
-	
-	GOLModel(int rows, int columns) {
+
+	public GOLModel(int rows, int columns) {
 		super(rows, columns);
 	}
 
