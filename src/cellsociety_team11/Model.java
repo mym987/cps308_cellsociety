@@ -27,9 +27,7 @@ public abstract class Model {
 	}
 	
 
-	public abstract void step();
-
-	public void nextState(){
+	public void step(){
 		myGrid.step();
 	}
 	

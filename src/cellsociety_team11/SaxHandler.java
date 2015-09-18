@@ -18,7 +18,7 @@ public class SaxHandler extends DefaultHandler {
 	private Model myModel;
 	private String myNodeName;
 	private Map<String, String> attributeMap = null;
-	private List<Map<String, String>> myCells;
+	private List<Map<String, String>> myCells = null;
 
 	private String currentTag = null;
 	private String currentValue = null;
@@ -70,9 +70,9 @@ public class SaxHandler extends DefaultHandler {
 	private Model createModel(String name, int r, int c) {
 		name = getClass().getPackage().getName() + "." + name;
 		try {
-			Class[] types = { Integer.TYPE, Integer.TYPE };
-			Constructor<?> constructor = Class.forName(name).getDeclaredConstructor(types);
-			return (Model) constructor.newInstance(r, c);
+			Class[] types = { Integer.TYPE, Integer.TYPE, CellSocietyGUI.class};
+			Constructor constructor = Class.forName(name).getDeclaredConstructor(types);
+			return (Model) constructor.newInstance(r, c, myCSGUI);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
