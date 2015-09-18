@@ -39,7 +39,7 @@ public class Grid {
 		}
 	}
 	
-	private void removeCells() {
+	public void removeCells() {
 		for (Cell c : myCells.values()) {
 			c.remove();
 		}

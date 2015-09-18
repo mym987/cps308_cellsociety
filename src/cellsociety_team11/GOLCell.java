@@ -6,8 +6,8 @@ import gui.SquareCellGUI;
 public class GOLCell extends Cell{
 	public static final double CELL_SIZE = 70;
 	
-	private Integer[] myStateInts = {0,1};  //0=dead, 1=live 
-											// Maybe this should be an ENUM to make it more readable?
+	private static final int DEAD_STATE = 0;
+	private static final int LIVE_STATE = 1;
 	
 	SquareCellGUI myCellGUI;
 
@@ -15,6 +15,7 @@ public class GOLCell extends Cell{
 		super(s, l, CSGUI);
 		
 		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI.updateState(myState);
 	}
 	
 	@Override
@@ -23,9 +24,9 @@ public class GOLCell extends Cell{
 		int numLiveNeighbors = getNeighborsInState(nextState).size();
 		
 		if(numLiveNeighbors > 3 || numLiveNeighbors < 2) {
-			myState.setNextState(myStateInts[0]);
+			myState.setNextState(DEAD_STATE);
 		} else if (numLiveNeighbors == 3) {
-			myState.setNextState(myStateInts[1]);
+			myState.setNextState(LIVE_STATE);
 		}
 	}
 	

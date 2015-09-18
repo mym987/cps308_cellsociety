@@ -38,6 +38,12 @@ public class CellSociety extends Application {
 		stage.show();
 		
 		myCSGUI.createGridArea();
+		
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+                e -> myModel.step());
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
 	}
 
 	public void loadXML() {
@@ -47,14 +53,10 @@ public class CellSociety extends Application {
         if (file != null) {
     		myModel = SaxParser.getModel(file.getAbsolutePath(), myCSGUI);
         }
+        myModel.step();
 	}
 
 	public void start() {
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> myModel.step());
-        myAnimation = new Timeline();
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
         myAnimation.play();
 	}
 
@@ -63,7 +65,8 @@ public class CellSociety extends Application {
 	}
 
 	public void reset() {
-		System.out.println("Reset");
+		myAnimation.pause();
+		myModel.removeCells();
 	}
 
 	private void addButtons() {

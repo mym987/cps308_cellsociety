@@ -41,4 +41,7 @@ public abstract class Model {
 		myGrid = grid;
 	}
 
+	public void removeCells() {
+		myGrid.removeCells();
+	}
 }
