@@ -9,7 +9,7 @@ public abstract class Model {
 	private final int myNumRow;
 	private Grid myGrid;
 	
-	Model(int rows, int columns){
+	public Model(int rows, int columns){
 		myNumColumn = rows;
 		myNumRow = columns;
 	}

@@ -28,4 +28,9 @@ public class SaxParser {
 		}
         return null;
 	}
+	
+	public static void main(String[] args){
+		SaxParser sax = new SaxParser();
+		sax.getModel("GOL.xml");
+	}
 }

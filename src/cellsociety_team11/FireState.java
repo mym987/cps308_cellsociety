@@ -3,13 +3,11 @@ package cellsociety_team11;
 import javafx.scene.paint.Color;
 
 public class FireState extends State {
-
-	FireState(int s) {
+	
+	public FireState(int s) {
 		super(s);
-		
-		myColors[0] = Color.GREEN; //live tree
-		myColors[1] = Color.YELLOW; //burning tree
-		myColors[2] = Color.BROWN; //dead tree
+		Color[] colors = {Color.GREEN,Color.YELLOW,Color.BROWN}; //Live,burning,dead tree
+		this.setAvailableColors(colors);
 		this.setColor(s);
 	}
 

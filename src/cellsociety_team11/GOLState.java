@@ -6,8 +6,8 @@ public class GOLState extends State {
 	
 	GOLState(int s) {
 		super(s);
-		myColors[0] = Color.AQUAMARINE; //dead
-		myColors[1] = Color.RED; //live
+		Color[] colors = {Color.AQUAMARINE,Color.RED}; //0=dead,1=live
+		setAvailableColors(colors);
 		this.setColor(s);
 	}
 }

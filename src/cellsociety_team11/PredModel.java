@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class PredModel extends Model {
 	
-	PredModel(int rows, int columns) {
+	public PredModel(int rows, int columns) {
 		super(rows, columns);
 	}
 
