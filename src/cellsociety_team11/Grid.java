@@ -38,5 +38,11 @@ public class Grid {
 			c.goToNextState();
 		}
 	}
+	
+	private void removeCells() {
+		for (Cell c : myCells.values()) {
+			c.remove();
+		}
+	}
 
 }

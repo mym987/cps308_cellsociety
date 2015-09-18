@@ -28,10 +28,6 @@ public abstract class Cell{
 	public Location getLocation(){
 		return myLoc;
 	}
-
-//	public ArrayList<Cell> getNeighborCells(){
-//		return myNeighborCells;
-//	}
 	
 	public void setNeighborCells(ArrayList<Cell> neighbors) {
 		myNeighborCells = neighbors;		
@@ -52,5 +48,7 @@ public abstract class Cell{
 	public void goToNextState() {
 		myState.goToNextState();
 	}
+	
+	public abstract void remove();
 
 }

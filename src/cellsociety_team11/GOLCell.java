@@ -28,4 +28,13 @@ public class GOLCell extends Cell{
 			myState.setNextState(myStateInts[1]);
 		}
 	}
+	
+	public void goToNextState() {
+		super.goToNextState();
+		myCellGUI.updateState(myState);
+	}
+	
+	public void remove() {
+		myCellGUI.remove();
+	}
 }

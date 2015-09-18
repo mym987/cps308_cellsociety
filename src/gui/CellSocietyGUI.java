@@ -36,6 +36,10 @@ public class CellSocietyGUI {
 		myRoot.getChildren().add(e);
 	}
 	
+	public void removeFromScreen(Node e) {
+		myRoot.getChildren().remove(e);
+	}
+	
 	public Button createAndPlaceButton(String text, double yCoord, double buttonHeight) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
 		Button button = new Button(text);
@@ -52,21 +56,27 @@ public class CellSocietyGUI {
 		Rectangle rect = new Rectangle();
 		rect.setX(GRID_MARGIN);
 		rect.setY(GRID_MARGIN);
-		double width = myWindowWidth - GRID_MARGIN * 2 - BUTTON_AREA_WIDTH;
-		double height = myWindowHeight - GRID_MARGIN * 2;
-		rect.setWidth(width);
-		rect.setHeight(height);
+		rect.setWidth(getGridWidth());
+		rect.setHeight(getGridHeight());
 		rect.setFill(Color.WHITE);
 		rect.setStroke(Color.BLACK);
 		rect.setStrokeWidth(2);
 		addToScreen(rect);
 	}
 	
-	public int getWindowWidth() {
-		return myWindowWidth;
+	public double getGridWidth() {
+		return myWindowWidth - GRID_MARGIN * 2 - BUTTON_AREA_WIDTH;
 	}
 	
-	public int getWindowHeight() {
-		return myWindowHeight;
+	public double getGridHeight() {
+		return myWindowHeight - GRID_MARGIN * 2;
+	}
+	
+	public double getGridX() {
+		return GRID_MARGIN;
+	}
+	
+	public double getGridY() {
+		return GRID_MARGIN;
 	}
 }

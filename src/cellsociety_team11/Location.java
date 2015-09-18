@@ -9,6 +9,8 @@ public class Location {
 	Location(double x, double y, int numRows, int numCols){
 		myX = x;
 		myY = y;
+		myNumRows = numRows;
+		myNumCols = numCols;
 	}
 	
 	public double getX(){

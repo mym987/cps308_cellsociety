@@ -9,16 +9,20 @@ public class SquareCellGUI {
 
 	private double myCellWidth;
 	private double myCellHeight;
+	private double myGridXPos;
+	private double myGridYPos;
 	private Rectangle myRect;
-	CellSocietyGUI myGUI;
+	CellSocietyGUI myCSGUI;
 
 	public SquareCellGUI(CellSocietyGUI CSGUI, Location loc) {
-		myGUI = CSGUI;
-		myCellWidth = CSGUI.getWindowWidth() / loc.getNumCols();
-		myCellHeight = CSGUI.getWindowHeight() / loc.getNumRows();
+		myCSGUI = CSGUI;
+		myCellWidth = CSGUI.getGridWidth() / loc.getNumCols();
+		myCellHeight = CSGUI.getGridHeight() / loc.getNumRows();
+		myGridXPos = CSGUI.getGridX();
+		myGridYPos = CSGUI.getGridY();
 		createRectangle();
 		setPosition(loc);
-		CSGUI.addToScreen(myRect);
+		myCSGUI.addToScreen(myRect);
 	}
 	
 	private void createRectangle() {
@@ -31,10 +35,10 @@ public class SquareCellGUI {
 	}
 	
 	private void setPosition(Location loc) {
-		double xPos = loc.getX()*myCellWidth;
-		double yPos = loc.getY()*myCellHeight;
+		double xPos = myGridXPos + loc.getX() * myCellWidth;
+		double yPos = myGridYPos + loc.getY() * myCellHeight;
 		myRect.setX(xPos);
-		myRect.setX(yPos);
+		myRect.setY(yPos);
 	}
 	
 	private void setColor(Color color) {
@@ -43,5 +47,9 @@ public class SquareCellGUI {
 	
 	public void updateState(State state) {
 		setColor(state.getColor());
+	}
+	
+	public void remove() {
+		myCSGUI.removeFromScreen(myRect);
 	}
 }

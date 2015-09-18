@@ -8,6 +8,6 @@ public class GOLState extends State {
 		super(s);
 		Color[] colors = {Color.AQUAMARINE,Color.RED}; //0=dead,1=live
 		setAvailableColors(colors);
-		this.setColor(s);
+		setColor(s);
 	}
 }

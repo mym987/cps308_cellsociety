@@ -3,6 +3,7 @@ package cellsociety_team11;
 import java.util.ArrayList;
 
 import gui.CellSocietyGUI;
+import gui.SquareCellGUI;
 
 public class PredCell extends Cell {
 	private static final double CELL_SIZE = 70;
@@ -16,9 +17,11 @@ public class PredCell extends Cell {
 	private boolean visited;
 
 	private static final int LIVES_REPRODUCE = 5;
+	SquareCellGUI myCellGUI;
 
 	PredCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
+		myCellGUI = new SquareCellGUI(CSGUI, l);
 	}
 	
 	public void setNumChronon(int chronon) {
@@ -89,5 +92,15 @@ public class PredCell extends Cell {
 		}
 		chosenCell = getRandomNeighborInState(EMPTY_STATE);
 		moveMyStateToCell(chosenCell);
+	}
+	
+	public void remove() {
+		myCellGUI.remove();
+	}
+
+	@Override
+	public void goToNextState() {
+		super.goToNextState();
+		myCellGUI.updateState(myState);
 	}
 }
