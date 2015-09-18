@@ -1,5 +1,6 @@
 package cellsociety_team11;
 
+import gui.CellSocietyGUI;
 import javafx.scene.paint.Color;
 
 public class SegCell extends Cell {
@@ -7,8 +8,8 @@ public class SegCell extends Cell {
 	
 	private Integer[] myStateInts = {0,1,2}; 
 
-	SegCell(State s, Location l) {
-		super(s, l);
+	SegCell(State s, Location l, CellSocietyGUI CSGUI) {
+		super(s, l, CSGUI);
 		
 		double x1 = myLoc.getX()*CELL_SIZE;
 		double y1 = myLoc.getY()*CELL_SIZE;

@@ -18,7 +18,7 @@ public class SquareGrid extends Grid {
 				for (int j = -1; j < 2; j++) {
 					if (i != 0 || j != 0) {
 						Location neighborLoc = new Location(cell.getLocation().getX() + i,
-								cell.getLocation().getY() + j);
+								cell.getLocation().getY() + j, myNumRows, myNumCols);
 						if (neighborLoc.isValid()) {
 							neighbors.add(cell);
 						}

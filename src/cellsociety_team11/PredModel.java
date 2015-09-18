@@ -4,24 +4,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gui.CellSocietyGUI;
+
 public class PredModel extends Model {
 	
-	public PredModel(int rows, int columns) {
-		super(rows, columns);
+	public PredModel(int rows, int columns, CellSocietyGUI CSGUI) {
+		super(rows, columns, CSGUI);
 	}
 
 	@Override
-	public void buildGrid(List<Map<String, String>> cells) {
+	public void buildGrid(List<Map<String, String>> cells,  CellSocietyGUI CSGUI) {
 		Map<Location,Cell> cellMap = new HashMap<>();
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("row"));
 			int y = Integer.parseInt(map.get("column"));
 			int state = Integer.parseInt(map.get("state"));
-			Cell cell = new GOLCell(new GOLState(state),new Location(x,y));
+			Cell cell = new GOLCell(new GOLState(state),new Location(x,y, getRows(), getColumns()), CSGUI);
 			cellMap.put(cell.getLocation(), cell);
 		});
 		Grid grid = new SquareGrid(getColumns(), getRows(), cellMap);
 		setMyGrid(grid);
+	}
+	
+	public void step() {
+		getMyGrid().step();
 	}
 
 }

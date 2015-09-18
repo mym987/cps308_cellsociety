@@ -1,28 +1,20 @@
 package cellsociety_team11;
 
+import gui.CellSocietyGUI;
+import gui.SquareCellGUI;
+
 public class GOLCell extends Cell{
 	public static final double CELL_SIZE = 70;
 	
 	private Integer[] myStateInts = {0,1};  //0=dead, 1=live 
 											// Maybe this should be an ENUM to make it more readable?
+	
+	SquareCellGUI myCellGUI;
 
-	GOLCell(State s, Location l) {
-		super(s, l);
-
-//		double x1 = myLoc.getX()*CELL_SIZE;
-//		double y1 = myLoc.getY()*CELL_SIZE;
-//		double x2 = myLoc.getX()*CELL_SIZE + CELL_SIZE;
-//		double y2 = myLoc.getY()*CELL_SIZE + CELL_SIZE;
-//
-//
-//		this.getPoints().addAll(new Double[]{
-//				x1, y1,
-//				x2, y1,
-//				x2, y2,
-//				x1, y2
-//		});
-//		this.setFill(Color.WHITE);		// These should be methods in CellGUI
-//		this.setStroke(Color.BLACK);
+	GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
+		super(s, l, CSGUI);
+		
+		myCellGUI = new SquareCellGUI(CSGUI, l);
 	}
 	
 	@Override
