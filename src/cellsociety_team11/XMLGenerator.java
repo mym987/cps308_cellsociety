@@ -60,11 +60,11 @@ public class XMLGenerator{
     	map.forEach((k,v)->{addElement(root,k,v);});
     }
     
-    private void createModel(String name, int r, int c){
+    private void createModel(String name, int width, int height){
     	Element model = addElement(myRoot,"model");
     	addElement(model,"name",name);
-        addElement(model,"rows",r);
-        addElement(model,"columns",c);
+        addElement(model,"width",width);
+        addElement(model,"height",height);
     }
     
     private Element createRoot(String name){
@@ -82,16 +82,16 @@ public class XMLGenerator{
     			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
     			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
     			{	0	,	0	,	0	,	0	,	0	,	1	,	1	,	1	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+    			{	0	,	1	,	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	},
+    			{	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
     			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	}};
-    	for(int r=0;r<mat.length;r++){
-    		for(int c=0;c<mat[r].length;c++){
+    	for(int y=0;y<mat.length;y++){
+    		for(int x=0;x<mat[y].length;x++){
     			Map<String,Integer> map = new HashMap<>();
-    			map.put("row", r);
-    			map.put("column", c);
-    			map.put("state", mat[r][c]);
+    			map.put("y", y);
+    			map.put("x", x);
+    			map.put("state", mat[y][x]);
     			addGroup(addElement(cells,"cell"),map);	
     		}
     	}

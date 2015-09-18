@@ -20,16 +20,19 @@ public class GOLCell extends Cell{
 	
 	@Override
 	public void determineNextState() { // This should be split up into smaller functions.
-		GOLState nextState = new GOLState(1);
-		int numLiveNeighbors = getNeighborsInState(nextState).size();
-		
-		if (numLiveNeighbors == 3) {
-			myState.setNextState(LIVE_STATE);
-		} else if(numLiveNeighbors != 2) {
-			myState.setNextState(DEAD_STATE);
+		int numLiveNeighbors = getNeighborsInState(new GOLState(LIVE_STATE)).size();
+		if(isInState(LIVE_STATE)){	
+			if(numLiveNeighbors == 2 || numLiveNeighbors == 3){
+				myState.setNextState(LIVE_STATE);
+			}else{
+				myState.setNextState(DEAD_STATE);
+			}
+		}else if(isInState(DEAD_STATE)){
+			if (numLiveNeighbors == 3)
+				myState.setNextState(LIVE_STATE);
 		}
 	}
-	
+	@Override
 	public void goToNextState() {
 		super.goToNextState();
 		myCellGUI.updateState(myState);

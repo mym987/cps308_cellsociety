@@ -2,22 +2,26 @@ package cellsociety_team11;
 
 public class Location {
 	
-	private double myX;
-	private double myY;
-	private int myNumRows, myNumCols;
+	private int myX, myY;
+	private int myWidth, myHeight;
 	
-	Location(double x, double y, int numRows, int numCols){
+	Location(int x, int y, int width, int height){
 		myX = x;
 		myY = y;
-		myNumRows = numRows;
-		myNumCols = numCols;
+		myWidth = width;
+		myHeight = height;
 	}
 	
-	public double getX(){
+	public Location getLocation(int x, int y){
+		Location loc = new Location(x,y,myWidth,myHeight);
+		return loc.isValid()?loc:null;
+	}
+	
+	public int getX(){
 		return myX;
 	}
 	
-	public double getY(){
+	public int getY(){
 		return myY;
 	}
 	
@@ -28,21 +32,17 @@ public class Location {
 //		}else{																		// mistake again.
 //			return true;
 //		}
-		
-		return (getX() >= 0 && getX() < myNumCols && getY() >= 0 && getY() < myNumRows);
+		return (getX() >= 0 && getX() < myWidth && getY() >= 0 && getY() < myHeight);
 	}
 	
-	public int getNumRows(){
-		return myNumRows;
+	public int getWidth(){
+		return myWidth;
 	}
 	
 	public int getNumCols(){
-		return myNumCols;
+		return myHeight;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,21 +55,12 @@ public class Location {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
-		if (Double.doubleToLongBits(myX) != Double.doubleToLongBits(other.myX))
-			return false;
-		if (Double.doubleToLongBits(myY) != Double.doubleToLongBits(other.myY))
+		if (myX != other.myX || myY != other.myY)
 			return false;
 		return true;
 	}

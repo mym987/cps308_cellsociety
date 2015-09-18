@@ -19,10 +19,10 @@ public class SegModel extends Model {
 			int r = Integer.parseInt(map.get("row"));
 			int c = Integer.parseInt(map.get("column"));
 			int state = Integer.parseInt(map.get("state"));
-			Cell cell = new GOLCell(new GOLState(state),new Location(r,c, getRows(), getColumns()), CSGUI);
+			Cell cell = new GOLCell(new GOLState(state),new Location(r,c, getHeight(), getWidth()), CSGUI);
 			cellMap.put(cell.getLocation(), cell);
 		});
-		Grid grid = new SquareGrid(getColumns(), getRows(), cellMap);
+		Grid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
 		setMyGrid(grid);
 	}
 	

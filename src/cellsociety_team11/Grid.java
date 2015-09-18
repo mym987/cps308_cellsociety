@@ -1,26 +1,41 @@
 package cellsociety_team11;
 
+import java.util.List;
 import java.util.Map;
 
-public class Grid {
+public abstract class Grid {
 	
-	protected int myNumCols;		// This should be in squareGrid.  Grid doesn't necessarily have rows and columns
-	protected int myNumRows;
+	protected int myWidth;		// This should be in squareGrid.  Grid doesn't necessarily have rows and columns
+	protected int myHeight;
 	protected Map<Location, Cell> myCells;
 	
-	Grid(int c, int r, Map<Location, Cell> cells){
-		myNumCols = c;
-		myNumRows = r;
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 * @param cells
+	 */
+	public Grid(int width, int height, Map<Location, Cell> cells){
+		myWidth = width;
+		myHeight = height;
 		myCells = cells;
 	}
 	
-	public int getNumRows() {
-		return myNumRows;
+	public int getHeight() {
+		return myHeight;
 	}
 
-	public int getNumCols() {
-		return myNumCols;
+	public int getWidth() {
+		return myWidth;
 	}
+	
+	public Cell getCell(Location loc){
+		return myCells.get(loc);
+	}
+	
+	public abstract List<Location> getAdjacentLoc(Location loc);
+	
+	public abstract List<Cell> getAdjacentCells(Cell cell);
 	
 	public void step() {
 		determineNextStates();

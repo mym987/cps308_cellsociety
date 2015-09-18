@@ -67,12 +67,12 @@ public class SaxHandler extends DefaultHandler {
 		}
 	}
 
-	private Model createModel(String name, int r, int c) {
+	private Model createModel(String name, int width, int height) {
 		name = getClass().getPackage().getName() + "." + name;
 		try {
 			Class[] types = { Integer.TYPE, Integer.TYPE, CellSocietyGUI.class};
 			Constructor constructor = Class.forName(name).getDeclaredConstructor(types);
-			return (Model) constructor.newInstance(r, c, myCSGUI);
+			return (Model) constructor.newInstance(width, height, myCSGUI);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -85,11 +85,11 @@ public class SaxHandler extends DefaultHandler {
 		//System.out.println("--endElement()--" + qName);
 		if (qName.equals("model")) {
 			String name = attributeMap.get("name");
-			int rows = Integer.parseInt(attributeMap.get("rows"));
-			int columns = Integer.parseInt(attributeMap.get("columns"));
-			myModel = createModel(name, rows, columns);
+			int width = Integer.parseInt(attributeMap.get("width"));
+			int height = Integer.parseInt(attributeMap.get("height"));
+			myModel = createModel(name, width, height);
 			myNodeName = "cell";
-			myCells = new ArrayList<>(rows * columns);
+			myCells = new ArrayList<>(width * height);
 		} else if (qName.equals("cell")) {
 			myCells.add(attributeMap);
 			attributeMap = null;

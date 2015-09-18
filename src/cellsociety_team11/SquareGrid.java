@@ -1,35 +1,52 @@
 package cellsociety_team11;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SquareGrid extends Grid {
-
-	SquareGrid(int c, int r, Map<Location, Cell> cells) {
-		super(c, r, cells);
+	
+	SquareGrid(int width, int height, Map<Location, Cell> cells) {
+		super(width, height, cells);
 	}
 
 	public void setNeighbors() {
-
-		for (Cell cell : myCells.values()) {
-			ArrayList<Cell> neighbors = new ArrayList<Cell>();
-			for (int i = -1; i < 2; i++) {
-				for (int j = -1; j < 2; j++) {
-					if (i != 0 || j != 0) {
-						Location neighborLoc = new Location(cell.getLocation().getX() + i,
-								cell.getLocation().getY() + j, myNumRows, myNumCols);
-						if (neighborLoc.isValid()) {
-							Cell newcell = myCells.get(neighborLoc);
-							if(newcell == null) {
-								System.out.println("fuck");
-							}
-							neighbors.add(newcell);
-						}
-					}
-				}
+		myCells.forEach((loc,cell)->{
+			cell.setNeighborCells(getAdjacentCells(cell));
+		});
+	}
+	
+	@Override
+	public List<Location> getAdjacentLoc(Location loc) {
+		int[] x = {-1,-1,-1, 0, 0, 1, 1, 1};
+		int[] y = {-1, 0, 1,-1, 1,-1, 0, 1};
+		List<Location> list = new ArrayList<>(x.length);
+		for(int i=0;i<x.length;i++){
+			Location neighbor = loc.getLocation(loc.getX()+x[i], loc.getY()+y[i]);
+			if(neighbor!=null){
+				list.add(neighbor);
 			}
-			cell.setNeighborCells(neighbors);
 		}
+		return list;
+	}
 
+	@Override
+	public List<Cell> getAdjacentCells(Cell cell) {
+		List<Cell> neighbors = new ArrayList<>(8);
+		getAdjacentLoc(cell.getLocation()).forEach(loc->{
+			neighbors.add(getCell(loc));
+		});
+		return neighbors;
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(int r=0;r<getHeight();r++){
+			for(int c=0;c<getWidth();c++){
+				//Cell cell = getCell(new Location(c,r,))
+			}
+		}
+		return "";
 	}
 }

@@ -17,7 +17,7 @@ public class SquareCellGUI {
 	public SquareCellGUI(CellSocietyGUI CSGUI, Location loc) {
 		myCSGUI = CSGUI;
 		myCellWidth = CSGUI.getGridWidth() / loc.getNumCols();
-		myCellHeight = CSGUI.getGridHeight() / loc.getNumRows();
+		myCellHeight = CSGUI.getGridHeight() / loc.getWidth();
 		myGridXPos = CSGUI.getGridX();
 		myGridYPos = CSGUI.getGridY();
 		createRectangle();

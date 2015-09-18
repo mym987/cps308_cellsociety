@@ -37,9 +37,6 @@ public abstract class State {
 		setColor(myStateInt);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,20 +45,12 @@ public abstract class State {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (obj == null || getClass() != obj.getClass())
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		State other = (State) obj;
-		if (myStateInt != other.myStateInt)
-			return false;
-		return true;
+		return myStateInt == ((State)obj).myStateInt;
 	}	
 }

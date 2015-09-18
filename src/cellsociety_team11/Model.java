@@ -8,22 +8,22 @@ import gui.CellSocietyGUI;
 public abstract class Model {
 	
 	protected CellSocietyGUI myCSGUI;
-	private final int myNumColumn;
-	private final int myNumRow;
+	private final int myWidth;
+	private final int myHeight;
 	private Grid myGrid;
 	
-	Model(int rows, int columns, CellSocietyGUI CSGUI){
-		myNumColumn = rows;
-		myNumRow = columns;
+	Model(int width, int height, CellSocietyGUI CSGUI){
+		myWidth = width;
+		myHeight = height;
 		myCSGUI = CSGUI;
 	}
 
-	public int getRows() {
-		return myNumRow;
+	public int getHeight() {
+		return myHeight;
 	}
 
-	public int getColumns() {
-		return myNumColumn;
+	public int getWidth() {
+		return myWidth;
 	}
 	
 

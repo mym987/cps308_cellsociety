@@ -1,6 +1,7 @@
 package cellsociety_team11;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
@@ -42,7 +43,7 @@ public class PredCell extends Cell {
 
 	private PredCell getRandomNeighborInState(int state) {
 		State stateVar = new PredState(state);
-		ArrayList<Cell> neighbors = getNeighborsInState(stateVar);
+		List<Cell> neighbors = getNeighborsInState(stateVar);
 		int randNeighbor = (int) (Math.random() * neighbors.size());
 		PredCell potentialCell = (PredCell) neighbors.get(randNeighbor);
 

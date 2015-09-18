@@ -1,6 +1,7 @@
 package cellsociety_team11;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.CellSocietyGUI;
 
@@ -8,7 +9,7 @@ public abstract class Cell{
 
 	protected State myState;
 	protected Location myLoc;
-	protected ArrayList<Cell> myNeighborCells;
+	protected List<Cell> myNeighborCells;
 	protected CellSocietyGUI myCSGUI;
 	
 	Cell(State s, Location l, CellSocietyGUI CSGUI){
@@ -20,6 +21,14 @@ public abstract class Cell{
 	public State getState(){
 		return myState;
 	}
+	
+	public boolean isInState(State s){
+		return getState().equals(s);
+	}
+	
+	public boolean isInState(int s){
+		return getState().getStateInt()==s;
+	}
 
 	public void setState(State s){
 		myState = s;
@@ -29,17 +38,16 @@ public abstract class Cell{
 		return myLoc;
 	}
 	
-	public void setNeighborCells(ArrayList<Cell> neighbors) {
+	public void setNeighborCells(List<Cell> neighbors) {
 		myNeighborCells = neighbors;		
 	}
 	
-	protected ArrayList<Cell> getNeighborsInState(State s) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		for(Cell c : myNeighborCells) {
-			if (c.getState().equals(s)) {
-				neighbors.add(c);
-			}
-		}
+	protected List<Cell> getNeighborsInState(State s) {
+		List<Cell> neighbors = new ArrayList<>();
+		myNeighborCells.forEach(cell->{
+			if(cell.isInState(s))
+				neighbors.add(cell);
+		});
 		return neighbors;
 	}
 	
