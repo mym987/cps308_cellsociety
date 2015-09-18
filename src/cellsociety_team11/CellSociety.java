@@ -47,17 +47,19 @@ public class CellSociety extends Application {
 	}
 
 	public void loadXML() {
+		reset();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		File file = fileChooser.showOpenDialog(myStage);
         if (file != null) {
     		myModel = SaxParser.getModel(file.getAbsolutePath(), myCSGUI);
         }
-        myModel.step();
+        //myModel.step();
 	}
 
 	public void start() {
-        myAnimation.play();
+		if(myModel != null)
+			myAnimation.play();
 	}
 
 	public void pause() {
@@ -65,8 +67,9 @@ public class CellSociety extends Application {
 	}
 
 	public void reset() {
-		myAnimation.pause();
-		myModel.removeCells();
+		pause();
+		if(myModel != null)
+			myModel.removeCells();
 	}
 
 	private void addButtons() {

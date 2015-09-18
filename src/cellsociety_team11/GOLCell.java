@@ -15,18 +15,18 @@ public class GOLCell extends Cell{
 		super(s, l, CSGUI);
 		
 		myCellGUI = new SquareCellGUI(CSGUI, l);
-		myCellGUI.updateState(myState);
+		myCellGUI.updateState(s);
 	}
 	
 	@Override
 	public void determineNextState() { // This should be split up into smaller functions.
-		GOLState nextState = new GOLState(0);
+		GOLState nextState = new GOLState(1);
 		int numLiveNeighbors = getNeighborsInState(nextState).size();
 		
-		if(numLiveNeighbors > 3 || numLiveNeighbors < 2) {
-			myState.setNextState(DEAD_STATE);
-		} else if (numLiveNeighbors == 3) {
+		if (numLiveNeighbors == 3) {
 			myState.setNextState(LIVE_STATE);
+		} else if(numLiveNeighbors != 2) {
+			myState.setNextState(DEAD_STATE);
 		}
 	}
 	

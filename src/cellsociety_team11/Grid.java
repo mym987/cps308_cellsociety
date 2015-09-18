@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Grid {
 	
-	protected int myNumCols;
+	protected int myNumCols;		// This should be in squareGrid.  Grid doesn't necessarily have rows and columns
 	protected int myNumRows;
 	protected Map<Location, Cell> myCells;
 	

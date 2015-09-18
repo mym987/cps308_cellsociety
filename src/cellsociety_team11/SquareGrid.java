@@ -11,8 +11,7 @@ public class SquareGrid extends Grid {
 
 	public void setNeighbors() {
 
-		for (Location l : myCells.keySet()) {
-			Cell cell = myCells.get(l);
+		for (Cell cell : myCells.values()) {
 			ArrayList<Cell> neighbors = new ArrayList<Cell>();
 			for (int i = -1; i < 2; i++) {
 				for (int j = -1; j < 2; j++) {
@@ -20,7 +19,11 @@ public class SquareGrid extends Grid {
 						Location neighborLoc = new Location(cell.getLocation().getX() + i,
 								cell.getLocation().getY() + j, myNumRows, myNumCols);
 						if (neighborLoc.isValid()) {
-							neighbors.add(cell);
+							Cell newcell = myCells.get(neighborLoc);
+							if(newcell == null) {
+								System.out.println("fuck");
+							}
+							neighbors.add(newcell);
 						}
 					}
 				}
