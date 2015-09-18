@@ -72,7 +72,7 @@ public class SaxHandler extends DefaultHandler {
 		try {
 			Class[] types = { Integer.TYPE, Integer.TYPE };
 			Constructor<?> constructor = Class.forName(name).getDeclaredConstructor(types);
-			return (Model) constructor.newInstance(r, c);
+			return (Model) constructor.newInstance(r, c, myCSGUI);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

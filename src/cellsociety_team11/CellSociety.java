@@ -3,24 +3,28 @@ package cellsociety_team11;
 import java.io.File;
 
 import gui.CellSocietyGUI;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class CellSociety extends Application {
 	private static final int XSIZE = 1000;
 	private static final int YSIZE = 1000;
 	private static final String[] BUTTON_NAMES = { "LoadXML", "Start", "Pause", "Reset" };
 	private static final double BUTTON_HEIGHT = 40;
-	public static final int FRAMES_PER_SECOND = 60;
+	public static final int FRAMES_PER_SECOND = 1;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+//	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 	private CellSocietyGUI myCSGUI;
 	private Model myModel;
 	private Stage myStage;
+	private Timeline myAnimation;
 
 	@Override
 	public void start(Stage stage) {
@@ -46,11 +50,16 @@ public class CellSociety extends Application {
 	}
 
 	public void start() {
-		System.out.println("Start");
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+                e -> myModel.step());
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.play();
 	}
 
 	public void pause() {
-		System.out.println("Pause");
+		myAnimation.pause();
 	}
 
 	public void reset() {
