@@ -2,6 +2,8 @@ package cellsociety_team11;
 
 import java.util.ArrayList;
 
+import gui.CellSocietyGUI;
+
 public class PredCell extends Cell {
 	private static final double CELL_SIZE = 70;
 	private static int EMPTY_STATE = 0;
@@ -15,8 +17,8 @@ public class PredCell extends Cell {
 
 	private static final int LIVES_REPRODUCE = 5;
 
-	PredCell(State s, Location l) {
-		super(s, l);
+	PredCell(State s, Location l, CellSocietyGUI CSGUI) {
+		super(s, l, CSGUI);
 	}
 	
 	public void setNumChronon(int chronon) {

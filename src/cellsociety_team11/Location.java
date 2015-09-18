@@ -4,8 +4,9 @@ public class Location {
 	
 	private double myX;
 	private double myY;
+	private int myNumRows, myNumCols;
 	
-	Location(double x, double y){
+	Location(double x, double y, int numRows, int numCols){
 		myX = x;
 		myY = y;
 	}
@@ -19,10 +20,18 @@ public class Location {
 	}
 	
 	public boolean isValid(){	
-		if(getX() < 0 || getX() > Grid.getNumCols() || getY() < 0 || getY() > Grid.getNumRows()){
+		if(getX() < 0 || getX() > myNumCols || getY() < 0 || getY() > myNumRows){
 			return false;
 		}else{
 			return true;
 		}
+	}
+	
+	public int getNumRows(){
+		return myNumRows;
+	}
+	
+	public int getNumCols(){
+		return myNumCols;
 	}
 }

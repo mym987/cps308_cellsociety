@@ -1,9 +1,12 @@
 package cellsociety_team11;
 
+import java.io.File;
+
 import gui.CellSocietyGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class CellSociety extends Application {
@@ -16,20 +19,30 @@ public class CellSociety extends Application {
 	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 	private CellSocietyGUI myCSGUI;
+	private Model myModel;
+	private Stage myStage;
 
 	@Override
 	public void start(Stage stage) {
-		myCSGUI = new CellSocietyGUI(stage);
+		myStage = stage;
+		myCSGUI = new CellSocietyGUI();
 
 		Scene scene = myCSGUI.init(XSIZE, YSIZE);
 		stage.setScene(scene);
 		stage.setTitle(myCSGUI.getTitle());
 		addButtons();
 		stage.show();
+		
+		myCSGUI.createGridArea();
 	}
 
 	public void loadXML() {
-		System.out.println("Load XML");
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		File file = fileChooser.showOpenDialog(myStage);
+        if (file != null) {
+    		myModel = SaxParser.getModel(file.getAbsolutePath(), myCSGUI);
+        }
 	}
 
 	public void start() {

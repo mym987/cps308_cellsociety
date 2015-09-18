@@ -2,15 +2,19 @@ package cellsociety_team11;
 
 import java.util.ArrayList;
 
+import gui.CellSocietyGUI;
+
 public abstract class Cell{ 
 
 	protected State myState;
 	protected Location myLoc;
 	protected ArrayList<Cell> myNeighborCells;
+	protected CellSocietyGUI myCSGUI;
 	
-	Cell(State s, Location l){
+	Cell(State s, Location l, CellSocietyGUI CSGUI){
 		myState = s;
 		myLoc = l;
+		myCSGUI = CSGUI;
 	}
 
 	public State getState(){

@@ -3,7 +3,6 @@ package cellsociety_team11;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,8 @@ import java.util.Map;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import gui.CellSocietyGUI;
 
 public class SaxHandler extends DefaultHandler {
 
@@ -22,8 +23,11 @@ public class SaxHandler extends DefaultHandler {
 	private String currentTag = null;
 	private String currentValue = null;
 	
-	public SaxHandler() {
+	private CellSocietyGUI myCSGUI;
+	
+	public SaxHandler(CellSocietyGUI CSGUI) {
 		myNodeName = "Model";
+		myCSGUI = CSGUI;
 	}
 
 	public Model getModel() {
@@ -71,7 +75,7 @@ public class SaxHandler extends DefaultHandler {
 			int rows = Integer.parseInt(attributeMap.get("Rows"));
 			int columns = Integer.parseInt(attributeMap.get("Columns"));
 			try {
-				Constructor c = Class.forName(name).getConstructor(Integer.TYPE, Integer.TYPE);
+				Constructor<?> c = Class.forName(name).getConstructor(Integer.TYPE, Integer.TYPE);
 				myModel = (Model) c.newInstance(rows, columns);
 			} catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException
 					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -90,6 +94,6 @@ public class SaxHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {
 		System.out.println("--endDocument()--");
 		super.endDocument();
-		myModel.buildGrid(myCells);
+		myModel.buildGrid(myCells, myCSGUI);
 	}
 }
