@@ -10,7 +10,7 @@ public class SquareGrid extends Grid {
 	}
 
 	public void setNeighbors() {
-		
+
 		for (Location l : myCells.keySet()) {
 			Cell cell = myCells.get(l);
 			ArrayList<Cell> neighbors = new ArrayList<Cell>();
@@ -27,6 +27,6 @@ public class SquareGrid extends Grid {
 			}
 			cell.setNeighborCells(neighbors);
 		}
-			
+
 	}
 }

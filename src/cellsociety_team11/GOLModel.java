@@ -27,6 +27,7 @@ public class GOLModel extends Model {
 		// Why locations are double??!!
 			// Because that's what the methods to draw take
 		SquareGrid grid = new SquareGrid(getColumns(), getRows(), cellMap);
+		grid.setNeighbors();
 		setMyGrid(grid);
 	}
 }
