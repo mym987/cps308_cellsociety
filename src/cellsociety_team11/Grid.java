@@ -28,15 +28,13 @@ public class Grid {
 	}
 	
 	private void determineNextStates() {
-		for (Location l : myCells.keySet()) {
-			Cell c = myCells.get(l);
+		for (Cell c : myCells.values()) {
 			c.determineNextState();
 		}
 	}
 	
 	private void goToNextStates() {
-		for(Location l : myCells.keySet()) {
-			Cell c = myCells.get(l);
+		for (Cell c : myCells.values()) {
 			c.goToNextState();
 		}
 	}

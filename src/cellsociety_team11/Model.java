@@ -6,11 +6,11 @@ import java.util.Map;
 import gui.CellSocietyGUI;
 
 public abstract class Model {
-	final int myNumColumn;
-	final int myNumRow;
 	
-	protected Map<Location, Cell> myCellMap;
 	protected CellSocietyGUI myCSGUI;
+	private final int myNumColumn;
+	private final int myNumRow;
+	private Grid myGrid;
 	
 	Model(int rows, int columns, CellSocietyGUI CSGUI){
 		myNumColumn = rows;
@@ -26,10 +26,21 @@ public abstract class Model {
 		return myNumColumn;
 	}
 	
+
 	public abstract void step();
+
+	public void nextState(){
+		myGrid.step();
+	}
 	
 	public abstract void buildGrid(List<Map<String,String>> cells, CellSocietyGUI CSGUI);
 	
-	public abstract Grid getMyGrid();
+	public Grid getMyGrid(){
+		return myGrid;
+	};
+	
+	public void setMyGrid(Grid grid){
+		myGrid = grid;
+	}
 
 }

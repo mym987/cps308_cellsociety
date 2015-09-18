@@ -6,10 +6,8 @@ public class SegState extends State {
 
 	SegState(int s) {
 		super(s);
-		
-		myColors[0] = Color.WHITE; //empty
-		myColors[1] = Color.BLUE; //group1
-		myColors[2] = Color.YELLOW; //group2
+		Color[] colors = {Color.WHITE,Color.BLUE,Color.YELLOW}; //0=empty,1=group1,2=group2
+		setAvailableColors(colors);
 		this.setColor(s);
 	}
 

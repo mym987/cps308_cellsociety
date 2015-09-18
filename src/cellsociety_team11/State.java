@@ -3,21 +3,24 @@ package cellsociety_team11;
 import javafx.scene.paint.Color;
 
 public abstract class State {
-	protected Color[] myColors;
-	protected Color myColor;
-	protected int myStateInt = 0;
-	protected int myNextStateInt = 0;
+	private Color myColor;
+	private Color[] myColors;
+	private int myStateInt = 0;
+	private int myNextStateInt = 0;
 
 	State(int state){ //This will need to take CellSocietyGUI as a parameter so it can create a SquareCellGUI.
 		myStateInt = state;
-		this.setColor(state);
 	}
 	
 	public Color getColor() {
 		return myColor;
 	}
 	
-	public void setColor(int s) {
+	public void setAvailableColors(Color[] colors){
+		myColors = colors;
+	}
+	
+	public void setColor(int s){
 		myColor = myColors[s];
 	}
 	

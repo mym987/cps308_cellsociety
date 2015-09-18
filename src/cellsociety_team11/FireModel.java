@@ -6,14 +6,10 @@ import java.util.Map;
 
 import gui.CellSocietyGUI;
 
-public class GOLModel extends Model {
-	
-	GOLModel(int rows, int columns, CellSocietyGUI CSGUI) {
+public class FireModel extends Model {
+
+	public FireModel(int rows, int columns, CellSocietyGUI CSGUI) {
 		super(rows, columns, CSGUI);
-	}
-	
-	public void step() {
-		getMyGrid().step();
 	}
 
 	@Override
@@ -22,13 +18,16 @@ public class GOLModel extends Model {
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("row"));
 			int y = Integer.parseInt(map.get("column"));
-			int state = Integer.parseInt(map.get("State"));
-			Cell cell = new GOLCell(new GOLState(state), new Location(x,y, getRows(), getColumns()), CSGUI);
+			int state = Integer.parseInt(map.get("state"));
+			Cell cell = new GOLCell(new GOLState(state),new Location(x,y, getRows(), getColumns()), CSGUI);
 			cellMap.put(cell.getLocation(), cell);
 		});
-		// Why locations are double??!!
-			// Because that's what the methods to draw take
-		SquareGrid grid = new SquareGrid(getColumns(), getRows(), cellMap);
+		Grid grid = new SquareGrid(getColumns(), getRows(), cellMap);
 		setMyGrid(grid);
+	}
+
+	@Override
+	public void step() {
+		getMyGrid().step();
 	}
 }
