@@ -14,6 +14,8 @@ public class GOLModel extends Model {
 
 	@Override
 	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
+		System.out.println(getRows());
+		System.out.println(getColumns());
 		Map<Location,Cell> cellMap = new HashMap<>();
 		cells.forEach(map -> {
 			int r = Integer.parseInt(map.get("row"));
