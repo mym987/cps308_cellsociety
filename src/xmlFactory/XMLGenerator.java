@@ -33,8 +33,8 @@ public class XMLGenerator{
     	XMLGenerator generator = new XMLGenerator();
     	//generator.init(new GOLModel(50,50,0.5));
     	//generator.init(new PredModel(50,50,0.2,0.7));
-    	//generator.init(new SegModel(50,50,0.45,0.45));
-    	generator.init(new FireModel(50,50));
+    	generator.init(new SegModel(8,8,0.45,0.45));
+    	//generator.init(new FireModel(50,50));
     	generator.createXml();
     }
  
@@ -89,7 +89,7 @@ public class XMLGenerator{
     	
         createModel();
         createCells();
-        String fileName = myModel+"_"+(new Date()).toString().replaceAll(" ", "")+".xml";
+        String fileName = myModel+".xml";
         TransformerFactory tf = TransformerFactory.newInstance();
         try {
             Transformer transformer = tf.newTransformer();
