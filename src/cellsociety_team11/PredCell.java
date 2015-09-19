@@ -124,8 +124,6 @@ public class PredCell extends Cell {
 	public void goToNextState() {
 		super.goToNextState();
 		myCellGUI.updateState(myState);
-		if(myState.getStateInt() == SHARK_STATE)
-			System.out.println(sharkEnergy);
 		visited = false;
 	}
 }
