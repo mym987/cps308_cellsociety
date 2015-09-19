@@ -1,8 +1,10 @@
-package cellsociety_team11;
+package cell;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import location.Location;
+import state.State;
 import gui.CellSocietyGUI;
 
 public abstract class Cell{ 

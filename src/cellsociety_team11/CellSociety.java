@@ -2,6 +2,8 @@ package cellsociety_team11;
 
 import java.io.File;
 
+import model.Model;
+import model.SaxParser;
 import gui.CellSocietyGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

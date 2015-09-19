@@ -1,12 +1,16 @@
-package cellsociety_team11;
+package model;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Stack;
 
+import location.Location;
+import state.SegState;
+import cell.Cell;
+import cell.SegCell;
+import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class SegModel extends Model {

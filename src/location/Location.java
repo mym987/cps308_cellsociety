@@ -1,11 +1,11 @@
-package cellsociety_team11;
+package location;
 
 public class Location {
 	
 	private int myX, myY;
 	private int myWidth, myHeight;
 	
-	Location(int x, int y, int width, int height){
+	public Location(int x, int y, int width, int height){
 		myX = x;
 		myY = y;
 		myWidth = width;

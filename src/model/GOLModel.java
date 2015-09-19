@@ -1,9 +1,14 @@
-package cellsociety_team11;
+package model;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import location.Location;
+import state.GOLState;
+import cell.Cell;
+import cell.GOLCell;
+import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class GOLModel extends Model {

@@ -1,7 +1,10 @@
-package cellsociety_team11;
+package cell;
 
 import java.util.Random;
 
+import location.Location;
+import state.FireState;
+import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
@@ -14,7 +17,7 @@ public class FireCell extends Cell{
 	private double myProbCatchFire = 0.5;
 	private SquareCellGUI myCellGUI;
 
-	FireCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);

@@ -1,5 +1,8 @@
-package cellsociety_team11;
+package cell;
 
+import location.Location;
+import state.GOLState;
+import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
@@ -10,7 +13,7 @@ public class GOLCell extends Cell{
 	
 	SquareCellGUI myCellGUI;
 
-	GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		
 		myCellGUI = new SquareCellGUI(CSGUI, l);

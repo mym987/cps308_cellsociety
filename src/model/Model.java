@@ -1,8 +1,9 @@
-package cellsociety_team11;
+package model;
 
 import java.util.List;
 import java.util.Map;
 
+import grid.Grid;
 import gui.CellSocietyGUI;
 
 public abstract class Model {

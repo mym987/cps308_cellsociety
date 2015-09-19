@@ -1,6 +1,10 @@
-package cellsociety_team11;
+package cell;
 
 import java.util.List;
+
+import location.Location;
+import state.PredState;
+import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
@@ -20,7 +24,7 @@ public class PredCell extends Cell {
 	
 	SquareCellGUI myCellGUI;
 
-	PredCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public PredCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);

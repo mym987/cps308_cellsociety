@@ -1,4 +1,4 @@
-package cellsociety_team11;
+package state;
 
 import javafx.scene.paint.Color;
 

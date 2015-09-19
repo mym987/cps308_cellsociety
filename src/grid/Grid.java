@@ -1,7 +1,10 @@
-package cellsociety_team11;
+package grid;
 
 import java.util.List;
 import java.util.Map;
+
+import location.Location;
+import cell.Cell;
 
 public abstract class Grid {
 	
