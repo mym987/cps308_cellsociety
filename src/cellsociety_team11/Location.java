@@ -25,13 +25,7 @@ public class Location {
 		return myY;
 	}
 	
-	public boolean isValid(){														// Karen... I just want to point out that if we were to turn
-																					// in this method as it was, we would all fail the class,
-//		if(getX() < 0 || getX() > myNumCols || getY() < 0 || getY() > myNumRows){	// according to what duvall said the other day.
-//			return false;															// I'm leaving it here so you see it and don't make the same
-//		}else{																		// mistake again.
-//			return true;
-//		}
+	public boolean isValid(){														
 		return (getX() >= 0 && getX() < myWidth && getY() >= 0 && getY() < myHeight);
 	}
 	
