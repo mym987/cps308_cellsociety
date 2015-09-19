@@ -14,19 +14,20 @@ public class SegModel extends Model {
 
 	@Override
 	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
-		Map<Location,Cell> cellMap = new HashMap<>();
+		Map<Location, Cell> cellMap = new HashMap<>();
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("x"));
 			int y = Integer.parseInt(map.get("y"));
 			int state = Integer.parseInt(map.get("state"));
-			Cell cell = new SegCell(new SegState(state), new Location(x,y, getWidth(), getHeight()), CSGUI);
+			Cell cell = new SegCell(new SegState(state), new Location(x, y, getWidth(), getHeight()), CSGUI);
 			cellMap.put(cell.getLocation(), cell);
 		});
-		if(cellMap.size()<getWidth()*getHeight())
+		if (cellMap.size() < getWidth() * getHeight())
 			System.err.println("Missing Cell Info!");
 		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
 		grid.setNeighbors();
+		grid.setEmpty();
 		setMyGrid(grid);
 	}
-	
+
 }

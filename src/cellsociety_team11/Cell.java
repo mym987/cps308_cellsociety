@@ -2,6 +2,7 @@ package cellsociety_team11;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import gui.CellSocietyGUI;
 
@@ -10,6 +11,7 @@ public abstract class Cell{
 	protected State myState;
 	protected Location myLoc;
 	protected List<Cell> myNeighborCells;
+	protected List<Cell> myEmptyCells;
 	protected CellSocietyGUI myCSGUI;
 	
 	Cell(State s, Location l, CellSocietyGUI CSGUI){
@@ -49,6 +51,20 @@ public abstract class Cell{
 				neighbors.add(cell);
 		});
 		return neighbors;
+	}
+	
+	public void setEmptyCells(List<Cell> emptycells) {
+		myEmptyCells = emptycells;		
+	}
+	
+	protected List<Cell> getEmptyCells() {
+		return myEmptyCells;
+	}
+	
+	protected Cell getRandomEmpty() {
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(getEmptyCells().size() + 1);
+		return getEmptyCells().get(randomInt);	
 	}
 	
 	public abstract void determineNextState();

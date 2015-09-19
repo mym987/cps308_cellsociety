@@ -24,7 +24,7 @@ public class FireModel extends Model {
 		});
 		if(cellMap.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
+		FireGrid grid = new FireGrid(getWidth(), getHeight(), cellMap);
 		grid.setNeighbors();
 		setMyGrid(grid);
 	}
