@@ -1,6 +1,7 @@
 package xmlFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,46 +10,31 @@ import java.util.Random;
 public class FireModel extends Model {
 	
 	private static final int EMPTY_STATE = 0;
-	private static final int SHARK_STATE = 1;
-	private static final int FISH_STATE = 2;
+	private static final int TREE_STATE = 1;
+	private static final int FIRE_STATE = 2;
 
-	private int myNumShark, myNumFish;
-
-	FireModel(int width, int height, double percentShark, double percentFish) {
-		super("PredModel", width, height);
-		int total = width * height;
-		percentShark = (percentShark < 0) ? 0 : percentShark;
-		percentFish = (percentFish < 0) ? 0 : percentFish;
-		int numSharks = (int) (percentShark * total);
-		int numFish = (int) (percentFish * total);
-		myNumShark = numSharks <= total ? numSharks : total;
-		myNumFish = (numFish <= total - myNumShark) ? numFish : total - myNumShark;
+	FireModel(int width, int height) {
+		super("FireModel", width, height);
 	}
 
 	@Override
 	public List<Map<String, String>> getCells() {
 		int mat[][] = new int[getWidth()][getHeight()];
-		Random rand = new Random(System.currentTimeMillis());
 		int total = getWidth()*getHeight();
 		
-		int i = 0;
-		while(i < myNumShark){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = SHARK_STATE;
-				i++;
-			}
+		for(int i=0;i<mat.length;i++){
+			Arrays.fill(mat[i], TREE_STATE);
 		}
-		i = 0;
-		while(i < myNumFish){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = FISH_STATE;
-				i++;
-			}
+		mat[getWidth()/2][getHeight()/2] = FIRE_STATE;
+		for(int i = 0;i<getWidth();i++){
+			mat[i][0] = EMPTY_STATE;
+			mat[i][getHeight()-1] = EMPTY_STATE;
 		}
+		for(int i = 0;i<getHeight();i++){
+			mat[0][i] = EMPTY_STATE;
+			mat[getWidth()-1][i] = EMPTY_STATE;
+		}
+		
 		List<Map<String, String>> list = new ArrayList<>();
 		
 		for (int x = 0; x < mat.length; x++) {

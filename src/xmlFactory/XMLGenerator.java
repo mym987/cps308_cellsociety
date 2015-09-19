@@ -32,8 +32,9 @@ public class XMLGenerator{
     	XMLGenerator generator = new XMLGenerator();
     	//generator.init(new GOLModel(50,50));
     	//generator.init(new PredModel(50,50,0.2,0.7));
-    	generator.init(new SegModel(50,50,0.45,0.45));
-    	generator.createXml("Seg50_50.xml");
+    	//generator.init(new SegModel(50,50,0.45,0.45));
+    	generator.init(new FireModel(10,10));
+    	generator.createXml("Fire10_10.xml");
     }
  
     public void init(Model model) {

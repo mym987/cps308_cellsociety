@@ -18,11 +18,12 @@ public class FireCell extends Cell{
 	FireCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
 	}
 
 	@Override
 	public void determineNextState() {
-		int numBurningNeighbors = getNeighborsInState(new GOLState(BURN_STATE)).size();
+		int numBurningNeighbors = getNeighborsInState(new FireState(BURN_STATE)).size();
 		Random randomGenerator = new Random();
 		if (isInState(LIVE_STATE) && numBurningNeighbors >= 1) {
 			int randomInt = randomGenerator.nextInt(100);
