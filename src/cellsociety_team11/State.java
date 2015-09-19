@@ -10,6 +10,7 @@ public abstract class State {
 
 	State(int state){ //This will need to take CellSocietyGUI as a parameter so it can create a SquareCellGUI.
 		myStateInt = state;
+		myNextStateInt = state;
 	}
 	
 	public Color getColor() {
