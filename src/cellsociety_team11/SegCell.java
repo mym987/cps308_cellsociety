@@ -19,6 +19,7 @@ public class SegCell extends Cell {
 		super(s, l, CSGUI);
 
 		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
 
 	}
 
