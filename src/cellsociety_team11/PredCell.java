@@ -98,7 +98,6 @@ public class PredCell extends Cell {
 		PredCell chosenCell;
 
 		if (myState.getStateInt() == SHARK_STATE) {
-			System.out.println(sharkEnergy);
 			--sharkEnergy;
 			if (sharkEnergy <= 0) {
 				myState.setNextState(EMPTY_STATE);
