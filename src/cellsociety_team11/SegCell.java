@@ -2,18 +2,15 @@ package cellsociety_team11;
 
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
-import javafx.scene.paint.Color;
 
 public class SegCell extends Cell {
 	public static final double CELL_SIZE = 70;
-	
+
 	private static final int EMPTY_STATE = 0;
 	private static final int BLUE_STATE = 1;
 	private static final int YELLOW_STATE = 2;
-	public static final double PERCENT_SIMILAR = 0.30;   //set to what we want
+	public static final double PERCENT_SIMILAR = 0.70; // set to what we want
 	SquareCellGUI myCellGUI;
-	
-	private Integer[] myStateInts = {0,1,2}; 
 
 	SegCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
@@ -24,13 +21,25 @@ public class SegCell extends Cell {
 
 	@Override
 	public void determineNextState() {
-		double percentSimilar = getNeighborsInState(myState).size()/8;
-		if (percentSimilar < PERCENT_SIMILAR) {
-			myState.setNextState(EMPTY_STATE);
-			getRandomEmpty().getState().setNextState(myState.getStateInt());
-		}
 	}
 	
+	public void determineNextState(State s){
+		myState.setNextState(s.getStateInt());
+	}
+
+	public boolean isSatisfied() {
+		if (getState().getStateInt() == EMPTY_STATE)
+			return false;
+		int otherState = BLUE_STATE + YELLOW_STATE - getState().getStateInt();
+		int sameNeighborSize = getNeighborsInState(myState).size();
+		int otherNeighborSize = getNeighborsInState(new SegState(otherState)).size();
+		return ((double)sameNeighborSize)/(sameNeighborSize+otherNeighborSize)>=PERCENT_SIMILAR;
+	}
+	
+	public boolean isEmpty() {
+		return getState().getStateInt() == EMPTY_STATE;
+	}
+
 	public void remove() {
 		myCellGUI.remove();
 	}
