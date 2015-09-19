@@ -1,5 +1,8 @@
-package cellsociety_team11;
+package cell;
 
+import location.Location;
+import state.SegState;
+import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
@@ -13,7 +16,7 @@ public class SegCell extends Cell {
 	private double mySimilarity = 0.50;
 	private SquareCellGUI myCellGUI;
 
-	SegCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public SegCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 
 		myCellGUI = new SquareCellGUI(CSGUI, l);

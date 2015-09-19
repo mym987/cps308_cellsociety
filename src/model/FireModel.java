@@ -1,9 +1,14 @@
-package cellsociety_team11;
+package model;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import location.Location;
+import state.FireState;
+import cell.Cell;
+import cell.FireCell;
+import grid.FireGrid;
 import gui.CellSocietyGUI;
 
 public class FireModel extends Model {

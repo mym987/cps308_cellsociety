@@ -1,4 +1,4 @@
-package cellsociety_team11;
+package model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

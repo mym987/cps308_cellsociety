@@ -1,9 +1,9 @@
 package gui;
 
-import cellsociety_team11.Location;
-import cellsociety_team11.State;
+import state.State;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import location.Location;
 
 public class SquareCellGUI {
 

@@ -1,9 +1,14 @@
-package cellsociety_team11;
+package model;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import location.Location;
+import state.PredState;
+import cell.Cell;
+import cell.PredCell;
+import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class PredModel extends Model {

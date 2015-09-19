@@ -1,13 +1,16 @@
-package cellsociety_team11;
+package grid;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import location.Location;
+import cell.Cell;
+
 public class SquareGrid extends Grid {
 	public static final int EMPTY_STATE = 0;
 	
-	SquareGrid(int width, int height, Map<Location, Cell> cells) {
+	public SquareGrid(int width, int height, Map<Location, Cell> cells) {
 		super(width, height, cells);
 	}
 

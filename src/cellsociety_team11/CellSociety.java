@@ -2,6 +2,8 @@ package cellsociety_team11;
 
 import java.io.File;
 
+import model.Model;
+import model.SaxParser;
 import gui.CellSocietyGUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -53,7 +55,9 @@ public class CellSociety extends Application {
 	}
 
 	public void loadXML() {
-		reset();
+		pause();
+		if (myModel != null)
+			myModel.removeCells();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		File file = fileChooser.showOpenDialog(myStage);
