@@ -23,6 +23,7 @@ public class PredCell extends Cell {
 	PredCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
 	}
 	
 	public void setNumChronon(int chronon) {
