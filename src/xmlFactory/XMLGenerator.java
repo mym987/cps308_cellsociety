@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class XMLGenerator{
     	//generator.init(new PredModel(50,50,0.2,0.7));
     	//generator.init(new SegModel(50,50,0.45,0.45));
     	generator.init(new FireModel(10,10));
-    	generator.createXml("Fire10_10.xml");
+    	generator.createXml();
     }
  
     public void init(Model model) {
@@ -84,11 +85,11 @@ public class XMLGenerator{
     	});
     }
     
-    public void createXml(String fileName) {
+    public void createXml() {
     	
         createModel();
         createCells();
-        
+        String fileName = myModel+"_"+(new Date()).toString().replaceAll(" ", "")+".xml";
         TransformerFactory tf = TransformerFactory.newInstance();
         try {
             Transformer transformer = tf.newTransformer();
@@ -99,6 +100,7 @@ public class XMLGenerator{
             StreamResult result = new StreamResult(pw);
             transformer.transform(source, result);
             System.out.println("Successfully generated XML file!");
+            System.out.println("Name: "+fileName);
         } catch (TransformerConfigurationException e) {
             System.out.println(e.getMessage());
         } catch (IllegalArgumentException e) {

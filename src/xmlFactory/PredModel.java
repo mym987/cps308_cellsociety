@@ -66,5 +66,11 @@ public class PredModel extends Model {
 		map.put("state", Integer.toString(state));
 		return map;
 	}
+	
+	@Override
+	public String toString(){
+		return getClass().getName()+"_"+getWidth()+"_"+
+				getHeight()+"_"+myNumShark+"_"+myNumFish;
+	}
 
 }

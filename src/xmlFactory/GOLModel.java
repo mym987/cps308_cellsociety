@@ -76,5 +76,10 @@ public class GOLModel extends Model {
 			}
 		}
 	}
+	
+	@Override
+	public String toString(){
+		return getClass().getName()+"_"+getWidth()+"_"+getHeight()+"_"+myNumLiveCells;
+	}
 
 }
