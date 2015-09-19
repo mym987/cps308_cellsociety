@@ -63,7 +63,7 @@ public abstract class Cell{
 	
 	protected Cell getRandomEmpty() {
 		Random randomGenerator = new Random();
-		int randomInt = randomGenerator.nextInt(getEmptyCells().size() + 1);
+		int randomInt = randomGenerator.nextInt(getEmptyCells().size());
 		return getEmptyCells().get(randomInt);	
 	}
 	

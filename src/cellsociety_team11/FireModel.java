@@ -28,5 +28,4 @@ public class FireModel extends Model {
 		grid.setNeighbors();
 		setMyGrid(grid);
 	}
-
 }
