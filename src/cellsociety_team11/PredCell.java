@@ -1,13 +1,10 @@
 package cellsociety_team11;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
 public class PredCell extends Cell {
-	private static final double CELL_SIZE = 70;
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
