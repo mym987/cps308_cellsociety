@@ -13,4 +13,11 @@ Java Documentation
 Main class file:
 CellSociety.java
 
+Non-java files needed:
+FireModel_50_50.xml
+GOLModel_50_50_1250.xml
+PredModel_50_50_500_1750.xml
+SegModel_50_50_1125_1125.xml
+
 Instructions:
+Run CellSociety.java
