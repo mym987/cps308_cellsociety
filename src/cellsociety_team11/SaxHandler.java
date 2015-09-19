@@ -20,8 +20,8 @@ public class SaxHandler extends DefaultHandler {
 	private Map<String, String> myAttributeMap = null;
 	private List<Map<String, String>> myCells = null;
 
-	private String currentTag = null;
-	private String currentValue = null;
+	private String myCurrentTag = null;
+	private String myCurrentValue = null;
 	
 	private CellSocietyGUI myCSGUI;
 	
@@ -49,18 +49,18 @@ public class SaxHandler extends DefaultHandler {
 				myAttributeMap.put(attributes.getQName(i), attributes.getValue(i));
 			}
 		}
-		currentTag = qName;
+		myCurrentTag = qName;
 	}
 
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (currentTag != null && myAttributeMap != null) {
-			currentValue = new String(ch, start, length);
-			if (currentValue != null && !currentValue.trim().equals("") && !currentValue.trim().equals("\n")) {
-				myAttributeMap.put(currentTag, currentValue);
+		if (myCurrentTag != null && myAttributeMap != null) {
+			myCurrentValue = new String(ch, start, length);
+			if (myCurrentValue != null && !myCurrentValue.trim().equals("") && !myCurrentValue.trim().equals("\n")) {
+				myAttributeMap.put(myCurrentTag, myCurrentValue);
 			}
-			currentTag = null;
-			currentValue = null;
+			myCurrentTag = null;
+			myCurrentValue = null;
 		}
 	}
 

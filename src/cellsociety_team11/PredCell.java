@@ -1,13 +1,10 @@
 package cellsociety_team11;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
 public class PredCell extends Cell {
-	private static final double CELL_SIZE = 70;
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
@@ -15,7 +12,7 @@ public class PredCell extends Cell {
 	private int myFishEnergy = 2;
 	private int myMaxSharkEnergy = 5;
 	private int myLivesReproduce = 5;
-	
+
 	private int myNumChronon = 0;
 	private int mySharkEnergy = 0;
 	private boolean visited;
@@ -49,8 +46,7 @@ public class PredCell extends Cell {
 		mySharkEnergy = x;
 	}
 
-	public boolean getVisited() { // determines if a cell has been visited as a
-									// neighbor
+	public boolean getVisited() { // determines if a cell has been visited as a neighbor
 		return visited;
 	}
 
