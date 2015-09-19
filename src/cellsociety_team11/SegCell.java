@@ -9,7 +9,7 @@ public class SegCell extends Cell {
 	private static final int EMPTY_STATE = 0;
 	private static final int BLUE_STATE = 1;
 	private static final int YELLOW_STATE = 2;
-	public static final double PERCENT_SIMILAR = 0.70; // set to what we want
+	public static final double PERCENT_SIMILAR = 0.70; //set to what we want
 	SquareCellGUI myCellGUI;
 
 	SegCell(State s, Location l, CellSocietyGUI CSGUI) {

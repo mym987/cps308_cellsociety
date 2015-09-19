@@ -17,11 +17,11 @@ public class SaxHandler extends DefaultHandler {
 
 	private Model myModel;
 	private String myNodeName;
-	private Map<String, String> attributeMap = null;
+	private Map<String, String> myAttributeMap = null;
 	private List<Map<String, String>> myCells = null;
 
-	private String currentTag = null;
-	private String currentValue = null;
+	private String myCurrentTag = null;
+	private String myCurrentValue = null;
 	
 	private CellSocietyGUI myCSGUI;
 	
@@ -43,27 +43,27 @@ public class SaxHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		//System.out.println("--startElement()--" + qName);
 		if (qName.equals(myNodeName)) {
-			attributeMap = new HashMap<String, String>();
+			myAttributeMap = new HashMap<String, String>();
 		}
 
-		if (attributes != null && attributeMap != null) {
+		if (attributes != null && myAttributeMap != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
-				attributeMap.put(attributes.getQName(i), attributes.getValue(i));
+				myAttributeMap.put(attributes.getQName(i), attributes.getValue(i));
 			}
 		}
-		currentTag = qName;
+		myCurrentTag = qName;
 	}
 
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (currentTag != null && attributeMap != null) {
-			currentValue = new String(ch, start, length);
-			if (currentValue != null && !currentValue.trim().equals("") && !currentValue.trim().equals("\n")) {
-				attributeMap.put(currentTag, currentValue);
+		if (myCurrentTag != null && myAttributeMap != null) {
+			myCurrentValue = new String(ch, start, length);
+			if (myCurrentValue != null && !myCurrentValue.trim().equals("") && !myCurrentValue.trim().equals("\n")) {
+				myAttributeMap.put(myCurrentTag, myCurrentValue);
 				//System.out.println("-----" + currentTag + " " + currentValue);
 			}
-			currentTag = null;
-			currentValue = null;
+			myCurrentTag = null;
+			myCurrentValue = null;
 		}
 	}
 
@@ -84,15 +84,15 @@ public class SaxHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		//System.out.println("--endElement()--" + qName);
 		if (qName.equals("model")) {
-			String name = attributeMap.get("name");
-			int width = Integer.parseInt(attributeMap.get("width"));
-			int height = Integer.parseInt(attributeMap.get("height"));
+			String name = myAttributeMap.get("name");
+			int width = Integer.parseInt(myAttributeMap.get("width"));
+			int height = Integer.parseInt(myAttributeMap.get("height"));
 			myModel = createModel(name, width, height);
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);
 		} else if (qName.equals("cell")) {
-			myCells.add(attributeMap);
-			attributeMap = null;
+			myCells.add(myAttributeMap);
+			myAttributeMap = null;
 		}
 	}
 

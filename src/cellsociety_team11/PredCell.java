@@ -8,14 +8,15 @@ import gui.SquareCellGUI;
 
 public class PredCell extends Cell {
 	private static final double CELL_SIZE = 70;
+	
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
 	private static int FISH_ENERGY = 2; // THIS CAN BE WHATEVER WE WANT
 	private static int DEFAULT_SHARK_ENERGY = 5; // THIS CAN BE WHATEVER WE WANT
 
-	private int numChronon = 0;
-	private int sharkEnergy = 0;
+	private int myNumChronon = 0;
+	private int mySharkEnergy = 0;
 	private boolean visited;
 
 	private static final int LIVES_REPRODUCE = 5;
@@ -31,15 +32,14 @@ public class PredCell extends Cell {
 	}
 
 	public void setNumChronon(int chronon) {
-		numChronon = chronon;
+		myNumChronon = chronon;
 	}
 
 	public void setSharkEnergy(int x) {
-		sharkEnergy = x;
+		mySharkEnergy = x;
 	}
 
-	public boolean getVisited() { // determines if a cell has been visited as a
-									// neighbor
+	public boolean getVisited() { // determines if a cell has been visited as a neighbor
 		return visited;
 	}
 
@@ -71,11 +71,11 @@ public class PredCell extends Cell {
 		chosenCell.getState().setNextState(myState.getStateInt()); // This can
 																	// be
 																	// improved
-		chosenCell.setNumChronon(numChronon);
+		chosenCell.setNumChronon(myNumChronon);
 		chosenCell.setVisited(true);
 		if(chosenCell.isInState(FISH_STATE))
-			chosenCell.setSharkEnergy(sharkEnergy + FISH_ENERGY);
-		if (numChronon < LIVES_REPRODUCE) {
+			chosenCell.setSharkEnergy(mySharkEnergy + FISH_ENERGY);
+		if (myNumChronon < LIVES_REPRODUCE) {
 			myState.setNextState(EMPTY_STATE);
 			setSharkEnergy(0);
 		} else {
@@ -94,12 +94,12 @@ public class PredCell extends Cell {
 		if (visited || isInState(EMPTY_STATE)) {
 			return;
 		}
-		++numChronon;
+		++myNumChronon;
 		PredCell chosenCell;
 
 		if (myState.getStateInt() == SHARK_STATE) {
-			--sharkEnergy;
-			if (sharkEnergy <= 0) {
+			--mySharkEnergy;
+			if (mySharkEnergy <= 0) {
 				myState.setNextState(EMPTY_STATE);
 				setNumChronon(0);
 				setSharkEnergy(0);

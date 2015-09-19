@@ -27,7 +27,6 @@ public class PredModel extends Model {
 		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
 		grid.setNeighbors();
 		setMyGrid(grid);
-		//System.out.println(grid.toString());
 	}
 
 }
