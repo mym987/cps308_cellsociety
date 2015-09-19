@@ -32,7 +32,7 @@ public abstract class Grid {
 	public Cell getCell(Location loc){
 		return myCells.get(loc);
 	}
-	
+
 	public abstract List<Location> getAdjacentLoc(Location loc);
 	
 	public abstract List<Cell> getAdjacentCells(Cell cell);
