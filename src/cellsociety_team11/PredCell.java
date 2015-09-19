@@ -45,6 +45,8 @@ public class PredCell extends Cell {
 	private PredCell getRandomNeighborInState(int state) {
 		State stateVar = new PredState(state);
 		List<Cell> neighbors = getNeighborsInState(stateVar);
+		if(neighbors.size() == 0)
+			return null;
 		int randNeighbor = (int) (Math.random() * neighbors.size());
 		PredCell potentialCell = (PredCell) neighbors.get(randNeighbor);
 

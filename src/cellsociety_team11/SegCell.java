@@ -20,7 +20,6 @@ public class SegCell extends Cell {
 
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
-
 	}
 
 	@Override

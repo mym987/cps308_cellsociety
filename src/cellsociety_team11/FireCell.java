@@ -32,8 +32,8 @@ public class FireCell extends Cell{
 			} else {
 				myState.setNextState(LIVE_STATE);
 			}
-		} else if (isInState(LIVE_STATE)) {
-			myState.setNextState(LIVE_STATE);
+//		} else if (isInState(LIVE_STATE)) {
+//			myState.setNextState(LIVE_STATE);
 		} else if(isInState(BURN_STATE)) {
 			myState.setNextState(EMPTY_STATE);
 		}
