@@ -22,7 +22,9 @@ public class SegModel extends Model {
 			Cell cell = new GOLCell(new GOLState(state),new Location(r,c, getHeight(), getWidth()), CSGUI);
 			cellMap.put(cell.getLocation(), cell);
 		});
-		Grid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
+		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
+		grid.setNeighbors();
+		grid.setEmpty();
 		setMyGrid(grid);
 	}
 	

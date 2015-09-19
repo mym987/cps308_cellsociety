@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SquareGrid extends Grid {
+	public static final int EMPTY_STATE = 0;
 	
 	SquareGrid(int width, int height, Map<Location, Cell> cells) {
 		super(width, height, cells);
@@ -13,6 +14,12 @@ public class SquareGrid extends Grid {
 	public void setNeighbors() {
 		myCells.forEach((loc,cell)->{
 			cell.setNeighborCells(getAdjacentCells(cell));
+		});
+	}
+	
+	public void setEmpty() {
+		myCells.forEach((loc,cell)->{
+			cell.setEmptyCells(getEmptyCells());
 		});
 	}
 	
@@ -37,6 +44,16 @@ public class SquareGrid extends Grid {
 			neighbors.add(getCell(loc));
 		});
 		return neighbors;
+	}
+	
+	public List<Cell> getEmptyCells() {
+		List<Cell> emptyCells = new ArrayList<>();
+		myCells.forEach((loc,cell) -> {
+			if(cell.isInState(EMPTY_STATE)) {
+				emptyCells.add(cell);
+			}
+		});
+		return emptyCells;
 	}
 	
 	@Override
