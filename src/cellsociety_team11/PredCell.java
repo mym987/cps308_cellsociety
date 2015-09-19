@@ -11,31 +11,42 @@ public class PredCell extends Cell {
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
-	private static int FISH_ENERGY = 2; // THIS CAN BE WHATEVER WE WANT
-	private static int DEFAULT_SHARK_ENERGY = 5; // THIS CAN BE WHATEVER WE WANT
-
-	private int numChronon = 0;
-	private int sharkEnergy = 0;
+	
+	private int myFishEnergy = 2;
+	private int myMaxSharkEnergy = 5;
+	private int myLivesReproduce = 5;
+	
+	private int myNumChronon = 0;
+	private int mySharkEnergy = 0;
 	private boolean visited;
 
-	private static final int LIVES_REPRODUCE = 5;
+	
 	SquareCellGUI myCellGUI;
 
 	PredCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
-		if (s.getStateInt() == SHARK_STATE) {
-			setSharkEnergy(DEFAULT_SHARK_ENERGY);
+		if (isInState(SHARK_STATE)) {
+			setSharkEnergy(myMaxSharkEnergy);
+		}
+	}
+	
+	public void setParameters(int fishEnergy, int sharkEnergy, int livesReproduce){
+		myFishEnergy = fishEnergy;
+		myMaxSharkEnergy = sharkEnergy;
+		myLivesReproduce = livesReproduce;
+		if (isInState(SHARK_STATE)) {
+			setSharkEnergy(myMaxSharkEnergy);
 		}
 	}
 
 	public void setNumChronon(int chronon) {
-		numChronon = chronon;
+		myNumChronon = chronon;
 	}
 
 	public void setSharkEnergy(int x) {
-		sharkEnergy = x;
+		mySharkEnergy = x;
 	}
 
 	public boolean getVisited() { // determines if a cell has been visited as a
@@ -71,17 +82,17 @@ public class PredCell extends Cell {
 		chosenCell.getState().setNextState(myState.getStateInt()); // This can
 																	// be
 																	// improved
-		chosenCell.setNumChronon(numChronon);
+		chosenCell.setNumChronon(myNumChronon);
 		chosenCell.setVisited(true);
 		if(chosenCell.isInState(FISH_STATE))
-			chosenCell.setSharkEnergy(sharkEnergy + FISH_ENERGY);
-		if (numChronon < LIVES_REPRODUCE) {
+			chosenCell.setSharkEnergy(mySharkEnergy + myFishEnergy);
+		if (myNumChronon < myLivesReproduce) {
 			myState.setNextState(EMPTY_STATE);
 			setSharkEnergy(0);
 		} else {
 			myState.setNextState(myState.getStateInt());
 			if (myState.getStateInt() == SHARK_STATE)
-				setSharkEnergy(DEFAULT_SHARK_ENERGY);
+				setSharkEnergy(myMaxSharkEnergy);
 			else
 				setSharkEnergy(0);
 		}
@@ -94,12 +105,12 @@ public class PredCell extends Cell {
 		if (visited || isInState(EMPTY_STATE)) {
 			return;
 		}
-		++numChronon;
+		++myNumChronon;
 		PredCell chosenCell;
 
 		if (myState.getStateInt() == SHARK_STATE) {
-			--sharkEnergy;
-			if (sharkEnergy <= 0) {
+			--mySharkEnergy;
+			if (mySharkEnergy <= 0) {
 				myState.setNextState(EMPTY_STATE);
 				setNumChronon(0);
 				setSharkEnergy(0);

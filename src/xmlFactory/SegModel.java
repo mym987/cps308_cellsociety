@@ -23,6 +23,12 @@ public class SegModel extends Model {
 		int numB = (int) (percentB * total);
 		myNumA = numA <= total ? numA : total;
 		myNumB = (numB <= total - myNumA) ? numB : total - myNumA;
+		setModelParameters(0.5);
+		
+	}
+	
+	public void setModelParameters(double similar){
+		addModelParameter("PERCENT_SIMILAR", similar);
 	}
 	
 	private void fillCells(int[][] mat, int limit, int state){

@@ -11,20 +11,30 @@ import gui.CellSocietyGUI;
 
 public class SegModel extends Model {
 	
+	private double mySimilarity = 0.5;
 	private Map<Location,Cell> myCells;
 
 	public SegModel(int rows, int columns, CellSocietyGUI CSGUI) {
 		super(rows, columns, CSGUI);
+		myCells = new HashMap<>();
+	}
+	
+	@Override
+	public void setParameters(Map<String,String> map){
+		super.setParameters(map);
+		if(map.containsKey("PERCENT_SIMILAR"))
+			mySimilarity = Double.parseDouble(map.get("PERCENT_SIMILAR"));
 	}
 
 	@Override
 	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
-		myCells = new HashMap<>();
+		myCells.clear();
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("x"));
 			int y = Integer.parseInt(map.get("y"));
 			int state = Integer.parseInt(map.get("state"));
-			Cell cell = new SegCell(new SegState(state), new Location(x, y, getWidth(), getHeight()), CSGUI);
+			SegCell cell = new SegCell(new SegState(state), new Location(x, y, getWidth(), getHeight()), CSGUI);
+			cell.setSimilarity(mySimilarity);
 			myCells.put(cell.getLocation(), cell);
 		});
 		if (myCells.size() < getWidth() * getHeight())

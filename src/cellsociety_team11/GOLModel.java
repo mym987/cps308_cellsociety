@@ -8,23 +8,26 @@ import gui.CellSocietyGUI;
 
 public class GOLModel extends Model {
 	
-	GOLModel(int rows, int columns, CellSocietyGUI CSGUI) {
+	private Map<Location,Cell> myCells;
+	
+	public GOLModel(int rows, int columns, CellSocietyGUI CSGUI) {
 		super(rows, columns, CSGUI);
+		myCells = new HashMap<>();
 	}
 
 	@Override
 	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
-		Map<Location,Cell> cellMap = new HashMap<>();
+		myCells.clear();
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("x"));
 			int y = Integer.parseInt(map.get("y"));
 			int state = Integer.parseInt(map.get("state"));
 			Cell cell = new GOLCell(new GOLState(state), new Location(x,y, getWidth(), getHeight()), CSGUI);
-			cellMap.put(cell.getLocation(), cell);
+			myCells.put(cell.getLocation(), cell);
 		});
-		if(cellMap.size()<getWidth()*getHeight())
+		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), cellMap);
+		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), myCells);
 		grid.setNeighbors();
 		setMyGrid(grid);
 	}

@@ -23,8 +23,15 @@ public class PredModel extends Model {
 		int numFish = (int) (percentFish * total);
 		myNumShark = numSharks <= total ? numSharks : total;
 		myNumFish = (numFish <= total - myNumShark) ? numFish : total - myNumShark;
+		setModelParameters(5,5,5);
+		
 	}
-
+	
+	public void setModelParameters(int fishEnergy, int sharkEnergy, int livesReproduce){
+		addModelParameter("FISH_ENERGY", fishEnergy);
+		addModelParameter("SHARK_ENERGY", sharkEnergy);
+		addModelParameter("LIVES_REPRODUCE", livesReproduce);
+	}
 	
 	private void fillCells(int[][] mat, int limit, int state){
 		Random rand = new Random(System.currentTimeMillis());

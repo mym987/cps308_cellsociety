@@ -17,7 +17,7 @@ public class SaxHandler extends DefaultHandler {
 
 	private Model myModel;
 	private String myNodeName;
-	private Map<String, String> attributeMap = null;
+	private Map<String, String> myAttributeMap = null;
 	private List<Map<String, String>> myCells = null;
 
 	private String currentTag = null;
@@ -36,19 +36,17 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		//System.out.println("--startDocument()--");
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		//System.out.println("--startElement()--" + qName);
 		if (qName.equals(myNodeName)) {
-			attributeMap = new HashMap<String, String>();
+			myAttributeMap = new HashMap<String, String>();
 		}
 
-		if (attributes != null && attributeMap != null) {
+		if (attributes != null && myAttributeMap != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
-				attributeMap.put(attributes.getQName(i), attributes.getValue(i));
+				myAttributeMap.put(attributes.getQName(i), attributes.getValue(i));
 			}
 		}
 		currentTag = qName;
@@ -56,11 +54,10 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (currentTag != null && attributeMap != null) {
+		if (currentTag != null && myAttributeMap != null) {
 			currentValue = new String(ch, start, length);
 			if (currentValue != null && !currentValue.trim().equals("") && !currentValue.trim().equals("\n")) {
-				attributeMap.put(currentTag, currentValue);
-				//System.out.println("-----" + currentTag + " " + currentValue);
+				myAttributeMap.put(currentTag, currentValue);
 			}
 			currentTag = null;
 			currentValue = null;
@@ -82,23 +79,23 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		//System.out.println("--endElement()--" + qName);
 		if (qName.equals("model")) {
-			String name = attributeMap.get("name");
-			int width = Integer.parseInt(attributeMap.get("width"));
-			int height = Integer.parseInt(attributeMap.get("height"));
+			String name = myAttributeMap.get("name");
+			int width = Integer.parseInt(myAttributeMap.get("width"));
+			int height = Integer.parseInt(myAttributeMap.get("height"));
 			myModel = createModel(name, width, height);
+			myModel.setParameters(myAttributeMap);
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);
+			myAttributeMap = null;
 		} else if (qName.equals("cell")) {
-			myCells.add(attributeMap);
-			attributeMap = null;
+			myCells.add(myAttributeMap);
+			myAttributeMap = null;
 		}
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
-		//System.out.println("--endDocument()--");
 		super.endDocument();
 		myModel.buildGrid(myCells, myCSGUI);
 	}

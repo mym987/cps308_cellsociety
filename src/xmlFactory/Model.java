@@ -17,6 +17,15 @@ public abstract class Model {
 		myModelMap.put("name", name);
 		myModelMap.put("width", Integer.toString(width));
 		myModelMap.put("height", Integer.toString(height));
+		myModelMap.put("author", "CellSociety_Team11");
+	}
+	
+	public void setAuthor(String name){
+		addModelParameter("name",name);
+	}
+	
+	public void addModelParameter(Object key, Object value){
+		myModelMap.put(key.toString(), value.toString());
 	}
 	
 	public Map<String,String> getModel(){

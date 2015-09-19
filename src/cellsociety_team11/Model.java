@@ -11,11 +11,16 @@ public abstract class Model {
 	private final int myWidth;
 	private final int myHeight;
 	private Grid myGrid;
+	private String myAuthor;
 	
 	Model(int width, int height, CellSocietyGUI CSGUI){
 		myWidth = width;
 		myHeight = height;
 		myCSGUI = CSGUI;
+	}
+	
+	public void setParameters(Map<String,String> map){
+		myAuthor = map.containsKey("author")?map.get("author"):"";
 	}
 
 	public int getHeight() {

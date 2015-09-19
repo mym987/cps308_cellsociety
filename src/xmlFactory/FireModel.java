@@ -15,6 +15,12 @@ public class FireModel extends Model {
 
 	FireModel(int width, int height) {
 		super("FireModel", width, height);
+		setModelParameters(0.5);
+		
+	}
+	
+	public void setModelParameters(double probCatchFire){
+		addModelParameter("PROB_CATCH_FIRE", probCatchFire);
 	}
 
 	@Override

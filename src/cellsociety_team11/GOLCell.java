@@ -4,7 +4,6 @@ import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
 public class GOLCell extends Cell{
-	public static final double CELL_SIZE = 70;
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;

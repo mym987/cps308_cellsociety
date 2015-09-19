@@ -9,14 +9,19 @@ public class SegCell extends Cell {
 	private static final int EMPTY_STATE = 0;
 	private static final int BLUE_STATE = 1;
 	private static final int YELLOW_STATE = 2;
-	public static final double PERCENT_SIMILAR = 0.70; // set to what we want
-	SquareCellGUI myCellGUI;
+	
+	private double mySimilarity = 0.50;
+	private SquareCellGUI myCellGUI;
 
 	SegCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
+	}
+	
+	public void setSimilarity(double similarity) {
+		mySimilarity = similarity;
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class SegCell extends Cell {
 		int otherState = BLUE_STATE + YELLOW_STATE - getState().getStateInt();
 		int sameNeighborSize = getNeighborsInState(myState).size();
 		int otherNeighborSize = getNeighborsInState(new SegState(otherState)).size();
-		return ((double)sameNeighborSize)/(sameNeighborSize+otherNeighborSize)>=PERCENT_SIMILAR;
+		return ((double)sameNeighborSize)/(sameNeighborSize+otherNeighborSize)>=mySimilarity;
 	}
 	
 	public boolean isEmpty() {
