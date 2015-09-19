@@ -30,8 +30,9 @@ public class XMLGenerator{
     
     public static void main(String[] args){
     	XMLGenerator generator = new XMLGenerator();
-    	generator.init(new GOLModel(50,50));
-    	generator.createXml("GOL50_50.xml");
+    	//generator.init(new GOLModel(50,50));
+    	generator.init(new PredModel(50,50,0.2,0.7));
+    	generator.createXml("Pred50_50.xml");
     }
  
     public void init(Model model) {
@@ -79,26 +80,6 @@ public class XMLGenerator{
     	myModel.getCells().forEach(map->{
     		addAttributes(addRootElement(cells,"cell"),map);
     	});
-//    	int mat[][] = {
-//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	0	,	0	,	0	,	0	,	1	,	1	,	1	,	0	,	0	},
-//    			{	0	,	1	,	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	}};
-//    	for(int y=0;y<mat.length;y++){
-//    		for(int x=0;x<mat[y].length;x++){
-//    			Map<String,Integer> map = new HashMap<>();
-//    			map.put("y", y);
-//    			map.put("x", x);
-//    			map.put("state", mat[y][x]);
-//    			addAttributes(addRootElement(cells,"cell"),map);	
-//    		}
-//    	}
     }
     
     public void createXml(String fileName) {
