@@ -28,10 +28,10 @@ public class SquareCellGUI {
 	private void createRectangle() {
 		myRect = new Rectangle();
 		myRect.setFill(Color.WHITE);		// These should be methods in CellGUI
-		myRect.setStroke(Color.BLACK);
+		myRect.setStroke(Color.GREY);
 		myRect.setWidth(myCellWidth);
 		myRect.setHeight(myCellHeight);
-		myRect.setStrokeWidth(2);
+		myRect.setStrokeWidth(0.2);
 	}
 	
 	private void setPosition(Location loc) {

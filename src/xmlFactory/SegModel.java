@@ -24,31 +24,27 @@ public class SegModel extends Model {
 		myNumA = numA <= total ? numA : total;
 		myNumB = (numB <= total - myNumA) ? numB : total - myNumA;
 	}
+	
+	private void fillCells(int[][] mat, int limit, int state){
+		Random rand = new Random(System.currentTimeMillis());
+		int total = mat.length*mat[0].length;
+		int i = 0;
+		while(i < limit){
+			int t = rand.nextInt(total);
+			int x = t % mat[0].length, y = t / mat[0].length;
+			if(mat[x][y]==EMPTY_STATE){
+				mat[x][y] = state;
+				i++;
+			}
+		}
+	}
 
 	@Override
 	public List<Map<String, String>> getCells() {
 		int mat[][] = new int[getWidth()][getHeight()];
-		Random rand = new Random(System.currentTimeMillis());
-		int total = getWidth()*getHeight();
+		fillCells(mat,myNumA,STATE_A);
+		fillCells(mat,myNumB,STATE_B);
 		
-		int i = 0;
-		while(i < myNumA){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = STATE_A;
-				i++;
-			}
-		}
-		i = 0;
-		while(i < myNumB){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = STATE_B;
-				i++;
-			}
-		}
 		List<Map<String, String>> list = new ArrayList<>();
 		
 		for (int x = 0; x < mat.length; x++) {
@@ -69,7 +65,7 @@ public class SegModel extends Model {
 	
 	@Override
 	public String toString(){
-		return getClass().getName()+"_"+getWidth()+"_"+getHeight()+"_"+myNumA+"_"+myNumB;
+		return getClass().getSimpleName()+"_"+getWidth()+"_"+getHeight()+"_"+myNumA+"_"+myNumB;
 	}
 
 }

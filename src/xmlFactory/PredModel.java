@@ -25,30 +25,27 @@ public class PredModel extends Model {
 		myNumFish = (numFish <= total - myNumShark) ? numFish : total - myNumShark;
 	}
 
+	
+	private void fillCells(int[][] mat, int limit, int state){
+		Random rand = new Random(System.currentTimeMillis());
+		int total = mat.length*mat[0].length;
+		int i = 0;
+		while(i < limit){
+			int t = rand.nextInt(total);
+			int x = t % mat[0].length, y = t / mat[0].length;
+			if(mat[x][y]==EMPTY_STATE){
+				mat[x][y] = state;
+				i++;
+			}
+		}
+	}
+	
 	@Override
 	public List<Map<String, String>> getCells() {
-		int mat[][] = new int[getWidth()][getHeight()];
-		Random rand = new Random(System.currentTimeMillis());
-		int total = getWidth()*getHeight();
-		
-		int i = 0;
-		while(i < myNumShark){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = SHARK_STATE;
-				i++;
-			}
-		}
-		i = 0;
-		while(i < myNumFish){
-			int t = rand.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==EMPTY_STATE){
-				mat[x][y] = FISH_STATE;
-				i++;
-			}
-		}
+		int mat[][] = new int[getWidth()][getHeight()];		
+		fillCells(mat,myNumShark,SHARK_STATE);
+		fillCells(mat,myNumFish,FISH_STATE);
+
 		List<Map<String, String>> list = new ArrayList<>();
 		
 		for (int x = 0; x < mat.length; x++) {
@@ -69,7 +66,7 @@ public class PredModel extends Model {
 	
 	@Override
 	public String toString(){
-		return getClass().getName()+"_"+getWidth()+"_"+
+		return getClass().getSimpleName()+"_"+getWidth()+"_"+
 				getHeight()+"_"+myNumShark+"_"+myNumFish;
 	}
 

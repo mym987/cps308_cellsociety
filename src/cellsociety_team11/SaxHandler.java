@@ -36,7 +36,7 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println("--startDocument()--");
+		//System.out.println("--startDocument()--");
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println("--endDocument()--");
+		//System.out.println("--endDocument()--");
 		super.endDocument();
 		myModel.buildGrid(myCells, myCSGUI);
 	}

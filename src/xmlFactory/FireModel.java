@@ -55,7 +55,7 @@ public class FireModel extends Model {
 	
 	@Override
 	public String toString(){
-		return getClass().getName()+"_"+getWidth()+"_"+getHeight();
+		return getClass().getSimpleName()+"_"+getWidth()+"_"+getHeight();
 	}
 
 }

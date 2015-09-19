@@ -31,10 +31,10 @@ public class XMLGenerator{
     
     public static void main(String[] args){
     	XMLGenerator generator = new XMLGenerator();
-    	//generator.init(new GOLModel(50,50));
-    	//generator.init(new PredModel(10,10,0.2,0.7));
+    	//generator.init(new GOLModel(50,50,0.5));
+    	//generator.init(new PredModel(50,50,0.2,0.7));
     	//generator.init(new SegModel(50,50,0.45,0.45));
-    	generator.init(new FireModel(10,10));
+    	generator.init(new FireModel(50,50));
     	generator.createXml();
     }
  

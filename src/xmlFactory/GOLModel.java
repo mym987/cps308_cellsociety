@@ -52,34 +52,10 @@ public class GOLModel extends Model {
 		map.put("state", Integer.toString(state));
 		return map;
 	}
-
-	private void getCells(List<Map<String, String>> list) {
-		list.clear();
-		int mat[][] = { 
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 }, 
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0, 1, 1, 1, 0, 0 }, 
-				{ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 }, 
-				{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 }, 
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
-		for (int y = 0; y < mat.length; y++) {
-			for (int x = 0; x < mat[y].length; x++) {
-				Map<String, String> map = new HashMap<>();
-				map.put("y", Integer.toString(y));
-				map.put("x", Integer.toString(x));
-				map.put("state", Integer.toString(mat[y][x]));
-				list.add(map);
-			}
-		}
-	}
 	
 	@Override
 	public String toString(){
-		return getClass().getName()+"_"+getWidth()+"_"+getHeight()+"_"+myNumLiveCells;
+		return getClass().getSimpleName()+"_"+getWidth()+"_"+getHeight()+"_"+myNumLiveCells;
 	}
 
 }

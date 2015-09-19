@@ -17,12 +17,6 @@ public class SquareGrid extends Grid {
 		});
 	}
 	
-	public void setEmpty() {
-		myCells.forEach((loc,cell)->{
-			cell.setEmptyCells(getEmptyCells());
-		});
-	}
-	
 	@Override
 	public List<Location> getAdjacentLoc(Location loc) {
 		int[] x = {-1,-1,-1, 0, 0, 1, 1, 1};
@@ -46,15 +40,6 @@ public class SquareGrid extends Grid {
 		return neighbors;
 	}
 	
-	public List<Cell> getEmptyCells() {
-		List<Cell> emptyCells = new ArrayList<>();
-		myCells.forEach((loc,cell) -> {
-			if(cell.isInState(EMPTY_STATE)) {
-				emptyCells.add(cell);
-			}
-		});
-		return emptyCells;
-	}
 	
 	@Override
 	public String toString(){

@@ -31,7 +31,6 @@ public class SegModel extends Model {
 			System.err.println("Missing Cell Info!");
 		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), myCells);
 		grid.setNeighbors();
-		grid.setEmpty();
 		setMyGrid(grid);
 	}
 	
@@ -39,7 +38,7 @@ public class SegModel extends Model {
 	public void step(){
 		Stack<Cell> dissatisfiedList = getDissatisfiedCells();
 		Stack<Cell> vacentList = getVacentCells();
-		Collections.shuffle(vacentList,new Random(System.currentTimeMillis()));
+		Collections.shuffle(vacentList);
 		while(!dissatisfiedList.isEmpty() && !vacentList.isEmpty()){
 			SegCell dissatisfiedCell = (SegCell)dissatisfiedList.pop();
 			SegCell vacentCell = (SegCell)vacentList.pop();
