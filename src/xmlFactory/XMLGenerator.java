@@ -1,4 +1,4 @@
-package cellsociety_team11;
+package xmlFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,14 +26,15 @@ import org.xml.sax.SAXException;
 public class XMLGenerator{
     private Document myDoc;
     private Element myRoot;
+    private Model myModel;
     
     public static void main(String[] args){
     	XMLGenerator generator = new XMLGenerator();
-    	generator.init();
-    	generator.createXml("GOL.xml");
+    	generator.init(new GOLModel(50,50));
+    	generator.createXml("GOL50_50.xml");
     }
  
-    public void init() {
+    public void init(Model model) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -41,30 +42,8 @@ public class XMLGenerator{
         } catch (ParserConfigurationException e) {
             System.out.println(e.getMessage());
         }
-    }
- 
-    private Element addElement(Element root, Object name,Object attr){
-    	Element e = myDoc.createElement(name.toString());
-    	e.appendChild(myDoc.createTextNode(attr.toString()));
-    	root.appendChild(e);
-    	return e;
-    }
-    
-    private Element addElement(Element root, Object name){
-    	Element e = myDoc.createElement(name.toString());
-    	root.appendChild(e);
-    	return e;
-    }
-    
-    private void addGroup(Element root, Map<?,?> map){
-    	map.forEach((k,v)->{addElement(root,k,v);});
-    }
-    
-    private void createModel(String name, int width, int height){
-    	Element model = addElement(myRoot,"model");
-    	addElement(model,"name",name);
-        addElement(model,"width",width);
-        addElement(model,"height",height);
+        myModel = model;
+        myRoot = createRoot("MyModel");
     }
     
     private Element createRoot(String name){
@@ -72,34 +51,59 @@ public class XMLGenerator{
     	myDoc.appendChild(root);
     	return root;
     }
+ 
+    private Element addAttribute(Element root, Object name,Object attr){
+    	Element e = myDoc.createElement(name.toString());
+    	e.appendChild(myDoc.createTextNode(attr.toString()));
+    	root.appendChild(e);
+    	return e;
+    }
+    
+    private Element addRootElement(Element root, Object name){
+    	Element e = myDoc.createElement(name.toString());
+    	root.appendChild(e);
+    	return e;
+    }
+    
+    private void addAttributes(Element root, Map<?,?> map){
+    	map.forEach((k,v)->{addAttribute(root,k,v);});
+    }
+    
+    private void createModel(){
+    	Element model = addRootElement(myRoot,"model");
+    	addAttributes(model, myModel.getModel());
+    }
     
     private void createCells(){
-    	Element cells = addElement(myRoot,"cells");
-    	int mat[][] = {
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	1	,	1	,	1	,	0	,	0	},
-    			{	0	,	1	,	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
-    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	}};
-    	for(int y=0;y<mat.length;y++){
-    		for(int x=0;x<mat[y].length;x++){
-    			Map<String,Integer> map = new HashMap<>();
-    			map.put("y", y);
-    			map.put("x", x);
-    			map.put("state", mat[y][x]);
-    			addGroup(addElement(cells,"cell"),map);	
-    		}
-    	}
+    	Element cells = addRootElement(myRoot,"cells");
+    	myModel.getCells().forEach(map->{
+    		addAttributes(addRootElement(cells,"cell"),map);
+    	});
+//    	int mat[][] = {
+//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	0	,	0	,	0	,	0	,	1	,	1	,	1	,	0	,	0	},
+//    			{	0	,	1	,	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	1	,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	0	},
+//    			{	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	}};
+//    	for(int y=0;y<mat.length;y++){
+//    		for(int x=0;x<mat[y].length;x++){
+//    			Map<String,Integer> map = new HashMap<>();
+//    			map.put("y", y);
+//    			map.put("x", x);
+//    			map.put("state", mat[y][x]);
+//    			addAttributes(addRootElement(cells,"cell"),map);	
+//    		}
+//    	}
     }
     
     public void createXml(String fileName) {
-    	myRoot = createRoot("MyModel");
-        createModel("GOLModel",10,10);
+    	
+        createModel();
         createCells();
         
         TransformerFactory tf = TransformerFactory.newInstance();
