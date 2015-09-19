@@ -1,5 +1,4 @@
 # cellsociety
-<<<<<<< HEAD
 ###Names
 Mike Ma
 Karen Li
