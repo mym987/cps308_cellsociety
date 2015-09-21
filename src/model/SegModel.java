@@ -50,14 +50,15 @@ public class SegModel extends Model {
 	
 	@Override
 	public void step(){
-		Stack<Cell> dissatisfiedList = getDissatisfiedCells();
-		Stack<Cell> vacentList = getVacentCells();
-		Collections.shuffle(vacentList);
-		while(!dissatisfiedList.isEmpty() && !vacentList.isEmpty()){
-			SegCell dissatisfiedCell = (SegCell)dissatisfiedList.pop();
-			SegCell vacentCell = (SegCell)vacentList.pop();
-			vacentCell.determineNextState(dissatisfiedCell.getState());
-			dissatisfiedCell.determineNextState(vacentCell.getState());
+		Stack<Cell> exchangeList = getDissatisfiedCells();
+		exchangeList.addAll(getVacentCells());
+		Collections.shuffle(exchangeList);
+		
+		while(exchangeList.size()>=2){
+			SegCell cell1 = (SegCell)exchangeList.pop();
+			SegCell cell2 = (SegCell)exchangeList.pop();
+			cell2.determineNextState(cell1.getState());
+			cell1.determineNextState(cell2.getState());
 		}
 		myCells.forEach((loc,cell)->{cell.goToNextState();});
 	}
