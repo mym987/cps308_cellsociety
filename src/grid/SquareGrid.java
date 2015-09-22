@@ -8,7 +8,7 @@ import location.Location;
 import cell.Cell;
 
 public class SquareGrid extends Grid {
-	public static final int EMPTY_STATE = 0;
+//	public static final int EMPTY_STATE = 0;
 	
 	public SquareGrid(int width, int height, Map<Location, Cell> cells) {
 		super(width, height, cells);

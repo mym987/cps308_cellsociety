@@ -19,6 +19,8 @@ public abstract class CellGUI {
 	
 	private void setColor(Color color) {
 		myShape.setFill(color);
+		myShape.setFill(Color.WHITE);
+		myShape.setStroke(Color.GREY);
 	}
 	
 	public void updateState(State state) {
@@ -27,5 +29,12 @@ public abstract class CellGUI {
 	
 	public void remove() {
 		myCSGUI.removeFromScreen(myShape);
+	}
+	
+	protected void addShapeToScreen() {
+		myShape.setStrokeWidth(0.2);
+		myShape.setFill(Color.WHITE);
+		myShape.setStroke(Color.GREY);
+		myCSGUI.addToScreen(myShape);
 	}
 }
