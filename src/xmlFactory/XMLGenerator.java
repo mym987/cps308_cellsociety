@@ -29,7 +29,7 @@ public class XMLGenerator{
     
     public static void main(String[] args){
     	XMLGenerator generator = new XMLGenerator();
-    	Model[] models = {new GOLModel(50,50,0.5),
+    	Model[] models = {new GOLModel(10,10,0.5),
     						new PredModel(50,50,0.2,0.7),
     						new SegModel(50,50,0.45,0.45),
     						new FireModel(50,50)};

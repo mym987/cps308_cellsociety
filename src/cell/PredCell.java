@@ -21,9 +21,6 @@ public class PredCell extends Cell {
 	private int mySharkEnergy = 0;
 	private boolean visited;
 
-	
-	SquareCellGUI myCellGUI;
-
 	public PredCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);

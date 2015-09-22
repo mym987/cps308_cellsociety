@@ -15,7 +15,6 @@ public class FireCell extends Cell{
 	private static final int BURN_STATE = 2;
 	
 	private double myProbCatchFire = 0.5;
-	private SquareCellGUI myCellGUI;
 
 	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);

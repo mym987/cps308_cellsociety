@@ -9,6 +9,7 @@ import state.GOLState;
 import cell.Cell;
 import cell.GOLCell;
 import grid.SquareGrid;
+import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
 public class GOLModel extends Model {
@@ -32,7 +33,7 @@ public class GOLModel extends Model {
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), myCells);
+		TriangleGrid grid = new TriangleGrid(getWidth(), getHeight(), myCells);
 		grid.setNeighbors();
 		setMyGrid(grid);
 	}
