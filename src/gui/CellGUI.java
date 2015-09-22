@@ -4,14 +4,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import state.State;
 
-public abstract class GridGUI {
+public abstract class CellGUI {
 
 	CellSocietyGUI myCSGUI;
 	protected double myGridXPos;
 	protected double myGridYPos;
 	protected Shape myShape;
 
-	public GridGUI(CellSocietyGUI CSGUI) {
+	public CellGUI(CellSocietyGUI CSGUI) {
 		myCSGUI = CSGUI;
 		myGridXPos = CSGUI.getGridX();
 		myGridYPos = CSGUI.getGridY();

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import location.Location;
 
-public class SquareCellGUI extends GridGUI {
+public class SquareCellGUI extends CellGUI {
 
 	private double myCellWidth;
 	private double myCellHeight;
