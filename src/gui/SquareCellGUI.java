@@ -1,55 +1,33 @@
 package gui;
 
-import state.State;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import location.Location;
 
-public class SquareCellGUI {
+public class SquareCellGUI extends GridGUI {
 
 	private double myCellWidth;
 	private double myCellHeight;
-	private double myGridXPos;
-	private double myGridYPos;
-	private Rectangle myRect;
-	CellSocietyGUI myCSGUI;
 
 	public SquareCellGUI(CellSocietyGUI CSGUI, Location loc) {
-		myCSGUI = CSGUI;
+		super(CSGUI);
 		myCellWidth = CSGUI.getGridWidth() / loc.getNumCols();
 		myCellHeight = CSGUI.getGridHeight() / loc.getWidth();
-		myGridXPos = CSGUI.getGridX();
-		myGridYPos = CSGUI.getGridY();
-		createRectangle();
-		setPosition(loc);
-		myCSGUI.addToScreen(myRect);
+		createRectangle(loc);
+		myCSGUI.addToScreen(myShape);
 	}
 	
-	private void createRectangle() {
-		myRect = new Rectangle();
-		myRect.setFill(Color.WHITE);		// These should be methods in CellGUI
-		myRect.setStroke(Color.GREY);
-		myRect.setWidth(myCellWidth);
-		myRect.setHeight(myCellHeight);
-		myRect.setStrokeWidth(0.2);
-	}
-	
-	private void setPosition(Location loc) {
+	private void createRectangle(Location loc) {
+		Rectangle rect = new Rectangle();
+		rect.setFill(Color.WHITE);		// These should be methods in CellGUI
+		rect.setStroke(Color.GREY);
+		rect.setWidth(myCellWidth);
+		rect.setHeight(myCellHeight);
+		rect.setStrokeWidth(0.2);
 		double xPos = myGridXPos + loc.getX() * myCellWidth;
 		double yPos = myGridYPos + loc.getY() * myCellHeight;
-		myRect.setX(xPos);
-		myRect.setY(yPos);
-	}
-	
-	private void setColor(Color color) {
-		myRect.setFill(color);
-	}
-	
-	public void updateState(State state) {
-		setColor(state.getColor());
-	}
-	
-	public void remove() {
-		myCSGUI.removeFromScreen(myRect);
+		rect.setX(xPos);
+		rect.setY(yPos);
+		myShape = rect;
 	}
 }
