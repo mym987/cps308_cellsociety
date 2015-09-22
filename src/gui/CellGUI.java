@@ -19,8 +19,6 @@ public abstract class CellGUI {
 	
 	private void setColor(Color color) {
 		myShape.setFill(color);
-		myShape.setFill(Color.WHITE);
-		myShape.setStroke(Color.GREY);
 	}
 	
 	public void updateState(State state) {
