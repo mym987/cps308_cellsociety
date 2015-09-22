@@ -3,7 +3,8 @@ package location;
 public class Location {
 	
 	private int myX, myY;
-	private int myWidth, myHeight;
+	protected int myWidth;
+	protected int myHeight;
 	
 	public Location(int x, int y, int width, int height){
 		myX = x;
@@ -25,7 +26,7 @@ public class Location {
 		return myY;
 	}
 	
-	public boolean isValid(){														
+	private boolean isValid(){														
 		return (getX() >= 0 && getX() < myWidth && getY() >= 0 && getY() < myHeight);
 	}
 	

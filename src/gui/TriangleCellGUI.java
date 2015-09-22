@@ -1,10 +1,5 @@
 package gui;
 
-import java.awt.Font;
-
-import com.sun.prism.paint.Color;
-
-import javafx.scene.control.Label;
 import javafx.scene.shape.Polygon;
 import location.Location;
 

@@ -84,7 +84,7 @@ public class CellSociety extends Application {
 	}
 	
 	private void stepIfNotAnimating() {
-		if(myModel != null && myAnimation.getStatus() == Status.PAUSED)
+		if(myModel != null && (myAnimation.getStatus() == Status.PAUSED || myAnimation.getStatus() == Status.STOPPED))
 			myModel.step();
 	}
 	
