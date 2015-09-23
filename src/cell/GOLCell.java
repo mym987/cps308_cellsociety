@@ -3,9 +3,11 @@ package cell;
 import location.Location;
 import state.GOLState;
 import state.State;
+
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import gui.TriangleCellGUI;
+import javafx.scene.paint.Color;
 
 public class GOLCell extends Cell{
 	

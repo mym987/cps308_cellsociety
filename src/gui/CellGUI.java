@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import state.State;
 
@@ -10,6 +11,7 @@ public abstract class CellGUI {
 	protected double myGridXPos;
 	protected double myGridYPos;
 	protected Shape myShape;
+	protected Circle myCircle;
 
 	public CellGUI(CellSocietyGUI CSGUI) {
 		myCSGUI = CSGUI;
@@ -26,6 +28,7 @@ public abstract class CellGUI {
 	}
 	
 	public void remove() {
+		removeCircle();
 		myCSGUI.removeFromScreen(myShape);
 	}
 	
@@ -34,5 +37,11 @@ public abstract class CellGUI {
 		myShape.setFill(Color.WHITE);
 		myShape.setStroke(Color.GREY);
 		myCSGUI.addToScreen(myShape);
+	}
+	
+	public abstract void drawCircle(Color red);
+
+	public void removeCircle() {
+		myCSGUI.removeFromScreen(myCircle);
 	}
 }
