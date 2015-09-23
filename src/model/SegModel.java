@@ -40,7 +40,7 @@ public class SegModel extends Model {
 			SegCell cell = new SegCell(new SegState(state), new Location(x, y, getWidth(), getHeight()), CSGUI);
 			cell.setSimilarity(mySimilarity);
 			myCells.put(cell.getLocation(), cell);
-		});
+		}); 
 		if (myCells.size() < getWidth() * getHeight())
 			System.err.println("Missing Cell Info!");
 		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), myCells);
