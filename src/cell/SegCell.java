@@ -12,14 +12,16 @@ public class SegCell extends Cell {
 	private static final int EMPTY_STATE = 0;
 	private static final int BLUE_STATE = 1;
 	private static final int YELLOW_STATE = 2;
+	private static final int NUM_STATES = 3;
 	
 	private double mySimilarity = 0.50;
 
 	public SegCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, l, CSGUI);
+		super(s, NUM_STATES, l, CSGUI);
 
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
+		addClickListener();
 	}
 	
 	public void setSimilarity(double similarity) {
@@ -49,12 +51,6 @@ public class SegCell extends Cell {
 
 	public void remove() {
 		myCellGUI.remove();
-	}
-
-	@Override
-	public void goToNextState() {
-		super.goToNextState();
-		myCellGUI.updateState(myState);
 	}
 
 }

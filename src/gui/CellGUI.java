@@ -1,5 +1,7 @@
 package gui;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -12,6 +14,7 @@ public abstract class CellGUI {
 	protected double myGridYPos;
 	protected Shape myShape;
 	protected Circle myCircle;
+	protected EventHandler<? super MouseEvent> myClickCallback;
 
 	public CellGUI(CellSocietyGUI CSGUI) {
 		myCSGUI = CSGUI;
@@ -43,5 +46,13 @@ public abstract class CellGUI {
 
 	public void removeCircle() {
 		myCSGUI.removeFromScreen(myCircle);
+	}
+	
+	public void addClickListener(EventHandler<? super MouseEvent> callback) {
+        myShape.setOnMouseClicked(callback);
+	}
+	
+	public void addCircleClickListener(EventHandler<? super MouseEvent> callback) {
+        myCircle.setOnMouseClicked(callback);
 	}
 }

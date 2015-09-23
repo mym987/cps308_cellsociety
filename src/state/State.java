@@ -53,5 +53,5 @@ public abstract class State {
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		return myStateInt == ((State)obj).myStateInt;
-	}	
+	}
 }
