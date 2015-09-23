@@ -32,7 +32,7 @@ public class SugarCell extends Cell{
 	
 	
 
-	SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		
 		setPatchAmntSugar(s.getStateInt());

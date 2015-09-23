@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class SugarState extends State{
 	private int myAgent;
 
-	SugarState(int s) {
+	public SugarState(int s) {
 		super(s);
 		Color[] colors = {Color.WHITE,Color.BISQUE, Color.ORANGE, Color.DARKORANGE, Color.ORANGERED, Color.BLACK, Color.TRANSPARENT}; 
 		setAvailableColors(colors);
