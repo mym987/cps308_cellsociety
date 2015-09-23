@@ -5,18 +5,17 @@ import state.GOLState;
 import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
+import gui.TriangleCellGUI;
 
 public class GOLCell extends Cell{
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
-	
-	SquareCellGUI myCellGUI;
 
 	public GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		
-		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI = new TriangleCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
 	}
 	

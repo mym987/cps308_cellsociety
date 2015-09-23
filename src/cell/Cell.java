@@ -5,7 +5,9 @@ import java.util.List;
 
 import location.Location;
 import state.State;
+import gui.CellGUI;
 import gui.CellSocietyGUI;
+import gui.SquareCellGUI;
 
 public abstract class Cell{ 
 
@@ -13,6 +15,7 @@ public abstract class Cell{
 	protected Location myLoc;
 	protected List<Cell> myNeighborCells;
 	protected CellSocietyGUI myCSGUI;
+	protected CellGUI myCellGUI;
 	
 	Cell(State s, Location l, CellSocietyGUI CSGUI){
 		myState = s;

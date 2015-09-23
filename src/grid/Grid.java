@@ -1,5 +1,6 @@
 package grid;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +37,21 @@ public abstract class Grid {
 		return myCells.get(loc);
 	}
 
+	public void setNeighbors() {
+		myCells.forEach((loc,cell)->{
+			cell.setNeighborCells(getAdjacentCells(cell));
+		});
+	}
+
 	public abstract List<Location> getAdjacentLoc(Location loc);
-	
-	public abstract List<Cell> getAdjacentCells(Cell cell);
+
+	public List<Cell> getAdjacentCells(Cell cell) {
+		List<Cell> neighbors = new ArrayList<>();
+		getAdjacentLoc(cell.getLocation()).forEach(loc->{
+			neighbors.add(getCell(loc));
+		});
+		return neighbors;
+	}
 	
 	public void step() {
 		determineNextStates();
@@ -63,4 +76,16 @@ public abstract class Grid {
 		}
 	}
 
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(int x=0;x<getWidth();x++){
+			for(int y=0;y<getHeight();y++){
+				Cell cell = getCell(new Location(x,y,getWidth(),getHeight()));
+				sb.append(cell.getState().getStateInt());
+			}
+			sb.append('\n');
+		}
+		return sb.toString();
+	}
 }

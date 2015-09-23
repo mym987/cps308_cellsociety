@@ -75,7 +75,6 @@ public class CellSocietyGUI {
 	public void showSliderLabel(String text, double yPos) {
 		mySliderLabel = new Label(text);
 		myRoot.getChildren().add(mySliderLabel);
-		//lbl.setFont(new Font(myFont, fontSize));
 		mySliderLabel.applyCss();
 		double xPos = myWindowWidth - BUTTON_AREA_WIDTH + (BUTTON_AREA_WIDTH - mySliderLabel.prefWidth(-1)) / 2;
 		mySliderLabel.setLayoutX(xPos);

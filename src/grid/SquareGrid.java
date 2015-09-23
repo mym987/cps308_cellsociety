@@ -8,16 +8,10 @@ import location.Location;
 import cell.Cell;
 
 public class SquareGrid extends Grid {
-	public static final int EMPTY_STATE = 0;
+//	public static final int EMPTY_STATE = 0;
 	
 	public SquareGrid(int width, int height, Map<Location, Cell> cells) {
 		super(width, height, cells);
-	}
-
-	public void setNeighbors() {
-		myCells.forEach((loc,cell)->{
-			cell.setNeighborCells(getAdjacentCells(cell));
-		});
 	}
 	
 	@Override
@@ -32,28 +26,5 @@ public class SquareGrid extends Grid {
 			}
 		}
 		return list;
-	}
-
-	@Override
-	public List<Cell> getAdjacentCells(Cell cell) {
-		List<Cell> neighbors = new ArrayList<>(8);
-		getAdjacentLoc(cell.getLocation()).forEach(loc->{
-			neighbors.add(getCell(loc));
-		});
-		return neighbors;
-	}
-	
-	
-	@Override
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		for(int x=0;x<getWidth();x++){
-			for(int y=0;y<getHeight();y++){
-				Cell cell = getCell(new Location(x,y,getWidth(),getHeight()));
-				sb.append(cell.getState().getStateInt());
-			}
-			sb.append('\n');
-		}
-		return sb.toString();
 	}
 }

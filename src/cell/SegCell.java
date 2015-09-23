@@ -14,7 +14,6 @@ public class SegCell extends Cell {
 	private static final int YELLOW_STATE = 2;
 	
 	private double mySimilarity = 0.50;
-	private SquareCellGUI myCellGUI;
 
 	public SegCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
