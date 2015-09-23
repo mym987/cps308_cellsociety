@@ -3,20 +3,24 @@ package cell;
 import location.Location;
 import state.GOLState;
 import state.State;
+
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import gui.TriangleCellGUI;
+import javafx.scene.paint.Color;
 
 public class GOLCell extends Cell{
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
+	private static final int NUM_STATES = 2;
 
 	public GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, l, CSGUI);
+		super(s, NUM_STATES, l, CSGUI);
 		
 		myCellGUI = new TriangleCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
+		addClickListener();
 	}
 	
 	@Override
@@ -32,11 +36,6 @@ public class GOLCell extends Cell{
 			if (numLiveNeighbors == 3)
 				myState.setNextState(LIVE_STATE);
 		}
-	}
-	@Override
-	public void goToNextState() {
-		super.goToNextState();
-		myCellGUI.updateState(myState);
 	}
 	
 	public void remove() {

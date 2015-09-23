@@ -13,13 +13,15 @@ public class FireCell extends Cell{
 	private static final int EMPTY_STATE = 0;
 	private static final int LIVE_STATE = 1;
 	private static final int BURN_STATE = 2;
+	private static final int NUM_STATES = 3;
 	
 	private double myProbCatchFire = 0.5;
 
 	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, l, CSGUI);
+		super(s, NUM_STATES, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
+		addClickListener();
 	}
 
 	
@@ -40,12 +42,6 @@ public class FireCell extends Cell{
 		} else if(isInState(BURN_STATE)) {
 			myState.setNextState(EMPTY_STATE);
 		}
-	}
-
-	@Override
-	public void goToNextState() {
-		super.goToNextState();
-		myCellGUI.updateState(myState);
 	}
 	
 	public void remove() {

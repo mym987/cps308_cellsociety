@@ -7,11 +7,13 @@ import state.PredState;
 import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
+import javafx.scene.input.MouseEvent;
 
 public class PredCell extends Cell {
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
+	private static final int NUM_STATES = 3;
 	
 	private int myFishEnergy = 2;
 	private int myMaxSharkEnergy = 5;
@@ -22,9 +24,10 @@ public class PredCell extends Cell {
 	private boolean visited;
 
 	public PredCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, l, CSGUI);
+		super(s, NUM_STATES, l, CSGUI);
 		myCellGUI = new SquareCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
+		addClickListener();
 		if (isInState(SHARK_STATE)) {
 			setSharkEnergy(myMaxSharkEnergy);
 		}
@@ -130,7 +133,19 @@ public class PredCell extends Cell {
 	@Override
 	public void goToNextState() {
 		super.goToNextState();
-		myCellGUI.updateState(myState);
 		visited = false;
+	}
+	
+	@Override
+	public void incrementState() {
+		super.incrementState();
+		if(myState.getStateInt() == EMPTY_STATE) {
+			setSharkEnergy(0);
+		} else if(myState.getStateInt() == SHARK_STATE) {
+			setSharkEnergy(myMaxSharkEnergy);
+		} else if(myState.getStateInt() == FISH_STATE) {
+			setSharkEnergy(0);
+		}
+		setNumChronon(0);// reproductive state reset
 	}
 }

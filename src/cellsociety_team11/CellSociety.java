@@ -97,10 +97,12 @@ public class CellSociety extends Application {
 		int timerInterval = (int) (1000 / fps);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(timerInterval), e -> stepIfNotNull());
 
+		Status prevStat = myAnimation.getStatus();
 		myAnimation.stop();
 		myAnimation.getKeyFrames().setAll(keyFrame);
 		myCSGUI.updateSliderLabel((int)fps + BUTTON_NAMES[5]);
-		start();
+		if(prevStat == Status.RUNNING)
+			start();
 	}
 
 	private void addButtons() {

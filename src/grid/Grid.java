@@ -75,6 +75,18 @@ public abstract class Grid {
 			c.remove();
 		}
 	}
+	
+	public void removeOutlines() {
+		for (Cell c : myCells.values()) {
+			c.removeOutlines();
+		}
+	}
+	
+	public void addOutlines() {
+		for (Cell c : myCells.values()) {
+			c.addOutlines();
+		}
+	}
 
 	@Override
 	public String toString(){

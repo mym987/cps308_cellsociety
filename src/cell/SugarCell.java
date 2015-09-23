@@ -14,6 +14,7 @@ public class SugarCell extends Cell{
 	private static final int PATCH_STATE_2 = 2;
 	private static final int PATCH_STATE_3 = 3;
 	private static final int PATCH_STATE_4 = 4;
+	private static final int NUM_STATES = 5;
 	
 	private static final int AGENT_STATE = 1;
 	private static final int NO_AGENT_STATE = 0;
@@ -33,7 +34,7 @@ public class SugarCell extends Cell{
 	
 
 	SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, l, CSGUI);
+		super(s, NUM_STATES, l, CSGUI);
 		// TODO Auto-generated constructor stub
 		setPatchAmntSugar(s.getStateInt());
 		

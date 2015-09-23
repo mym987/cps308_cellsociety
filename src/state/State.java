@@ -8,7 +8,7 @@ public abstract class State {
 	private int myStateInt = 0;
 	private int myNextStateInt = 0;
 
-	State(int state){ //This will need to take CellSocietyGUI as a parameter so it can create a SquareCellGUI.
+	State(int state){
 		myStateInt = state;
 		myNextStateInt = state;
 	}
@@ -53,5 +53,5 @@ public abstract class State {
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		return myStateInt == ((State)obj).myStateInt;
-	}	
+	}
 }
