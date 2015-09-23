@@ -8,7 +8,7 @@ public class SugarState extends State{
 
 	SugarState(int s) {
 		super(s);
-		Color[] colors = {Color.WHITE,Color.BISQUE, Color.ORANGE, Color.DARKORANGE, Color.ORANGERED, Color.BLACK}; 
+		Color[] colors = {Color.WHITE,Color.BISQUE, Color.ORANGE, Color.DARKORANGE, Color.ORANGERED, Color.BLACK, Color.TRANSPARENT}; 
 		setAvailableColors(colors);
 		this.setColor(s);
 		
@@ -18,10 +18,12 @@ public class SugarState extends State{
 		//drawCircle
 	}
 	
-	private void setAgent(int a){
+	public void setAgent(int a){
 		myAgent = a;
 		if(a == 1) {
 			this.setColor(5);
+		}else{
+			this.setColor(6);
 		}
 	}
 	

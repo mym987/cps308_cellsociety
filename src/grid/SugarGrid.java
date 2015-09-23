@@ -13,19 +13,36 @@ public class SugarGrid extends SquareGrid{
 		super(width, height, cells);
 	}
 	
-	public void setNeighbors() {
+	public void setNeighbors(int vision) {
 		myCells.forEach((loc,cell)->{
-			cell.setNeighborCells(getAdjacentCells(cell));
+			cell.setNeighborCells(getAdjacentCellsSugar(cell, vision));
 		});
 	}
 	
-	@Override
-	public List<Location> getAdjacentLoc(Location loc) {
-		int[] x = {-1,-1,-1, 0, 0, 1, 1, 1};
-		int[] y = {-1, 0, 1,-1, 1,-1, 0, 1};
-		List<Location> list = new ArrayList<>(x.length);
-		for(int i=0;i<x.length;i++){
-			Location neighbor = loc.getLocation(loc.getX()+x[i], loc.getY()+y[i]);
+	
+	public List<Location> getAdjacentLocSugar(Location loc, int vision) {
+		ArrayList<Integer> x = new ArrayList<Integer>();
+		ArrayList<Integer> y = new ArrayList<Integer>();
+		
+		for (int i = -vision; i < vision + 1; i++){
+			if(i != 0){
+				x.add(i);
+				y.add(i);
+			}
+		}
+		
+		for (int i=0; i<4*vision; i++){
+			if(i%2 == 0){
+				y.add(i,0);
+			}else{
+				x.add(i,0);
+			}
+		}
+		
+		
+		List<Location> list = new ArrayList<>(x.size());
+		for(int i=0;i<x.size();i++){
+			Location neighbor = loc.getLocation(loc.getX()+x.get(i), loc.getY()+y.get(i));
 			if(neighbor!=null){
 				list.add(neighbor);
 			}
@@ -33,10 +50,10 @@ public class SugarGrid extends SquareGrid{
 		return list;
 	}
 
-	@Override
-	public List<Cell> getAdjacentCells(Cell cell) {
+	
+	public List<Cell> getAdjacentCellsSugar(Cell cell, int vision) {
 		List<Cell> neighbors = new ArrayList<>(8);
-		getAdjacentLoc(cell.getLocation()).forEach(loc->{
+		getAdjacentLocSugar(cell.getLocation(), vision).forEach(loc->{
 			neighbors.add(getCell(loc));
 		});
 		return neighbors;

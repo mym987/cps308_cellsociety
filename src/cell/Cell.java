@@ -56,6 +56,15 @@ public abstract class Cell{
 		return neighbors;
 	}
 	
+	protected List<Cell> getNeighborsInStateInt(int stateInt) {
+		List<Cell> neighbors = new ArrayList<>();
+		myNeighborCells.forEach(cell->{
+			if(cell.getState().getStateInt() == stateInt)
+				neighbors.add(cell);
+		});
+		return neighbors;
+	}
+	
 	public abstract void determineNextState();
 	
 	public void goToNextState() {

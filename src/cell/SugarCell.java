@@ -1,5 +1,8 @@
 package cell;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gui.CellSocietyGUI;
 import location.Location;
 import state.State;
@@ -19,28 +22,60 @@ public class SugarCell extends Cell{
 	private static final int SUGAR_GROWBACK_RATE = 1;
 	private static final int SUGAR_GROWBACK_INTERVAL = 1;
 	
+	private SugarState mySugarState;
 	private int myAgentState;
 	
 	private int myPatchAmntSugar;
 	private int myAgentAmntSugar;  //arbitrary number
 	private int myAgentSugarMetabolism = 1;
-	private int myAgentVision = 1; //don't really understand what this represents in SugarScape
+	//private int myAgentVision = 1; 
 	
 	
 
 	SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, l, CSGUI);
 		// TODO Auto-generated constructor stub
-		myPatchAmntSugar = s.getStateInt();
+		setPatchAmntSugar(s.getStateInt());
 		
-		SugarState sugarState = (SugarState) s;
-		myAgentState = sugarState.getAgent();
+		mySugarState = (SugarState) s;
+		myAgentState = mySugarState.getAgent();
+		if (myAgentState == AGENT_STATE){
+			setAgentAmntSugar(5);
+		}
 	}
-
+	
+	private int getPatchAmntSugar(){
+		return myPatchAmntSugar;
+	}
+	
+	private void setPatchAmntSugar(int sugar){
+		myPatchAmntSugar = sugar;
+	}
+	
+	private int getAgentAmntSugar(){
+		return myAgentAmntSugar;
+	}
+	
+	private void setAgentAmntSugar(int sugar){
+		myAgentAmntSugar = sugar;
+	}
+	
 	@Override
 	public void determineNextState() {
 		if (myAgentState == AGENT_STATE) {
-			getNeighborsInState(s)
+			for(int i=MAX_SUGAR_CAPACITY; i>=0; i--){
+				List<Cell> neighborsInState = getNeighborsInStateInt(i);
+				if (!neighborsInState.isEmpty()){
+					SugarCell chosenCell = (SugarCell) findClosestCell(neighborsInState);
+					moveMyStateAndAgentToCell(chosenCell);
+					break;
+				}else{
+					continue;
+				}
+
+			}
+			
+			
 		}
 	}
 
@@ -48,6 +83,53 @@ public class SugarCell extends Cell{
 	public void remove() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private boolean moveMyStateAndAgentToCell(SugarCell chosenCell) {
+		if (chosenCell == null)
+			return false;
+		int prevSugar = chosenCell.getPatchAmntSugar();
+		SugarState prevState = (SugarState) chosenCell.getState();
+		int nextAgentAmntSugar = getAgentAmntSugar() + prevSugar - myAgentSugarMetabolism;
+		
+		if (nextAgentAmntSugar <= 0){
+			chosenCell.setAgentAmntSugar(0);
+			prevState.setAgent(0);
+		}else{
+			chosenCell.setAgentAmntSugar(nextAgentAmntSugar);
+			chosenCell.setPatchAmntSugar(0);  //agent takes sugar
+			prevState.setNextState(0);        //state sugar=0
+			prevState.setAgent(1);			  //there is an agent in this cell now
+		}
+		
+		this.mySugarState.setNextState(mySugarState.getStateInt());
+		this.mySugarState.setAgent(0);
+		this.setAgentAmntSugar(0);
+		
+		return true;
+	}
+
+	
+	
+	private Cell findClosestCell(List<Cell> neighborCellList){
+		int currX = this.getLocation().getX();
+		int currY = this.getLocation().getY();
+		
+		double minDistance = Integer.MAX_VALUE;
+		Cell minDistCell = this;
+		
+		for(int i=0; i<neighborCellList.size(); i++){
+			int otherX = neighborCellList.get(i).getLocation().getX();
+			int otherY = neighborCellList.get(i).getLocation().getY();
+			
+			double distance = Math.sqrt(Math.pow(currX-otherX, 2) + Math.pow(currY-otherY, 2));
+			if (distance < minDistance){
+				minDistance = distance;
+				minDistCell = neighborCellList.get(i);
+			}
+		}
+		
+		return minDistCell;
 	}
 
 }
