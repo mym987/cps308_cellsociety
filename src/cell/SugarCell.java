@@ -1,6 +1,5 @@
 package cell;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import gui.CellSocietyGUI;
@@ -16,12 +15,12 @@ public class SugarCell extends Cell{
 	private static final int PATCH_STATE_4 = 4;
 	private static final int NUM_STATES = 5;
 	
-	private static final int AGENT_STATE = 1;
 	private static final int NO_AGENT_STATE = 0;
+	private static final int AGENT_STATE = 1;
 	
 	private static final int MAX_SUGAR_CAPACITY = 4;
 	private static final int SUGAR_GROWBACK_RATE = 1;
-	private static final int SUGAR_GROWBACK_INTERVAL = 1;
+	//private static final int SUGAR_GROWBACK_INTERVAL = 1;
 	
 	private SugarState mySugarState;
 	private int myAgentState;
@@ -35,7 +34,7 @@ public class SugarCell extends Cell{
 
 	SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
-		// TODO Auto-generated constructor stub
+		
 		setPatchAmntSugar(s.getStateInt());
 		
 		mySugarState = (SugarState) s;
@@ -74,16 +73,18 @@ public class SugarCell extends Cell{
 					continue;
 				}
 
-			}
-			
-			
+			}	
+		}
+		
+		if (myPatchAmntSugar != MAX_SUGAR_CAPACITY){
+			setPatchAmntSugar(getPatchAmntSugar() + SUGAR_GROWBACK_RATE);
 		}
 	}
 
 	@Override
 	public void remove() {
 		// TODO Auto-generated method stub
-		
+		myCellGUI.remove();
 	}
 	
 	private boolean moveMyStateAndAgentToCell(SugarCell chosenCell) {
