@@ -9,6 +9,8 @@ import state.State;
 
 public abstract class CellGUI {
 
+	private static final double STROKE_WIDTH = 0.2;
+	
 	CellSocietyGUI myCSGUI;
 	protected double myGridXPos;
 	protected double myGridYPos;
@@ -35,8 +37,16 @@ public abstract class CellGUI {
 		myCSGUI.removeFromScreen(myShape);
 	}
 	
+	public void removeOutlines() {
+		myShape.setStrokeWidth(0);
+	}
+	
+	public void addOutlines() {
+		myShape.setStrokeWidth(STROKE_WIDTH);
+	}
+	
 	protected void addShapeToScreen() {
-		myShape.setStrokeWidth(0.2);
+		myShape.setStrokeWidth(STROKE_WIDTH); //Default on
 		myShape.setFill(Color.WHITE);
 		myShape.setStroke(Color.GREY);
 		myCSGUI.addToScreen(myShape);

@@ -80,4 +80,12 @@ public abstract class Cell {
 		myState.goToNextState();
 		myCellGUI.updateState(myState);
 	}
+
+	public void removeOutlines() {
+		myCellGUI.removeOutlines();
+	}
+
+	public void addOutlines() {
+		myCellGUI.addOutlines();
+	}
 }
