@@ -17,6 +17,7 @@ import gui.CellSocietyGUI;
 public class SegModel extends Model {
 	
 	private double mySimilarity = 0.7;
+	private static String STATE_NAMES[] = {"Empty", "Blue", "Yellow"};
 
 	public SegModel(CellSocietyGUI csGui) {
 		super(csGui);
@@ -43,6 +44,8 @@ public class SegModel extends Model {
 			cell1.determineNextState(cell2.getState());
 		}
 		myCells.forEach(cell->{cell.goToNextState();});
+		++myStepNum;
+		updateGraph();
 	}
 	
 	private Stack<Cell> getDissatisfiedCells(){
@@ -79,12 +82,13 @@ public class SegModel extends Model {
 		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
 		System.out.println(myGrid);
+		setupGraph(STATE_NAMES);
 	}
 
 	@Override
 	public void intialize(Map<String, String> parameters) {
 		// TODO Auto-generated method stub
-		
+		setupGraph(STATE_NAMES);
 	}
 	
 	private void addCell(int x,int y,int state){

@@ -15,6 +15,7 @@ public class GOLModel extends Model {
 	private static final double DEFAULT_PERCENT_LIVE_CELLS = 0.5;
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
+	private static String STATE_NAMES[] = {"Dead", "Alive"};
 	
 	public GOLModel(CellSocietyGUI csGui) {
 		super(csGui);
@@ -39,6 +40,7 @@ public class GOLModel extends Model {
 			System.err.println("Missing Cell Info!");
 		myGrid = new TriangleGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
+		setupGraph(STATE_NAMES);
 	}
 
 	@Override
@@ -66,6 +68,7 @@ public class GOLModel extends Model {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
+		setupGraph(STATE_NAMES);
 	}
 	
 	private void addCell(int x,int y,int state){

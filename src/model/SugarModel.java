@@ -13,6 +13,8 @@ import grid.SugarGrid;
 import gui.CellSocietyGUI;
 
 public class SugarModel extends Model{
+	
+	private static String STATE_NAMES[] = {"State 0", "State 1", "State 2", "State 3", "State 4"};
 
 	SugarModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
@@ -33,7 +35,7 @@ public class SugarModel extends Model{
 		
 		int vision = 0; //must get vision from XML file somehow
 		//myGrid.setNeighbors(vision);
-		
+		setupGraph(STATE_NAMES);
 	}
 
 	@Override

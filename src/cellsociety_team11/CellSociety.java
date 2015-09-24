@@ -9,9 +9,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.Animation.Status;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -20,7 +22,6 @@ public class CellSociety extends Application {
 	private static final int XSIZE = 1000;
 	private static final int YSIZE = 800;
 	private static final String[] BUTTON_NAMES = { "LoadXML", "Start", "Pause", "Reset", "Step", " fps" };
-	private static final double BUTTON_HEIGHT = 40;
 	private static final int FRAMES_PER_SECOND = 10;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	
@@ -39,6 +40,7 @@ public class CellSociety extends Application {
 		stage.setScene(scene);
 		stage.setTitle(myCSGUI.getTitle());
 		addButtons();
+		myCSGUI.addGraph();
 		stage.show();
 
 		myCSGUI.createGridArea();
@@ -106,26 +108,20 @@ public class CellSociety extends Application {
 	}
 
 	private void addButtons() {
-		int index = 0;
-		double topButtonY = (YSIZE - BUTTON_HEIGHT * (BUTTON_NAMES.length + 1)) / 2;
-		Button button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT * index, BUTTON_HEIGHT);
-		button.setOnMouseClicked((e) -> loadXML());
-		++index;
-		button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT * index, BUTTON_HEIGHT);
-		button.setOnMouseClicked((e) -> start());
-		++index;
-		button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT * index, BUTTON_HEIGHT);
-		button.setOnMouseClicked((e) -> pause());
-		++index;
-		button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT * index, BUTTON_HEIGHT);
-		button.setOnMouseClicked((e) -> reset());
-		++index;
-		button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT * index, BUTTON_HEIGHT);
-		button.setOnMouseClicked((e) -> stepIfNotAnimating());
-		++index;
-		Slider slider = myCSGUI.addSlider(topButtonY + BUTTON_HEIGHT * index, FRAMES_PER_SECOND);
+		EventHandler<? super MouseEvent>[] events = new EventHandler[5];
+		events[0] = (e) -> loadXML();
+		events[1] = (e) -> start();
+		events[2] = (e) -> pause();
+		events[3] = (e) -> reset();
+		events[4] = (e) -> stepIfNotAnimating();
+		int index;
+		for(index = 0; index < events.length; index++) {
+			Button button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], index);
+			button.setOnMouseClicked(events[index]);
+		}
+		Slider slider = myCSGUI.addSlider(index, FRAMES_PER_SECOND);
 		slider.valueProperty().addListener((observable, oldValue, newValue) -> {changeTime(newValue.doubleValue());});
-		myCSGUI.showSliderLabel(FRAMES_PER_SECOND + BUTTON_NAMES[index], topButtonY + BUTTON_HEIGHT  * (index + 1));
+		myCSGUI.showSliderLabel(FRAMES_PER_SECOND + BUTTON_NAMES[index], ++index);
 	}
 
 	public static void main(String[] args) {

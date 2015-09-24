@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ public abstract class Model {
 	protected Map<String,String> myParameters;
 	protected Random myRandom;
 	protected String myAuthor = "CPS308_Team11";
+	protected int myStepNum = 0;
 	
 	Model(CellSocietyGUI CSGUI){
 		myCSGUI = CSGUI;
@@ -53,13 +56,40 @@ public abstract class Model {
 	}
 	
 	public void step(){
+		++myStepNum;
 		myGrid.step();
+		updateGraph();
 	}
 	
 	//public abstract void buildGrid(List<Map<String,String>> cells, CellSocietyGUI CSGUI);
 
 	public void clear() {
+		myStepNum = 0;
 		myGrid.clear();
+		myCSGUI.resetGraph();
+	}
+	
+	protected void setupGraph(String[] names) {
+		myCSGUI.resetGraph();
+		for(int i = 0; i < names.length; i++) {
+			myCSGUI.addSeries(i, names[i]);
+		}
+		updateGraph();
+	}
+	
+	protected void updateGraph() {
+		HashMap<Integer, Integer> statemap = new HashMap<Integer, Integer>();
+		for(Cell cell: myCells) {
+			int state = cell.getState().getStateInt();
+			Integer numInState = statemap.get(state);
+			if(numInState == null)
+				numInState = 0;
+			++numInState;
+			statemap.put(state, numInState);
+		}
+		for(int key: statemap.keySet()) {
+			myCSGUI.addDataPoint(myStepNum, statemap.get(key), key);
+		}
 	}
 	
 	protected void setBasicConfig(Map<String, String> parameters){
@@ -68,6 +98,5 @@ public abstract class Model {
 		int height = Integer.parseInt(myParameters.get("height"));
 		setDimensions(width, height);
 		myAuthor = myParameters.containsKey("author")?myParameters.get("author"):myAuthor;
-		
 	}
 }

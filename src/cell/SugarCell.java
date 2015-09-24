@@ -18,7 +18,7 @@ public class SugarCell extends Cell{
 	private static final int NO_AGENT_STATE = 0;
 	private static final int AGENT_STATE = 1;
 	
-	private static final int MAX_SUGAR_CAPACITY = 4;
+	private static final int MAX_SUGAR_CAPACITY = 4;		// Doesn't this need to be set by the XML file?
 	private static final int SUGAR_GROWBACK_RATE = 1;
 	//private static final int SUGAR_GROWBACK_INTERVAL = 1;
 	

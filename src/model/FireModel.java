@@ -1,11 +1,13 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import location.Location;
 import location.ToroidalLocation;
 import state.FireState;
+import cell.Cell;
 import cell.FireCell;
 import grid.FireGrid;
 import gui.CellSocietyGUI;
@@ -13,6 +15,7 @@ import gui.CellSocietyGUI;
 public class FireModel extends Model {
 	
 	private double myProbCatchFire = 0.7;
+	private static String STATE_NAMES[] = {"Empty", "Tree", "Burning"};
 
 	public FireModel(CellSocietyGUI csGui) {
 		super(csGui);
@@ -42,13 +45,12 @@ public class FireModel extends Model {
 			System.err.println("Missing Cell Info!");
 		myGrid = new FireGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
-		
+		setupGraph(STATE_NAMES);
 	}
 
 	@Override
 	public void intialize(Map<String, String> parameters) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	private void addCell(int x,int y,int state){

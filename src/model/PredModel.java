@@ -16,6 +16,7 @@ public class PredModel extends Model {
 	private int myFishEnergy = 5;
 	private int myMaxSharkEnergy = 5;
 	private int myLivesReproduce = 5;
+	private static String STATE_NAMES[] = {"Empty", "Shark", "Fish"};
 	
 	public PredModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
@@ -48,7 +49,7 @@ public class PredModel extends Model {
 			System.err.println("Missing Cell Info!");
 		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
-		
+		setupGraph(STATE_NAMES);
 	}
 
 	@Override
