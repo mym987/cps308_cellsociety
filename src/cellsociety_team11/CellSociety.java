@@ -57,7 +57,7 @@ public class CellSociety extends Application {
 	public void loadXML() {
 		pause();
 		if (myModel != null)
-			myModel.removeCells();
+			myModel.clear();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		File file = fileChooser.showOpenDialog(myStage);
@@ -79,7 +79,7 @@ public class CellSociety extends Application {
 	public void reset() {
 		pause();
 		if (myModel != null)
-			myModel.removeCells();
+			myModel.clear();
 		createModel();
 	}
 	

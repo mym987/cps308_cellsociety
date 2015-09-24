@@ -13,7 +13,7 @@ import gui.CellSocietyGUI;
 public class SaxParser {
 	public static Model getModel(String fileName, CellSocietyGUI CSGUI){
 		try {
-            SAXParserFactory parserFactory=SAXParserFactory.newInstance();
+            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser=parserFactory.newSAXParser();
             SaxHandler myHandler=new SaxHandler(CSGUI);
             parser.parse(fileName, myHandler);

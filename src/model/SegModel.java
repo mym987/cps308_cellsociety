@@ -1,51 +1,33 @@
 package model;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import location.Location;
+import location.ToroidalLocation;
 import state.SegState;
 import cell.Cell;
 import cell.SegCell;
 import grid.SquareGrid;
+import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
 public class SegModel extends Model {
 	
-	private double mySimilarity = 0.5;
-	private Map<Location,Cell> myCells;
+	private double mySimilarity = 0.7;
 
-	public SegModel(int rows, int columns, CellSocietyGUI CSGUI) {
-		super(rows, columns, CSGUI);
-		myCells = new HashMap<>();
+	public SegModel(CellSocietyGUI csGui) {
+		super(csGui);
 	}
 	
 	@Override
 	public void setParameters(Map<String,String> map){
+		// TODO Auto-generated method stub
 		super.setParameters(map);
 		if(map.containsKey("PERCENT_SIMILAR"))
 			mySimilarity = Double.parseDouble(map.get("PERCENT_SIMILAR"));
-	}
-
-	@Override
-	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
-		myCells.clear();
-		cells.forEach(map -> {
-			int x = Integer.parseInt(map.get("x"));
-			int y = Integer.parseInt(map.get("y"));
-			int state = Integer.parseInt(map.get("state"));
-			SegCell cell = new SegCell(new SegState(state), new Location(x, y, getWidth(), getHeight()), CSGUI);
-			cell.setSimilarity(mySimilarity);
-			myCells.put(cell.getLocation(), cell);
-		}); 
-		if (myCells.size() < getWidth() * getHeight())
-			System.err.println("Missing Cell Info!");
-		SquareGrid grid = new SquareGrid(getWidth(), getHeight(), myCells);
-		grid.setNeighbors();
-		setMyGrid(grid);
 	}
 	
 	@Override
@@ -60,12 +42,12 @@ public class SegModel extends Model {
 			cell2.determineNextState(cell1.getState());
 			cell1.determineNextState(cell2.getState());
 		}
-		myCells.forEach((loc,cell)->{cell.goToNextState();});
+		myCells.forEach(cell->{cell.goToNextState();});
 	}
 	
 	private Stack<Cell> getDissatisfiedCells(){
 		Stack<Cell> list = new Stack<>();
-		myCells.forEach((loc,cell)->{
+		myCells.forEach(cell->{
 			if(!((SegCell)cell).isEmpty() && !((SegCell)cell).isSatisfied())
 				list.add(cell);
 		});
@@ -74,11 +56,41 @@ public class SegModel extends Model {
 	
 	private Stack<Cell> getVacentCells(){
 		Stack<Cell> list = new Stack<>();
-		myCells.forEach((loc,cell)->{
+		myCells.forEach(cell->{
 			if(((SegCell)cell).isEmpty())
 				list.add(cell);
 		});
 		return list;
+	}
+
+	@Override
+	public void initialize(Map<String, String> parameters, List<Map<String, String>> cells) {
+		myCells.clear();
+		setBasicConfig(parameters);
+		mySimilarity = myParameters.containsKey("similarity")?Double.parseDouble(myParameters.get("PERCENT_SIMILAR")):mySimilarity;
+		cells.forEach(map -> {
+			int x = Integer.parseInt(map.get("x"));
+			int y = Integer.parseInt(map.get("y"));
+			int state = Integer.parseInt(map.get("state"));
+			addCell(x,y,state);
+		}); 
+		if (myCells.size() < getWidth() * getHeight())
+			System.err.println("Missing Cell Info!");
+		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid.setNeighbors();
+		System.out.println(myGrid);
+	}
+
+	@Override
+	public void intialize(Map<String, String> parameters) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void addCell(int x,int y,int state){
+		SegCell cell = new SegCell(new SegState(state), new Location(x,y, myWidth, getHeight()), myCSGUI);
+		cell.setSimilarity(mySimilarity);
+		myCells.add(cell);
 	}
 
 }

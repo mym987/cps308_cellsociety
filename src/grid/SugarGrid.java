@@ -2,14 +2,14 @@ package grid;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import location.Location;
 import cell.Cell;
 
 public class SugarGrid extends SquareGrid{
 
-	public SugarGrid(int width, int height, Map<Location, Cell> cells) {
+	public SugarGrid(int width, int height, Set<Cell> cells) {
 		super(width, height, cells);
 	}
 	

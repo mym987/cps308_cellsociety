@@ -15,7 +15,7 @@ public class FireModel extends Model {
 
 	FireModel(int width, int height) {
 		super("FireModel", width, height);
-		setModelParameters(0.5);
+		setModelParameters(0.7);
 		
 	}
 	

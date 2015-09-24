@@ -1,48 +1,59 @@
 package model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import location.Location;
+import location.ToroidalLocation;
 import state.FireState;
-import cell.Cell;
 import cell.FireCell;
 import grid.FireGrid;
 import gui.CellSocietyGUI;
 
 public class FireModel extends Model {
 	
-	private double myProbCatchFire = 0.5;
-	private Map<Location,Cell> myCellMap;
+	private double myProbCatchFire = 0.7;
 
-	public FireModel(int rows, int columns, CellSocietyGUI CSGUI) {
-		super(rows, columns, CSGUI);
-		myCellMap = new HashMap<>();
+	public FireModel(CellSocietyGUI csGui) {
+		super(csGui);
 	}
 	
 	@Override
 	public void setParameters(Map<String,String> map){
+		// TODO Auto-generated method stub
 		super.setParameters(map);
 		if(map.containsKey("PROB_CATCH_FIRE"))
 			myProbCatchFire = Double.parseDouble(map.get("PROB_CATCH_FIRE"));
 	}
 
 	@Override
-	public void buildGrid(List<Map<String, String>> cells, CellSocietyGUI CSGUI) {
-		myCellMap.clear();
+	public void initialize(Map<String, String> parameters, List<Map<String, String>> cells) {
+		myCells.clear();
+		setBasicConfig(parameters);
+		if(parameters.containsKey("PROB_CATCH_FIRE"))
+			myProbCatchFire = Double.parseDouble(parameters.get("PROB_CATCH_FIRE"));
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("x"));
 			int y = Integer.parseInt(map.get("y"));
 			int state = Integer.parseInt(map.get("state"));
-			FireCell cell = new FireCell(new FireState(state), new Location(x,y, getWidth(), getHeight()), CSGUI);
-			cell.setProbCatchFire(myProbCatchFire);
-			myCellMap.put(cell.getLocation(), cell);
+			addCell(x,y,state);
 		});
-		if(myCellMap.size()<getWidth()*getHeight())
+		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		FireGrid grid = new FireGrid(getWidth(), getHeight(), myCellMap);
-		grid.setNeighbors();
-		setMyGrid(grid);
+		myGrid = new FireGrid(getWidth(), getHeight(), myCells);
+		myGrid.setNeighbors();
+		
+	}
+
+	@Override
+	public void intialize(Map<String, String> parameters) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void addCell(int x,int y,int state){
+		FireCell cell = new FireCell(new FireState(state), new Location(x,y, getWidth(), getHeight()), myCSGUI);
+		cell.setProbCatchFire(myProbCatchFire);
+		myCells.add(cell);
 	}
 }
