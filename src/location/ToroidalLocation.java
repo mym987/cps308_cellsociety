@@ -8,7 +8,8 @@ public class ToroidalLocation extends Location {
 	
 	@Override
 	public Location getLocation(int x, int y){
-		ToroidalLocation loc = new ToroidalLocation(Math.floorMod(x, myWidth), Math.floorMod(y, myHeight), myWidth, myHeight);
+		ToroidalLocation loc = new ToroidalLocation(Math.floorMod(x, myWidth), 
+				Math.floorMod(y, myHeight), myWidth, myHeight);
 		return loc;
 	}
 
