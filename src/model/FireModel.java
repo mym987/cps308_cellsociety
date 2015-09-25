@@ -13,7 +13,7 @@ import gui.CellSocietyGUI;
 
 public class FireModel extends AbstractModel {
 	
-	private double myProbCatchFire = 0.7;
+	private double myProbCatchFire;
 	private static String STATE_NAMES[] = {"Empty", "Tree", "Burning"};
 
 	public FireModel(CellSocietyGUI csGui) {
