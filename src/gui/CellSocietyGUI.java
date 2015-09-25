@@ -1,9 +1,14 @@
 package gui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
+import BrowserView.ShowPage;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,10 +19,11 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import state.State;
 
 public class CellSocietyGUI {
 	private static final String TITLE = "Cell Society";
@@ -33,11 +39,12 @@ public class CellSocietyGUI {
 	
 	private Scene myScene;
 	private Group myRoot;
+	private ResourceBundle myResources;
 	
-	HashMap<Integer, XYChart.Series<Number, Number>> mySeriesMap;
-	LineChart<Number,Number> myLineChart;
+	private HashMap<Integer, XYChart.Series<Number, Number>> mySeriesMap;
+	private LineChart<Number,Number> myLineChart;
 	
-	Label mySliderLabel;
+	private Label mySliderLabel;
 
 	private int myWindowWidth, myWindowHeight;
 
@@ -63,15 +70,17 @@ public class CellSocietyGUI {
 		myRoot.getChildren().remove(e);
 	}
 	
-	public Button createAndPlaceButton(String text, double yIndex) {
+	public Button createAndPlaceButton(String property, double yIndex, EventHandler<ActionEvent> handler) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
-		Button button = new Button(text);
+		String label = myResources.getString(property);
+		Button button = new Button(label);
 		addToScreen(button);
 		button.applyCss();
 		double width = button.prefWidth(-1);
 		//double height = button.prefHeight(-1);
 		button.setLayoutX(buttonArea + (BUTTON_AREA_WIDTH - GRID_MARGIN - width) / 2);
 		button.setLayoutY(GRID_MARGIN + BUTTON_HEIGHT * yIndex);
+		button.setOnAction(handler);
 		return button;
 	}
 	
@@ -121,8 +130,6 @@ public class CellSocietyGUI {
 	}
 	
 	public void addSeries(int index, String name) {
-//		int index = state.getStateInt();
-//		Color color = state.getColor();
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
         series.setName(name);
         
@@ -147,7 +154,7 @@ public class CellSocietyGUI {
 		rect.setHeight(getGridHeight());
 		rect.setFill(Color.WHITE);
 		rect.setStroke(Color.BLACK);
-		rect.setStrokeWidth(2);
+		rect.setStrokeWidth(1);
 		addToScreen(rect);
 	}
 	

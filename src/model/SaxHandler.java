@@ -21,10 +21,6 @@ public class SaxHandler extends DefaultHandler {
 	private String myCurrentTag = null;
 	private String myCurrentValue = null;
 
-	public SaxHandler() {
-		myNodeName = "model";
-	}
-
 	public Map<String, String> getModelConfig() {
 		return myModelConfig;
 	}
@@ -35,6 +31,8 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
+		super.startDocument();
+		myNodeName = "model";
 	}
 
 	@Override
