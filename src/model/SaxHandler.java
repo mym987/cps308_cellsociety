@@ -1,7 +1,5 @@
 package model;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +13,7 @@ import gui.CellSocietyGUI;
 
 public class SaxHandler extends DefaultHandler {
 
-	private Model myModel;
+	private IModel myModel;
 	private String myNodeName;
 	private Map<String, String> myAttributeMap = null;
 	private Map<String, String> myModelConfig;
@@ -31,7 +29,7 @@ public class SaxHandler extends DefaultHandler {
 		myCsGui = CSGUI;
 	}
 
-	public Model getModel() {
+	public IModel getModel() {
 		return myModel;
 	}
 
@@ -65,27 +63,13 @@ public class SaxHandler extends DefaultHandler {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	private Model createModel(String name) {
-		try {
-			name = getClass().getPackage().getName() + "." + name;
-			Class[] types = { CellSocietyGUI.class };
-			Constructor constructor = Class.forName(name).getDeclaredConstructor(types);
-			return (Model) constructor.newInstance(myCsGui);
-		} catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException, NumberFormatException {
 		if (qName.equals("model")) {
 			String name = myAttributeMap.get("name");
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));
-			myModel = createModel(name);
+			myModel = IModel.getModel(name, myCsGui);
 			myModelConfig = myAttributeMap;
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);

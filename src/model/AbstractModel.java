@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Color;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +12,7 @@ import cell.Cell;
 import grid.Grid;
 import gui.CellSocietyGUI;
 
-public abstract class Model {
+public abstract class AbstractModel implements IModel {
 	
 	protected CellSocietyGUI myCSGUI;
 	protected int myWidth;
@@ -24,7 +24,7 @@ public abstract class Model {
 	protected String myAuthor = "CPS308_Team11";
 	protected int myStepNum = 0;
 	
-	Model(CellSocietyGUI CSGUI){
+	AbstractModel(CellSocietyGUI CSGUI){
 		myCSGUI = CSGUI;
 		myRandom = new Random();
 		myCells = new HashSet<>();
@@ -39,7 +39,7 @@ public abstract class Model {
 	}
 	
 	public Map<String,String> getParameters(){
-		return myParameters;
+		return Collections.unmodifiableMap(myParameters);
 	}
 	
 	protected void setDimensions(int width, int height){
@@ -61,8 +61,6 @@ public abstract class Model {
 		updateGraph();
 	}
 	
-	//public abstract void buildGrid(List<Map<String,String>> cells, CellSocietyGUI CSGUI);
-
 	public void clear() {
 		myStepNum = 0;
 		myGrid.clear();
@@ -98,5 +96,9 @@ public abstract class Model {
 		int height = Integer.parseInt(myParameters.get("height"));
 		setDimensions(width, height);
 		myAuthor = myParameters.containsKey("author")?myParameters.get("author"):myAuthor;
+	}
+	
+	public Set<Cell> getCells(){
+		return Collections.unmodifiableSet(myCells);
 	}
 }

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,7 @@ import cell.FireCell;
 import grid.FireGrid;
 import gui.CellSocietyGUI;
 
-public class FireModel extends Model {
+public class FireModel extends AbstractModel {
 	
 	private double myProbCatchFire = 0.7;
 	private static String STATE_NAMES[] = {"Empty", "Tree", "Burning"};

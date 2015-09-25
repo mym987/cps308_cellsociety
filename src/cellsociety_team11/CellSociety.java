@@ -2,7 +2,7 @@ package cellsociety_team11;
 
 import java.io.File;
 
-import model.Model;
+import model.IModel;
 import model.SaxParser;
 import gui.CellSocietyGUI;
 import javafx.animation.KeyFrame;
@@ -26,7 +26,7 @@ public class CellSociety extends Application {
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	
 	private CellSocietyGUI myCSGUI;
-	private Model myModel;
+	private IModel myModel;
 	private Stage myStage;
 	private Timeline myAnimation;
 	private String myFileName;

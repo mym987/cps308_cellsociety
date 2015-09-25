@@ -11,7 +11,7 @@ import grid.SquareGrid;
 import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
-public class PredModel extends Model {
+public class PredModel extends AbstractModel {
 	
 	private int myFishEnergy = 5;
 	private int myMaxSharkEnergy = 5;

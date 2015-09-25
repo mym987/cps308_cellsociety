@@ -12,7 +12,7 @@ import cell.SugarCell;
 import grid.SugarGrid;
 import gui.CellSocietyGUI;
 
-public class SugarModel extends Model{
+public class SugarModel extends AbstractModel{
 	
 	private static String STATE_NAMES[] = {"State 0", "State 1", "State 2", "State 3", "State 4"};
 

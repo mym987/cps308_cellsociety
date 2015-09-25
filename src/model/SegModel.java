@@ -14,7 +14,7 @@ import grid.SquareGrid;
 import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
-public class SegModel extends Model {
+public class SegModel extends AbstractModel {
 	
 	private double mySimilarity = 0.7;
 	private static String STATE_NAMES[] = {"Empty", "Blue", "Yellow"};

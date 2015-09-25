@@ -10,7 +10,7 @@ import cell.GOLCell;
 import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
-public class GOLModel extends Model {
+public class GOLModel extends AbstractModel {
 	
 	private static final double DEFAULT_PERCENT_LIVE_CELLS = 0.5;
 	private static final int DEAD_STATE = 0;

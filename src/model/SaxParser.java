@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 import gui.CellSocietyGUI;
 
 public class SaxParser {
-	public static Model getModel(String fileName, CellSocietyGUI CSGUI){
+	public static IModel getModel(String fileName, CellSocietyGUI CSGUI){
 		try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser=parserFactory.newSAXParser();
