@@ -1,53 +1,49 @@
 package model;
 
+import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import grid.Grid;
+import cell.Cell;
 import gui.CellSocietyGUI;
 
-public abstract class Model {
-	
-	protected CellSocietyGUI myCSGUI;
-	private final int myWidth;
-	private final int myHeight;
-	private Grid myGrid;
-	private String myAuthor;
-	
-	Model(int width, int height, CellSocietyGUI CSGUI){
-		myWidth = width;
-		myHeight = height;
-		myCSGUI = CSGUI;
-	}
-	
-	public void setParameters(Map<String,String> map){
-		myAuthor = map.containsKey("author")?map.get("author"):"";
+public interface Model {
+
+	@SuppressWarnings("rawtypes")
+	public static Model getModel(String name, CellSocietyGUI csGui) {
+		String tmp = "GOLModel PredModel SegModel FireModel SugarModel";
+		List<String> models = Arrays.asList(tmp.split("\\s+"));
+		if (models.contains(name)) {
+			try {
+				name = Model.class.getPackage().getName() + "." + name;
+				Class[] types = { CellSocietyGUI.class };
+				Constructor constructor;
+				constructor = Class.forName(name).getDeclaredConstructor(types);
+				return (Model) constructor.newInstance(csGui);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
-	public int getHeight() {
-		return myHeight;
-	}
+	public abstract void initialize(Map<String, String> parameters, List<Map<String, String>> cells);
 
-	public int getWidth() {
-		return myWidth;
-	}
-	
+	public abstract void intialize(Map<String, String> parameters);
 
-	public void step(){
-		myGrid.step();
-	}
-	
-	public abstract void buildGrid(List<Map<String,String>> cells, CellSocietyGUI CSGUI);
-	
-	public Grid getMyGrid(){
-		return myGrid;
-	};
-	
-	public void setMyGrid(Grid grid){
-		myGrid = grid;
-	}
+	public abstract void setParameters(Map<String, String> parameters);
 
-	public void removeCells() {
-		myGrid.removeCells();
-	}
+	public abstract Map<String, String> getParameters();
+
+	public abstract int getWidth();
+
+	public abstract int getHeight();
+
+	public abstract void step();
+
+	public abstract void clear();
+	
+	public abstract Set<Cell> getCells();
 }

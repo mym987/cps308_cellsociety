@@ -4,12 +4,14 @@ import location.Location;
 import state.GOLState;
 import state.State;
 
+import java.util.Map;
+
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import gui.TriangleCellGUI;
 import javafx.scene.paint.Color;
 
-public class GOLCell extends Cell{
+public class GOLCell extends AbstractCell{
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
@@ -40,5 +42,11 @@ public class GOLCell extends Cell{
 	
 	public void remove() {
 		myCellGUI.remove();
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

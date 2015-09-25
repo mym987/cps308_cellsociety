@@ -1,7 +1,5 @@
 package model;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,24 +12,25 @@ import org.xml.sax.helpers.DefaultHandler;
 import gui.CellSocietyGUI;
 
 public class SaxHandler extends DefaultHandler {
-
-	private Model myModel;
+	
 	private String myNodeName;
 	private Map<String, String> myAttributeMap = null;
-	private List<Map<String, String>> myCells = null;
+	private Map<String, String> myModelConfig;
+	private List<Map<String, String>> myCells;
 
 	private String myCurrentTag = null;
 	private String myCurrentValue = null;
-	
-	private CellSocietyGUI myCSGUI;
-	
-	public SaxHandler(CellSocietyGUI CSGUI) {
+
+	public SaxHandler() {
 		myNodeName = "model";
-		myCSGUI = CSGUI;
 	}
 
-	public Model getModel() {
-		return myModel;
+	public Map<String, String> getModelConfig() {
+		return myModelConfig;
+	}
+	
+	public List<Map<String, String>> getCells(){
+		return myCells;
 	}
 
 	@Override
@@ -64,27 +63,12 @@ public class SaxHandler extends DefaultHandler {
 		}
 	}
 
-	private Model createModel(String name, int width, int height) {
-		name = getClass().getPackage().getName() + "." + name;
-		try {
-			Class[] types = { Integer.TYPE, Integer.TYPE, CellSocietyGUI.class};
-			Constructor constructor = Class.forName(name).getDeclaredConstructor(types);
-			return (Model) constructor.newInstance(width, height, myCSGUI);
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException {
+	public void endElement(String uri, String localName, String qName) throws SAXException, NumberFormatException {
 		if (qName.equals("model")) {
-			String name = myAttributeMap.get("name");
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));
-			myModel = createModel(name, width, height);
-			myModel.setParameters(myAttributeMap);
+			myModelConfig = myAttributeMap;
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);
 			myAttributeMap = null;
@@ -97,6 +81,5 @@ public class SaxHandler extends DefaultHandler {
 	@Override
 	public void endDocument() throws SAXException {
 		super.endDocument();
-		myModel.buildGrid(myCells, myCSGUI);
 	}
 }

@@ -2,7 +2,7 @@ package grid;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import location.Location;
 import cell.Cell;
@@ -10,7 +10,7 @@ import cell.Cell;
 public class SquareGrid extends Grid {
 //	public static final int EMPTY_STATE = 0;
 	
-	public SquareGrid(int width, int height, Map<Location, Cell> cells) {
+	public SquareGrid(int width, int height, Set<Cell> cells) {
 		super(width, height, cells);
 	}
 	

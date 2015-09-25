@@ -1,18 +1,29 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import state.State;
 
 public class CellSocietyGUI {
 	private static final String TITLE = "Cell Society";
-	private static final int BUTTON_AREA_WIDTH = 200;
+	private static final int BUTTON_AREA_WIDTH = 400;
+	private static final int GRAPH_HEIGHT = 300;
+	private static final double BUTTON_HEIGHT = 40;
 	
 	private static final double GRID_MARGIN = 50;
 
@@ -22,6 +33,9 @@ public class CellSocietyGUI {
 	
 	private Scene myScene;
 	private Group myRoot;
+	
+	HashMap<Integer, XYChart.Series<Number, Number>> mySeriesMap;
+	LineChart<Number,Number> myLineChart;
 	
 	Label mySliderLabel;
 
@@ -49,43 +63,80 @@ public class CellSocietyGUI {
 		myRoot.getChildren().remove(e);
 	}
 	
-	public Button createAndPlaceButton(String text, double yCoord, double buttonHeight) {
+	public Button createAndPlaceButton(String text, double yIndex) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
 		Button button = new Button(text);
 		addToScreen(button);
 		button.applyCss();
 		double width = button.prefWidth(-1);
-		double height = button.prefHeight(-1);
-		button.setLayoutX(buttonArea + (BUTTON_AREA_WIDTH - width) / 2);
-		button.setLayoutY(yCoord + (buttonHeight - height) / 2);
+		//double height = button.prefHeight(-1);
+		button.setLayoutX(buttonArea + (BUTTON_AREA_WIDTH - GRID_MARGIN - width) / 2);
+		button.setLayoutY(GRID_MARGIN + BUTTON_HEIGHT * yIndex);
 		return button;
 	}
 	
-	public Slider addSlider(double yPos, double fps) {
+	public Slider addSlider(double yIndex, double fps) {
 		 Slider slider = new Slider(MIN_FPS, MAX_FPS, fps);
 		 slider.setMajorTickUnit(1);
 		 slider.setBlockIncrement(INCREMENT);
 		 slider.setLayoutX(myWindowWidth - BUTTON_AREA_WIDTH);
-		 slider.setLayoutY(yPos);
-		 slider.setPrefWidth(BUTTON_AREA_WIDTH);
+		 slider.setLayoutY(GRID_MARGIN + BUTTON_HEIGHT * yIndex);
+		 slider.setPrefWidth(BUTTON_AREA_WIDTH - GRID_MARGIN);
 		 addToScreen(slider);
 		 return slider;
 	}
 	
-	public void showSliderLabel(String text, double yPos) {
-		mySliderLabel = new Label(text);
+	public void showSliderLabel(String text, double yIndex) {
+		mySliderLabel = new Label();
 		myRoot.getChildren().add(mySliderLabel);
 		mySliderLabel.applyCss();
-		double xPos = myWindowWidth - BUTTON_AREA_WIDTH + (BUTTON_AREA_WIDTH - mySliderLabel.prefWidth(-1)) / 2;
-		mySliderLabel.setLayoutX(xPos);
-		mySliderLabel.setLayoutY(yPos - mySliderLabel.prefHeight(-1));
+		mySliderLabel.setLayoutY(GRID_MARGIN + BUTTON_HEIGHT * yIndex - mySliderLabel.prefHeight(-1));
+		updateSliderLabel(text);
 	}
 	
 	public void updateSliderLabel(String text) {
 		mySliderLabel.setText(text);
 		mySliderLabel.applyCss();
-		double xPos = myWindowWidth - BUTTON_AREA_WIDTH + (BUTTON_AREA_WIDTH - mySliderLabel.prefWidth(-1)) / 2;
+		double xPos = myWindowWidth - BUTTON_AREA_WIDTH + (BUTTON_AREA_WIDTH - GRID_MARGIN - mySliderLabel.prefWidth(-1)) / 2;
 		mySliderLabel.setLayoutX(xPos);
+	}
+	
+	public void addGraph() {
+        //defining the axes
+        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Frame Number");
+        //creating the chart
+        myLineChart = 
+                new LineChart<Number,Number>(xAxis,yAxis);
+        mySeriesMap = new HashMap<Integer, XYChart.Series<Number, Number>>();
+                
+        myLineChart.setTitle("Number of Cells in Each State");
+        myLineChart.setLayoutX(myWindowWidth - BUTTON_AREA_WIDTH);
+        myLineChart.setLayoutY(myWindowHeight - GRAPH_HEIGHT - GRID_MARGIN);
+        myLineChart.setPrefWidth(BUTTON_AREA_WIDTH - GRID_MARGIN);
+        myLineChart.setPrefHeight(GRAPH_HEIGHT);
+        myLineChart.setCreateSymbols(false);
+        addToScreen(myLineChart);
+	}
+	
+	public void addSeries(int index, String name) {
+//		int index = state.getStateInt();
+//		Color color = state.getColor();
+        XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+        series.setName(name);
+        
+        myLineChart.getData().add(series);
+        mySeriesMap.put(index, series);
+	}
+	
+	public void resetGraph() {
+        myLineChart.getData().clear();
+	}
+	
+	public void addDataPoint(Number xVal, Number yVal, int seriesNum) {
+		ObservableList<Data<Number, Number>> list = mySeriesMap.get(seriesNum).getData();
+        list.add(new XYChart.Data<Number, Number>(xVal, yVal));
 	}
 	
 	public void createGridArea() {

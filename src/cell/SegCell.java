@@ -3,10 +3,13 @@ package cell;
 import location.Location;
 import state.SegState;
 import state.State;
+
+import java.util.Map;
+
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
-public class SegCell extends Cell {
+public class SegCell extends AbstractCell {
 	public static final double CELL_SIZE = 70;
 
 	private static final int EMPTY_STATE = 0;
@@ -51,6 +54,12 @@ public class SegCell extends Cell {
 
 	public void remove() {
 		myCellGUI.remove();
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

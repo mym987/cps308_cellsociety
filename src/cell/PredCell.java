@@ -1,6 +1,7 @@
 package cell;
 
 import java.util.List;
+import java.util.Map;
 
 import location.Location;
 import state.PredState;
@@ -9,7 +10,7 @@ import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import javafx.scene.input.MouseEvent;
 
-public class PredCell extends Cell {
+public class PredCell extends AbstractCell {
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
@@ -147,5 +148,11 @@ public class PredCell extends Cell {
 			setSharkEnergy(0);
 		}
 		setNumChronon(0);// reproductive state reset
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

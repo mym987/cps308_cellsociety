@@ -54,4 +54,9 @@ public abstract class State {
 			return false;
 		return myStateInt == ((State)obj).myStateInt;
 	}
+	
+	@Override
+	public String toString(){
+		return Integer.toString(myStateInt); 
+	}
 }
