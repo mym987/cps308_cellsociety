@@ -1,6 +1,4 @@
-package xmlFactory;
-
-import model.IModel;
+package model;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,9 +27,9 @@ import org.w3c.dom.Element;
 public class xmlWriter {
 	private Document myDoc;
 	private Element myRoot;
-	private IModel myModel;
+	private Model myModel;
 
-	public void init(IModel model) throws Exception {
+	public void init(Model model) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		builder = factory.newDocumentBuilder();
@@ -67,8 +65,8 @@ public class xmlWriter {
 
 	private void createCells() {
 		Element cells = addRootElement(myRoot, "cells");
-		myModel.getCells().forEach(map -> {
-			addAttributes(addRootElement(cells, "cell"), map);
+		myModel.getCells().forEach(cell -> {
+			addAttributes(addRootElement(cells, "cell"), cell.getAttributes());
 		});
 	}
 
@@ -77,14 +75,14 @@ public class xmlWriter {
 		createCells();
 		
 		DateFormat df = new SimpleDateFormat("MMddyy_HHmmss");
-    	Calendar calobj = Calendar.getInstance();
-    	String timeStamp = df.format(calobj.getTime());
+    	Calendar calObj = Calendar.getInstance();
+    	String timeStamp = df.format(calObj.getTime());
 		String fileName = myModel +timeStamp+".xml";
 		
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
 		DOMSource source = new DOMSource(myDoc);
-		transformer.setOutputProperty(OutputKeys.ENCODING, "gb2312");
+		//transformer.setOutputProperty(OutputKeys.ENCODING, "gb2312");
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
 		StreamResult result = new StreamResult(pw);

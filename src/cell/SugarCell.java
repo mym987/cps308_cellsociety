@@ -7,7 +7,7 @@ import location.Location;
 import state.State;
 import state.SugarState;
 
-public class SugarCell extends Cell{
+public class SugarCell extends AbstractCell{
 	private static final int PATCH_STATE_0 = 0;
 	private static final int PATCH_STATE_1 = 1;
 	private static final int PATCH_STATE_2 = 2;

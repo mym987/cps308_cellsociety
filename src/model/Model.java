@@ -9,18 +9,19 @@ import java.util.Set;
 import cell.Cell;
 import gui.CellSocietyGUI;
 
-public interface IModel {
+public interface Model {
 
-	public static IModel getModel(String name, CellSocietyGUI csGui) {
+	@SuppressWarnings("rawtypes")
+	public static Model getModel(String name, CellSocietyGUI csGui) {
 		String tmp = "GOLModel PredModel SegModel FireModel SugarModel";
 		List<String> models = Arrays.asList(tmp.split("\\s+"));
 		if (models.contains(name)) {
 			try {
-				name = IModel.class.getPackage().getName() + "." + name;
+				name = Model.class.getPackage().getName() + "." + name;
 				Class[] types = { CellSocietyGUI.class };
 				Constructor constructor;
 				constructor = Class.forName(name).getDeclaredConstructor(types);
-				return (IModel) constructor.newInstance(csGui);
+				return (Model) constructor.newInstance(csGui);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

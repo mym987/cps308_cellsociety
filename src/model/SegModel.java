@@ -44,7 +44,7 @@ public class SegModel extends AbstractModel {
 			cell1.determineNextState(cell2.getState());
 		}
 		myCells.forEach(cell->{cell.goToNextState();});
-		++myStepNum;
+		myStepNum++;
 		updateGraph();
 	}
 	
@@ -81,7 +81,6 @@ public class SegModel extends AbstractModel {
 			System.err.println("Missing Cell Info!");
 		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
-		System.out.println(myGrid);
 		setupGraph(STATE_NAMES);
 	}
 

@@ -9,7 +9,7 @@ import gui.SquareCellGUI;
 import gui.TriangleCellGUI;
 import javafx.scene.paint.Color;
 
-public class GOLCell extends Cell{
+public class GOLCell extends AbstractCell{
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;

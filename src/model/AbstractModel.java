@@ -12,7 +12,7 @@ import cell.Cell;
 import grid.Grid;
 import gui.CellSocietyGUI;
 
-public abstract class AbstractModel implements IModel {
+public abstract class AbstractModel implements Model {
 	
 	protected CellSocietyGUI myCSGUI;
 	protected int myWidth;

@@ -9,7 +9,7 @@ import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import javafx.scene.input.MouseEvent;
 
-public class PredCell extends Cell {
+public class PredCell extends AbstractCell {
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;

@@ -13,7 +13,7 @@ import gui.CellSocietyGUI;
 
 public class SaxHandler extends DefaultHandler {
 
-	private IModel myModel;
+	private Model myModel;
 	private String myNodeName;
 	private Map<String, String> myAttributeMap = null;
 	private Map<String, String> myModelConfig;
@@ -29,7 +29,7 @@ public class SaxHandler extends DefaultHandler {
 		myCsGui = CSGUI;
 	}
 
-	public IModel getModel() {
+	public Model getModel() {
 		return myModel;
 	}
 
@@ -69,7 +69,7 @@ public class SaxHandler extends DefaultHandler {
 			String name = myAttributeMap.get("name");
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));
-			myModel = IModel.getModel(name, myCsGui);
+			myModel = Model.getModel(name, myCsGui);
 			myModelConfig = myAttributeMap;
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);

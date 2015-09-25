@@ -8,7 +8,7 @@ import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
-public class FireCell extends Cell{
+public class FireCell extends AbstractCell{
 	
 	private static final int EMPTY_STATE = 0;
 	private static final int LIVE_STATE = 1;

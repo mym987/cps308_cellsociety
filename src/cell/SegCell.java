@@ -6,7 +6,7 @@ import state.State;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
-public class SegCell extends Cell {
+public class SegCell extends AbstractCell {
 	public static final double CELL_SIZE = 70;
 
 	private static final int EMPTY_STATE = 0;

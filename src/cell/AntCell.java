@@ -4,7 +4,7 @@ import gui.CellSocietyGUI;
 import location.Location;
 import state.State;
 
-public class AntCell extends Cell{
+public class AntCell extends AbstractCell{
 	private static final int CAPACITY = 10;
 	
 	private static final int EMPTY_STATE = 0;
