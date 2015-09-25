@@ -1,5 +1,7 @@
 package cell;
 
+import java.util.Map;
+
 import gui.CellSocietyGUI;
 import location.Location;
 import state.State;
@@ -30,6 +32,12 @@ public class AntCell extends AbstractCell{
 	public void remove() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

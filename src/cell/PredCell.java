@@ -1,6 +1,7 @@
 package cell;
 
 import java.util.List;
+import java.util.Map;
 
 import location.Location;
 import state.PredState;
@@ -147,5 +148,11 @@ public class PredCell extends AbstractCell {
 			setSharkEnergy(0);
 		}
 		setNumChronon(0);// reproductive state reset
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package cell;
 
 import java.util.List;
+import java.util.Map;
 
 import gui.CellSocietyGUI;
 import location.Location;
@@ -132,6 +133,12 @@ public class SugarCell extends AbstractCell{
 		}
 		
 		return minDistCell;
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

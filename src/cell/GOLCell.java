@@ -4,6 +4,8 @@ import location.Location;
 import state.GOLState;
 import state.State;
 
+import java.util.Map;
+
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import gui.TriangleCellGUI;
@@ -40,5 +42,11 @@ public class GOLCell extends AbstractCell{
 	
 	public void remove() {
 		myCellGUI.remove();
+	}
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -25,25 +25,26 @@ public class CellSociety extends Application {
 	private static final int FRAMES_PER_SECOND = 10;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	
-	private CellSocietyGUI myCSGUI;
+	private CellSocietyGUI myCsGui;
+	private SaxParser myParser;
 	private Model myModel;
 	private Stage myStage;
 	private Timeline myAnimation;
-	private String myFileName;
 
 	@Override
 	public void start(Stage stage) {
 		myStage = stage;
-		myCSGUI = new CellSocietyGUI();
+		myCsGui = new CellSocietyGUI();
+		myParser = new SaxParser(myCsGui);
 
-		Scene scene = myCSGUI.init(XSIZE, YSIZE);
+		Scene scene = myCsGui.init(XSIZE, YSIZE);
 		stage.setScene(scene);
-		stage.setTitle(myCSGUI.getTitle());
+		stage.setTitle(myCsGui.getTitle());
 		addButtons();
-		myCSGUI.addGraph();
+		myCsGui.addGraph();
 		stage.show();
 
-		myCSGUI.createGridArea();
+		myCsGui.createGridArea();
 
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myModel.step());
 		myAnimation = new Timeline();
@@ -52,8 +53,7 @@ public class CellSociety extends Application {
 	}
 
 	private void createModel() {
-		if (myFileName != null)
-			myModel = SaxParser.getModel(myFileName, myCSGUI);
+		myModel = myParser.getModel();
 	}
 
 	public void loadXML() {
@@ -64,7 +64,7 @@ public class CellSociety extends Application {
 		fileChooser.setTitle("Open Resource File");
 		File file = fileChooser.showOpenDialog(myStage);
 		if (file != null) {
-			myFileName = file.getAbsolutePath();
+			myParser.initialize(file);
 			createModel();
 		}
 	}
@@ -102,7 +102,7 @@ public class CellSociety extends Application {
 		Status prevStat = myAnimation.getStatus();
 		myAnimation.stop();
 		myAnimation.getKeyFrames().setAll(keyFrame);
-		myCSGUI.updateSliderLabel((int)fps + BUTTON_NAMES[5]);
+		myCsGui.updateSliderLabel((int)fps + BUTTON_NAMES[5]);
 		if(prevStat == Status.RUNNING)
 			start();
 	}
@@ -116,12 +116,12 @@ public class CellSociety extends Application {
 		events[4] = (e) -> stepIfNotAnimating();
 		int index;
 		for(index = 0; index < events.length; index++) {
-			Button button = myCSGUI.createAndPlaceButton(BUTTON_NAMES[index], index);
+			Button button = myCsGui.createAndPlaceButton(BUTTON_NAMES[index], index);
 			button.setOnMouseClicked(events[index]);
 		}
-		Slider slider = myCSGUI.addSlider(index, FRAMES_PER_SECOND);
+		Slider slider = myCsGui.addSlider(index, FRAMES_PER_SECOND);
 		slider.valueProperty().addListener((observable, oldValue, newValue) -> {changeTime(newValue.doubleValue());});
-		myCSGUI.showSliderLabel(FRAMES_PER_SECOND + BUTTON_NAMES[index], ++index);
+		myCsGui.showSliderLabel(FRAMES_PER_SECOND + BUTTON_NAMES[index], ++index);
 	}
 
 	public static void main(String[] args) {

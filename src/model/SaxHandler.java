@@ -12,8 +12,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import gui.CellSocietyGUI;
 
 public class SaxHandler extends DefaultHandler {
-
-	private Model myModel;
+	
 	private String myNodeName;
 	private Map<String, String> myAttributeMap = null;
 	private Map<String, String> myModelConfig;
@@ -22,15 +21,16 @@ public class SaxHandler extends DefaultHandler {
 	private String myCurrentTag = null;
 	private String myCurrentValue = null;
 
-	private CellSocietyGUI myCsGui;
-
-	public SaxHandler(CellSocietyGUI CSGUI) {
+	public SaxHandler() {
 		myNodeName = "model";
-		myCsGui = CSGUI;
 	}
 
-	public Model getModel() {
-		return myModel;
+	public Map<String, String> getModelConfig() {
+		return myModelConfig;
+	}
+	
+	public List<Map<String, String>> getCells(){
+		return myCells;
 	}
 
 	@Override
@@ -66,10 +66,8 @@ public class SaxHandler extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException, NumberFormatException {
 		if (qName.equals("model")) {
-			String name = myAttributeMap.get("name");
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));
-			myModel = Model.getModel(name, myCsGui);
 			myModelConfig = myAttributeMap;
 			myNodeName = "cell";
 			myCells = new ArrayList<>(width * height);
@@ -83,9 +81,5 @@ public class SaxHandler extends DefaultHandler {
 	@Override
 	public void endDocument() throws SAXException {
 		super.endDocument();
-		if (myModel != null) {
-			myModel.initialize(myModelConfig, myCells);
-			System.out.println("Model created successfully!");
-		}
 	}
 }

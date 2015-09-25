@@ -1,5 +1,6 @@
 package cell;
 
+import java.util.Map;
 import java.util.Random;
 
 import location.Location;
@@ -46,6 +47,13 @@ public class FireCell extends AbstractCell{
 	
 	public void remove() {
 		myCellGUI.remove();
+	}
+
+
+	@Override
+	public Map<String, String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
