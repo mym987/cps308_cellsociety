@@ -58,19 +58,5 @@ public class SugarGrid extends SquareGrid{
 		});
 		return neighbors;
 	}
-	
-	
-	@Override
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		for(int x=0;x<getWidth();x++){
-			for(int y=0;y<getHeight();y++){
-				Cell cell = getCell(new Location(x,y,getWidth(),getHeight()));
-				sb.append(cell.getState().getStateInt());
-			}
-			sb.append('\n');
-		}
-		return sb.toString();
-	}
 
 }

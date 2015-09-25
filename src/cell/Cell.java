@@ -1,6 +1,7 @@
 package cell;
 
 import java.util.List;
+import java.util.Map;
 
 import location.Location;
 import state.State;
@@ -28,4 +29,6 @@ public interface Cell {
 	public void removeOutlines();
 
 	public void addOutlines();
+	
+	public Map<String,String> getAttributes();
 }
