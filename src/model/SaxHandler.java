@@ -62,7 +62,7 @@ public class SaxHandler extends DefaultHandler {
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException, NumberFormatException {
+	public void endElement(String uri, String localName, String qName) throws SAXException{
 		if (qName.equals("model")) {
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));

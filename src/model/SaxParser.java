@@ -14,35 +14,27 @@ import org.xml.sax.SAXException;
 import gui.CellSocietyGUI;
 
 public class SaxParser {
-	
+
 	private CellSocietyGUI myCsGui;
 	private Map<String, String> myModelConfig;
 	private List<Map<String, String>> myCells;
-	
-	public SaxParser(CellSocietyGUI csGui){
+
+	public SaxParser(CellSocietyGUI csGui) {
 		myCsGui = csGui;
 	}
-	
-	public void initialize(File file){
-		try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            SAXParser parser=parserFactory.newSAXParser();
-            SaxHandler myHandler=new SaxHandler();
-            parser.parse(file, myHandler);
-            myModelConfig = myHandler.getModelConfig();
-            myCells = myHandler.getCells();
-            
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+	public boolean initialize(File file) throws SAXException, ParserConfigurationException, IOException {
+		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+		SAXParser parser = parserFactory.newSAXParser();
+		SaxHandler myHandler = new SaxHandler();
+		parser.parse(file, myHandler);
+		myModelConfig = myHandler.getModelConfig();
+		myCells = myHandler.getCells();
+		return myModelConfig != null && myCells != null;
 	}
-	
-	public Model getModel(){
-		if(myModelConfig==null || myCells == null)
+
+	public Model getModel() {
+		if (myModelConfig == null || myCells == null)
 			return null;
 		String name = myModelConfig.get("name");
 		Model model = Model.getModel(name, myCsGui);
