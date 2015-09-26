@@ -21,10 +21,6 @@ public class SaxHandler extends DefaultHandler {
 	private String myCurrentTag = null;
 	private String myCurrentValue = null;
 
-	public SaxHandler() {
-		myNodeName = "model";
-	}
-
 	public Map<String, String> getModelConfig() {
 		return myModelConfig;
 	}
@@ -35,6 +31,8 @@ public class SaxHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
+		super.startDocument();
+		myNodeName = "model";
 	}
 
 	@Override
@@ -64,7 +62,7 @@ public class SaxHandler extends DefaultHandler {
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException, NumberFormatException {
+	public void endElement(String uri, String localName, String qName) throws SAXException{
 		if (qName.equals("model")) {
 			int width = Integer.parseInt(myAttributeMap.get("width"));
 			int height = Integer.parseInt(myAttributeMap.get("height"));
