@@ -29,9 +29,9 @@ public interface Model {
 		return null;
 	}
 
-	public abstract void initialize(Map<String, String> parameters, List<Map<String, String>> cells);
+	public abstract void initialize(Map<String, String> parameters, List<Map<String, String>> cells) throws Exception;
 
-	public abstract void intialize(Map<String, String> parameters);
+	public abstract void initialize(Map<String, String> parameters) throws Exception;
 
 	public abstract void setParameters(Map<String, String> parameters);
 

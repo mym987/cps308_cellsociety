@@ -23,7 +23,7 @@ public class GOLModel extends AbstractModel {
 
 	@Override
 	public void setParameters(Map<String,String> parameters){
-		intialize(parameters);
+		initialize(parameters);
 	}
 	
 	@Override
@@ -44,7 +44,7 @@ public class GOLModel extends AbstractModel {
 	}
 
 	@Override
-	public void intialize(Map<String, String> parameters) {
+	public void initialize(Map<String, String> parameters) {
 		setBasicConfig(parameters);
 		double percentLive = DEFAULT_PERCENT_LIVE_CELLS;
 		if(myParameters.containsKey("percentLive")){
@@ -68,6 +68,8 @@ public class GOLModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
+		myGrid = new TriangleGrid(getWidth(), getHeight(), myCells);
+		myGrid.setNeighbors();
 		setupGraph(STATE_NAMES);
 	}
 	

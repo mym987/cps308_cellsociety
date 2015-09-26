@@ -20,7 +20,7 @@ public class FireModel extends Model {
 	}
 	
 	public void setModelParameters(double probCatchFire){
-		addModelParameter("PROB_CATCH_FIRE", probCatchFire);
+		addModelParameter("probCatchFire", probCatchFire);
 	}
 
 	@Override

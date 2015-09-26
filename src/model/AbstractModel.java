@@ -30,10 +30,6 @@ public abstract class AbstractModel implements Model {
 		myCells = new HashSet<>();
 	}
 	
-	public abstract void initialize(Map<String,String> parameters,List<Map<String,String>> cells);
-
-	public abstract void intialize(Map<String,String> parameters);
-	
 	public void setParameters(Map<String,String> parameters){
 		myParameters = parameters;
 	}

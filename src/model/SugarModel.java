@@ -39,7 +39,7 @@ public class SugarModel extends AbstractModel{
 	}
 
 	@Override
-	public void intialize(Map<String, String> parameters) {
+	public void initialize(Map<String, String> parameters) {
 		// TODO Auto-generated method stub
 		
 	}

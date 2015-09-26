@@ -7,12 +7,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import cellsociety_team11.CSManager;
+import gui.dialogue.Dialog;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.Animation.Status;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,6 +28,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -61,9 +64,10 @@ public class CellSocietyGUI {
 	private int myWindowWidth, myWindowHeight;
 
 	public CellSocietyGUI(Stage stage) {
+
 		myManager = new CSManager(this);
 		myStage = stage;
-		Scene scene = init(XSIZE, YSIZE);
+		Scene scene = init((int)stage.getWidth(), (int)stage.getHeight());
 		stage.setScene(scene);
 		stage.setTitle(TITLE);
 		
@@ -73,10 +77,8 @@ public class CellSocietyGUI {
 		MenuPanel menu = new MenuPanel(this);
 		menu.prefWidthProperty().bind(stage.widthProperty());
 		myRoot.getChildren().add(menu);
-		
 		createAnimation();
 		stage.show();
-		
 		
 	}
 	
@@ -88,7 +90,7 @@ public class CellSocietyGUI {
 		myWindowWidth = width;
 		myWindowHeight = height;
 		myRoot = new Group();
-		myScene = new Scene(myRoot, width, height, Color.AZURE);
+		myScene = new Scene(myRoot,width,height,Color.AZURE);
 		return myScene;
 	}
 
@@ -134,7 +136,8 @@ public class CellSocietyGUI {
 	}
 
 	protected void openXML() {
-		myAnimation.pause(); // don't use pause() here, pause() also changes button states
+		if(myAnimation.getStatus() == Status.RUNNING)
+			pause();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		File file = fileChooser.showOpenDialog(myStage);
@@ -150,6 +153,23 @@ public class CellSocietyGUI {
 			e.printStackTrace();
 		}
 
+	}
+	protected void openModelConfig(String name){
+		if(myAnimation.getStatus() == Status.RUNNING)
+			pause();
+		Dialog dialog = Dialog.getDialog(name);
+		dialog.showAndWait().ifPresent(map -> {
+			try {
+				if (myManager.loadModelConfig(map)) {
+					myButtons.get("Start").setDisable(false);
+					myButtons.get("Reset").setDisable(false);
+					myButtons.get("Step").setDisable(false);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 
 	public void start() {
@@ -299,4 +319,3 @@ public class CellSocietyGUI {
 		return GRID_MARGIN;
 	}
 }
-
