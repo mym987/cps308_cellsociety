@@ -33,7 +33,7 @@ public class SaxParser {
 		return myModelConfig != null && myCells != null;
 	}
 
-	public Model getModel() {
+	public Model getModel() throws Exception {
 		if (myModelConfig == null || myCells == null)
 			return null;
 		String name = myModelConfig.get("name");

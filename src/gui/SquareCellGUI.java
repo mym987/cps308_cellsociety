@@ -14,8 +14,8 @@ public class SquareCellGUI extends CellGUI {
 
 	public SquareCellGUI(CellSocietyGUI CSGUI, Location loc) {
 		super(CSGUI);
-		myCellWidth = CSGUI.getGridWidth() / loc.getNumCols();
-		myCellHeight = CSGUI.getGridHeight() / loc.getWidth();
+		myCellWidth = CSGUI.getGridWidth() / loc.getWidth();
+		myCellHeight = CSGUI.getGridHeight() / loc.getHeight();
 		myShape = createRectangle(loc);
 		addShapeToScreen();
 	}

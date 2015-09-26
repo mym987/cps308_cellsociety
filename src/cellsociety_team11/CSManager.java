@@ -1,19 +1,9 @@
 package cellsociety_team11;
 
 import java.io.File;
+import java.util.Map;
 
 import gui.CellSocietyGUI;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Model;
 import model.SaxParser;
 
@@ -22,6 +12,7 @@ public class CSManager {
 	private CellSocietyGUI myCsGui;
 	private SaxParser myParser;
 	private Model myModel;
+	private Map<String,String> myModelConfigMap;
 	
 	public CSManager(CellSocietyGUI csGui){
 		myCsGui = csGui;
@@ -34,25 +25,59 @@ public class CSManager {
 	}
 	
 	public boolean reset(){
-		if (myModel != null)
-			myModel.clear();
-		return createModel();
+		clear();
+		if(myModelConfigMap == null)
+			return createModelFromXML();
+		else{
+			try {
+				return createModelFromMap(myModelConfigMap);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+	}
+
+	
+	private boolean createModelFromXML() {
+		try {
+			myModel = myParser.getModel();
+			return myModel != null;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
-	private boolean createModel() {
-		myModel = myParser.getModel();
-		return myModel != null;
-	}
-	
-	public boolean loadXML(File file) throws Exception{
-		if (myModel != null)
-			myModel.clear();
-		if (file != null && myParser.initialize(file)) {
-			return createModel();
+	private boolean createModelFromMap(Map<String,String> map) throws Exception{
+		String name = map.get("name");
+		Model model = Model.getModel(name, myCsGui);
+		if (model != null) {
+			model.initialize(map);
+			if(model.getCells()!=null){
+				myModel=model;
+				myModelConfigMap = map; //store the map for future reset()
+				return true;
+			}
 		}
 		return false;
 	}
-
 	
-
+	public void clear(){
+		if (myModel != null)
+			myModel.clear();
+	}
+	
+	public boolean loadXML(File file) throws Exception{
+		clear();
+		if (file != null && myParser.initialize(file)) {
+			myModelConfigMap = null;
+			return createModelFromXML();
+		}
+		return false;
+	}
+	
+	public boolean loadModelConfig(Map<String,String> map)throws Exception{
+		clear();
+		if(!map.containsKey("name"))return false;
+		return createModelFromMap(map);
+	}
 }

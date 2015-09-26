@@ -34,7 +34,7 @@ public class Location {
 		return myWidth;
 	}
 	
-	public int getNumCols(){
+	public int getHeight(){
 		return myHeight;
 	}
 

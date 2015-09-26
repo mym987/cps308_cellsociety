@@ -1,6 +1,9 @@
 
 package gui;
 
+import java.util.Map;
+import java.util.Optional;
+
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -37,8 +40,35 @@ public class MenuPanel extends MenuBar {
 		return menu;
 	}
 	
-	private Menu modelMenu(){
+	private Menu modelMenu() {
 		Menu menu = new Menu("New Model");
+		MenuItem gol = new MenuItem("Game of Live Model");
+		gol.setOnAction(e -> {
+			myGui.openModelConfig("GOLModel");
+		});
+		MenuItem fire = new MenuItem("Fire Spreading Model");
+		fire.setOnAction(e -> {
+			myGui.openModelConfig("FireModel");
+		});
+		MenuItem pred = new MenuItem("Predator-prey Model");
+		pred.setOnAction(e -> {
+			myGui.openModelConfig("PredModel");
+		});
+		MenuItem seg = new MenuItem("Segregation Model");
+		seg.setOnAction(e -> {
+			myGui.openModelConfig("SegModel");
+		});
+		MenuItem ant = new MenuItem("Foraging Ants Model");
+		ant.setDisable(true);
+		ant.setOnAction(e -> {
+			myGui.openModelConfig("AntModel");
+		});
+		MenuItem sugar = new MenuItem("Sugarscape Model");
+		sugar.setDisable(true);
+		sugar.setOnAction(e -> {
+			myGui.openModelConfig("SugarModel");
+		});
+		menu.getItems().addAll(gol,fire,pred,seg,ant,sugar);
 		return menu;
 	}
 	
