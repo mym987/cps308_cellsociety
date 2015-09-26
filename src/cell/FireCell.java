@@ -16,7 +16,7 @@ public class FireCell extends AbstractCell{
 	private static final int BURN_STATE = 2;
 	private static final int NUM_STATES = 3;
 	
-	private double myProbCatchFire = 0.5;
+	private double myProbCatchFire;
 
 	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);

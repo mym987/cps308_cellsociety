@@ -7,7 +7,7 @@ import java.util.Set;
 import location.Location;
 import cell.Cell;
 
-public class FireGrid extends SquareGrid{
+public class FireGrid extends Grid{
 
 	public FireGrid(int width, int height, Set<Cell> cells) {
 		super(width, height, cells);

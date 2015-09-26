@@ -9,40 +9,47 @@ import state.State;
 import state.SugarState;
 
 public class SugarCell extends AbstractCell{
-	private static final int PATCH_STATE_0 = 0;
-	private static final int PATCH_STATE_1 = 1;
-	private static final int PATCH_STATE_2 = 2;
-	private static final int PATCH_STATE_3 = 3;
-	private static final int PATCH_STATE_4 = 4;
-	private static final int NUM_STATES = 5;
+//	private static final int PATCH_STATE_0 = 0;
+//	private static final int PATCH_STATE_1 = 1;
+//	private static final int PATCH_STATE_2 = 2;
+//	private static final int PATCH_STATE_3 = 3;
+//	private static final int PATCH_STATE_4 = 4;
+//	private static final int NUM_STATES = 5;
 	
 	private static final int NO_AGENT_STATE = 0;
 	private static final int AGENT_STATE = 1;
 	
-	private static final int MAX_SUGAR_CAPACITY = 4;		// Doesn't this need to be set by the XML file?
 	private static final int SUGAR_GROWBACK_RATE = 1;
 	//private static final int SUGAR_GROWBACK_INTERVAL = 1;
 	
 	private SugarState mySugarState;
 	private int myAgentState;
 	
+	private int myMaxSugarCapacity;
+	
 	private int myPatchAmntSugar;
-	private int myAgentAmntSugar;  //arbitrary number
-	private int myAgentSugarMetabolism = 1;
-	//private int myAgentVision = 1; 
+	private int myAgentAmntSugar = 5;  //default value
+	private int myAgentSugarMetabolism = 1; //default value
+	private int myAgentVision = 1 ; //default value
 	
 	
 
 	public SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
-		super(s, NUM_STATES, l, CSGUI);
-		
-		setPatchAmntSugar(s.getStateInt());
+		super(s, l, CSGUI);
+		//setPatchAmntSugar(s.getStateInt());
 		
 		mySugarState = (SugarState) s;
 		myAgentState = mySugarState.getAgent();
+	}
+	
+	public void setParameters(int agentVision, int agentSugar, int agentSugarMetabolism, int maxSugarCapacity){
+		myAgentVision = agentVision;
 		if (myAgentState == AGENT_STATE){
-			setAgentAmntSugar(5);
+			setAgentAmntSugar(agentSugar);
 		}
+		myAgentSugarMetabolism = agentSugarMetabolism;
+		myMaxSugarCapacity = maxSugarCapacity;
+		setPatchAmntSugar(myMaxSugarCapacity);
 	}
 	
 	private int getPatchAmntSugar(){
@@ -64,7 +71,7 @@ public class SugarCell extends AbstractCell{
 	@Override
 	public void determineNextState() {
 		if (myAgentState == AGENT_STATE) {
-			for(int i=MAX_SUGAR_CAPACITY; i>=0; i--){
+			for(int i=myMaxSugarCapacity; i>=0; i--){
 				List<Cell> neighborsInState = getNeighborsInStateInt(i);
 				if (!neighborsInState.isEmpty()){
 					SugarCell chosenCell = (SugarCell) findClosestCell(neighborsInState);
@@ -77,7 +84,7 @@ public class SugarCell extends AbstractCell{
 			}	
 		}
 		
-		if (myPatchAmntSugar != MAX_SUGAR_CAPACITY){
+		if (myPatchAmntSugar != myMaxSugarCapacity){
 			setPatchAmntSugar(getPatchAmntSugar() + SUGAR_GROWBACK_RATE);
 		}
 	}
