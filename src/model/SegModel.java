@@ -16,7 +16,7 @@ import gui.CellSocietyGUI;
 
 public class SegModel extends AbstractModel {
 	
-	private double mySimilarity = 0.7;
+	private double mySimilarity = 0.7; //default value
 	private static String STATE_NAMES[] = {"Empty", "Blue", "Yellow"};
 
 	public SegModel(CellSocietyGUI csGui) {

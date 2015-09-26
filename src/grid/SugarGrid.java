@@ -7,7 +7,7 @@ import java.util.Set;
 import location.Location;
 import cell.Cell;
 
-public class SugarGrid extends SquareGrid{
+public class SugarGrid extends Grid{
 
 	public SugarGrid(int width, int height, Set<Cell> cells) {
 		super(width, height, cells);
@@ -57,6 +57,12 @@ public class SugarGrid extends SquareGrid{
 			neighbors.add(getCell(loc));
 		});
 		return neighbors;
+	}
+
+	@Override
+	public List<Location> getAdjacentLoc(Location loc) {  //will never be used in SugarGrid
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

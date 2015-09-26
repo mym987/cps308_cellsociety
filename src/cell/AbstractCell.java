@@ -24,6 +24,12 @@ public abstract class AbstractCell implements Cell{
 		myNumStates = numStates;
 	}
 	
+	AbstractCell(State s,Location l, CellSocietyGUI CSGUI) {
+		myState = s;
+		myLoc = l;
+		myCSGUI = CSGUI;
+	}
+	
 	protected void addClickListener() {
 		myCellGUI.addClickListener(e->incrementState());
 	}
@@ -48,9 +54,13 @@ public abstract class AbstractCell implements Cell{
 		return myLoc;
 	}
 
-	@Override
+	
 	public void setNeighborCells(List<Cell> neighbors) {
 		myNeighborCells = neighbors;
+	}
+	
+	public List<Cell> getNeighborCells() {
+		return myNeighborCells;
 	}
 
 	protected List<Cell> getNeighborsInState(State s) {
