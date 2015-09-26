@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -29,8 +30,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class CellSocietyGUI {
-	private static final int XSIZE = 1000;
-	private static final int YSIZE = 800;
+	private static final int XSIZE = 800;
+	private static final int YSIZE = 600;
 	private static final String[] BUTTON_NAMES = { "LoadXML", "Start", "Pause", "Reset", "Step", " fps" };
 	private static final int FRAMES_PER_SECOND = 10;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -65,20 +66,28 @@ public class CellSocietyGUI {
 		Scene scene = init(XSIZE, YSIZE);
 		stage.setScene(scene);
 		stage.setTitle(TITLE);
+		
 		addButtons();
 		addGraph();
 		createGridArea();
-		stage.show();
+		MenuPanel menu = new MenuPanel(this);
+		menu.prefWidthProperty().bind(stage.widthProperty());
+		myRoot.getChildren().add(menu);
+		
 		createAnimation();
+		stage.show();
+		
+	}
+	
+	protected Map<String, Button> getReadOnlyButtons(){
+		return Collections.unmodifiableMap(myButtons);
 	}
 
-	public Scene init(int width, int height) {
+	private Scene init(int width, int height) {
 		myWindowWidth = width;
 		myWindowHeight = height;
-
 		myRoot = new Group();
-		myScene = new Scene(myRoot, width, height, Color.WHITE);
-
+		myScene = new Scene(myRoot, width, height, Color.AZURE);
 		return myScene;
 	}
 
@@ -97,7 +106,7 @@ public class CellSocietyGUI {
 	private void addButtons() {
 		myButtons = new HashMap<>(BUTTON_NAMES.length);
 		EventHandler<ActionEvent>[] events = new EventHandler[5];
-		events[0] = (e) -> loadXML();
+		events[0] = (e) -> openXML();
 		events[1] = (e) -> start();
 		events[2] = (e) -> pause();
 		events[3] = (e) -> reset();
@@ -123,7 +132,7 @@ public class CellSocietyGUI {
 		myAnimation.getKeyFrames().add(frame);
 	}
 
-	public void loadXML() {
+	protected void openXML() {
 		myAnimation.pause(); // don't use pause() here, pause() also changes button states
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
@@ -143,15 +152,19 @@ public class CellSocietyGUI {
 	}
 
 	public void start() {
-		myButtons.get("Start").setDisable(true);
-		myButtons.get("Pause").setDisable(false);
-		myAnimation.play();
+		if(myAnimation!=null){
+			myButtons.get("Start").setDisable(true);
+			myButtons.get("Pause").setDisable(false);
+			myAnimation.play();
+		}
 	}
 
 	public void pause() {
-		myButtons.get("Pause").setDisable(true);
-		myButtons.get("Start").setDisable(false);
-		myAnimation.pause();
+		if(myAnimation!=null){
+			myButtons.get("Pause").setDisable(true);
+			myButtons.get("Start").setDisable(false);
+			myAnimation.pause();
+		}
 	}
 
 	public void reset() {
@@ -159,7 +172,8 @@ public class CellSocietyGUI {
 		myManager.reset();
 	}
 	
-	private void step(){
+	public void step(){
+		if (myAnimation == null) return;
 		if (myAnimation.getStatus() == Status.RUNNING){
 			pause();
 			myManager.step();
@@ -284,3 +298,4 @@ public class CellSocietyGUI {
 		return GRID_MARGIN;
 	}
 }
+

@@ -1,32 +1,78 @@
+
 package gui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.KeyCombination;
 
-public class MenuPanel extends HBox {
+public class MenuPanel extends MenuBar {
+	
+	private CellSocietyGUI myGui;
 
-	public MenuPanel(){
-        // create buttons, with their associated actions
-        // old style way to do set up callback (anonymous class)
-        myBackButton = makeButton("BackCommand", new EventHandler<ActionEvent>() {
-            @Override      
-            public void handle (ActionEvent event) {       
-                back();        
-            }      
-        });
-        result.getChildren().add(myBackButton);
-        // new style way to do set up callback (lambdas)
-        myNextButton = makeButton("NextCommand", event -> next());
-        result.getChildren().add(myNextButton);
-        myHomeButton = makeButton("HomeCommand", event -> home());
-        result.getChildren().add(myHomeButton);
-        // if user presses button or enter in text field, load/show the URL
-        EventHandler<ActionEvent> showHandler = new ShowPage();
-        result.getChildren().add(makeButton("GoCommand", showHandler));
-        myURLDisplay = makeInputField(40, showHandler);
-        result.getChildren().add(myURLDisplay);
+	public MenuPanel(CellSocietyGUI csGui){
+        myGui = csGui;
+        getMenus().addAll(fileMenu(), modelMenu(), controlMenu(),settingMenu());
+	}
+	
+	private Menu fileMenu() {
+		Menu menu = new Menu("File");
+		
+		
+		MenuItem save = new MenuItem("Save XML");
+		save.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+		save.setOnAction(e->{});
+		
+		MenuItem open = new MenuItem("Open XML");
+		open.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+		open.setOnAction(e->{myGui.openXML();});
+		
+		MenuItem exit = new MenuItem("Exit");
+		exit.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
+		exit.setOnAction(e->{System.exit(0);});
+		
+		menu.getItems().addAll(save, open, new SeparatorMenuItem(), exit);
+		
+		return menu;
+	}
+	
+	private Menu modelMenu(){
+		Menu menu = new Menu("New Model");
+		return menu;
+	}
+	
+	private Menu controlMenu(){
+		Menu menu = new Menu("Control");
+		
+		MenuItem start = new MenuItem("Start");
+		start.disableProperty().bind(myGui.getReadOnlyButtons().get("Start").disabledProperty());
+		start.setAccelerator(KeyCombination.keyCombination("Ctrl+7"));
+		start.setOnAction(e->{myGui.start();});
+		
+		MenuItem pause = new MenuItem("Pause");
+		pause.disableProperty().bind(myGui.getReadOnlyButtons().get("Pause").disabledProperty());
+		pause.setAccelerator(KeyCombination.keyCombination("Ctrl+8"));
+		pause.setOnAction(e->{myGui.pause();});
+		
+		MenuItem reset = new MenuItem("Reset");
+		reset.disableProperty().bind(myGui.getReadOnlyButtons().get("Reset").disabledProperty());
+		reset.setAccelerator(KeyCombination.keyCombination("Ctrl+9"));
+		reset.setOnAction(e->{myGui.reset();});
+		
+		MenuItem step = new MenuItem("Step");
+		step.disableProperty().bind(myGui.getReadOnlyButtons().get("Step").disabledProperty());
+		step.setAccelerator(KeyCombination.keyCombination("Ctrl+0"));
+		step.setOnAction(e->{myGui.step();});
+		
+		menu.getItems().addAll(start,pause,reset,step);
+		return menu;
+	}
+	
+	private Menu settingMenu(){
+		Menu menu = new Menu("Settings");
+		return menu;
 	}
 
 }
+
