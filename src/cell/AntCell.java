@@ -10,7 +10,6 @@ import state.AntState;
 import state.State;
 
 public class AntCell extends AbstractCell{
-	private static final int CAPACITY = 10;
 	private static final int MAX_HOME_PHEROMONE = 10;
 	private static final int MAX_FOOD_PHEROMONE = 10;
 	
@@ -24,19 +23,26 @@ public class AntCell extends AbstractCell{
 	
 	AntState myAntState;
 	
+	private int myEvaporationRate;
+	private int myDiffusionRate;
+	
 	private int myFoodPheromone;
 	private int myHomePheromone;
 	private boolean myHasFoodItem;
 
 	AntCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
-		// TODO Auto-generated constructor stub
 		myAntState = (AntState) s;
 		
 		myFoodPheromone = 0;
 		myHomePheromone = 0;
 		
 		myHasFoodItem = false;
+	}
+	
+	public void setParameters(int evaporationRate, int diffusionRate){
+		myEvaporationRate = evaporationRate;
+		myDiffusionRate = diffusionRate;
 	}
 	
 	private void setMyHasFoodItem(boolean b){
@@ -67,6 +73,22 @@ public class AntCell extends AbstractCell{
 	
 	@Override
 	public void determineNextState() {
+		//evaporation
+		int foodPheromoneAfterEvap = this.getMyFoodPheromone() - (this.getMyFoodPheromone()*myEvaporationRate);
+		if(foodPheromoneAfterEvap > 0){
+			this.setMyFoodPheromone(foodPheromoneAfterEvap);
+		}else{
+			this.setMyFoodPheromone(0);
+		}
+		
+		int homePheromoneAfterEvap = this.getMyHomePheromone() - (this.getMyHomePheromone()*myEvaporationRate);
+		if(homePheromoneAfterEvap > 0){
+			this.setMyFoodPheromone(homePheromoneAfterEvap);
+		}else{
+			this.setMyHomePheromone(0);
+		}
+		
+		
 		if(this.getMyHasFoodItem() == false){
 			antFindFoodSource();	
 		}else{
@@ -91,8 +113,10 @@ public class AntCell extends AbstractCell{
 			}
 			if(maxPheromone > 0){
 				//drop home pheromones on current state
-				dropHomePheromones(chosenCellMaxPheromone);
+				//dropHomePheromones(chosenCellMaxPheromone, neighbors);
+				dropPheromones(chosenCellMaxPheromone, neighbors, NEST_STATE);
 				this.getState().setNextState(HOME_PHEROMONE_STATE);  //check this
+				
 				
 				AntState prevCellState = (AntState) this.getState();
 				prevCellState.setContainsAnt(false);
@@ -129,7 +153,9 @@ public class AntCell extends AbstractCell{
 			}
 			if(maxPheromone > 0){
 				//drop food pheromones on current state
-				dropFoodPheromones(chosenCellMaxPheromone);
+				//dropFoodPheromones(chosenCellMaxPheromone, neighbors);
+				dropPheromones(chosenCellMaxPheromone, neighbors, FOOD_SOURCE_STATE);
+				
 				this.getState().setNextState(FOOD_PHEROMONE_STATE);  //check this
 
 				AntState prevCellState = (AntState) this.getState();
@@ -152,31 +178,96 @@ public class AntCell extends AbstractCell{
 	}
 	
 	
-	public void dropHomePheromones(AntCell maxPheromoneCell){
-		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == NEST_STATE){
-			setMyHomePheromone(MAX_HOME_PHEROMONE);
+	
+	public void dropPheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors, int state){
+		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == state){
+			if(state == NEST_STATE) setMyHomePheromone(MAX_HOME_PHEROMONE);
+			else setMyFoodPheromone(MAX_FOOD_PHEROMONE);
 		}else{
-			int maxHomePheromones = maxPheromoneCell.getMyHomePheromone();
-			int des = maxHomePheromones-2;
-			int d = des - this.getMyHomePheromone();
-			if(d > 0){
-				this.setMyHomePheromone(d);
+			if(state == NEST_STATE){ 
+				int maxHomePheromones = maxPheromoneCell.getMyHomePheromone();
+				int des = maxHomePheromones-2;
+				int d = des - this.getMyHomePheromone();
+				if(d > 0){
+					this.setMyHomePheromone(getMyHomePheromone() + d);
+					
+					//diffusion -- might want to check if this works correctly
+					for(int i=0; i<neighbors.size(); i++) {
+						AntCell chosenCell = (AntCell) neighbors.get(i);
+						int chosenHomePheromone = chosenCell.getMyHomePheromone();
+						
+						chosenCell.setMyHomePheromone(chosenHomePheromone + (d * myDiffusionRate));
+						chosenCell.getState().setNextState(HOME_PHEROMONE_STATE);
+					}
+				}
+				
+			}else{
+				int maxFoodPheromones = maxPheromoneCell.getMyFoodPheromone();
+				int des = maxFoodPheromones-2;
+				int d = des - this.getMyFoodPheromone();
+				if(d > 0){
+					this.setMyFoodPheromone(getMyFoodPheromone() + d);
+					
+					//diffusion -- might want to check if this works correctly
+					for(int i=0; i<neighbors.size(); i++) {
+						AntCell chosenCell = (AntCell) neighbors.get(i);
+						int chosenFoodPheromone = chosenCell.getMyFoodPheromone();
+						
+						chosenCell.setMyFoodPheromone(chosenFoodPheromone + (d * myDiffusionRate));
+						chosenCell.getState().setNextState(FOOD_PHEROMONE_STATE);
+					}
+					
+				}
 			}
+			
 		}
 	}
 	
-	public void dropFoodPheromones(AntCell maxPheromoneCell){
-		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == FOOD_SOURCE_STATE){
-			setMyFoodPheromone(MAX_FOOD_PHEROMONE);
-		}else{
-			int maxFoodPheromones = maxPheromoneCell.getMyFoodPheromone();
-			int des = maxFoodPheromones-2;
-			int d = des - this.getMyFoodPheromone();
-			if(d > 0){
-				this.setMyFoodPheromone(d);
-			}
-		}
-	}
+	
+//	public void dropHomePheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors){
+//		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == NEST_STATE){
+//			setMyHomePheromone(MAX_HOME_PHEROMONE);
+//		}else{
+//			int maxHomePheromones = maxPheromoneCell.getMyHomePheromone();
+//			int des = maxHomePheromones-2;
+//			int d = des - this.getMyHomePheromone();
+//			if(d > 0){
+//				this.setMyHomePheromone(d);
+//				
+//				//diffusion -- might want to check if this works correctly
+//				for(int i=0; i<neighbors.size(); i++) {
+//					AntCell chosenCell = (AntCell) neighbors.get(i);
+//					int chosenHomePheromone = chosenCell.getMyHomePheromone();
+//					
+//					chosenCell.setMyHomePheromone(chosenHomePheromone + (d * myDiffusionRate));
+//					chosenCell.getState().setNextState(HOME_PHEROMONE_STATE);
+//				}
+//			}
+//		}
+//	}
+//	
+//	public void dropFoodPheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors){
+//		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == FOOD_SOURCE_STATE){
+//			setMyFoodPheromone(MAX_FOOD_PHEROMONE);
+//		}else{
+//			int maxFoodPheromones = maxPheromoneCell.getMyFoodPheromone();
+//			int des = maxFoodPheromones-2;
+//			int d = des - this.getMyFoodPheromone();
+//			if(d > 0){
+//				this.setMyFoodPheromone(d);
+//				
+//				//diffusion -- might want to check if this works correctly
+//				for(int i=0; i<neighbors.size(); i++) {
+//					AntCell chosenCell = (AntCell) neighbors.get(i);
+//					int chosenFoodPheromone = chosenCell.getMyFoodPheromone();
+//					
+//					chosenCell.setMyFoodPheromone(chosenFoodPheromone + (d * myDiffusionRate));
+//					chosenCell.getState().setNextState(FOOD_PHEROMONE_STATE);
+//				}
+//				
+//			}
+//		}
+//	}
 	
 	
 	@Override
