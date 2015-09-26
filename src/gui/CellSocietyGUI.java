@@ -77,6 +77,7 @@ public class CellSocietyGUI {
 		createAnimation();
 		stage.show();
 		
+		
 	}
 	
 	protected Map<String, Button> getReadOnlyButtons(){

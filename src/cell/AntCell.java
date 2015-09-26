@@ -23,6 +23,9 @@ public class AntCell extends AbstractCell{
 	
 	AntState myAntState;
 	
+//	private int myEvaporationRate;
+//	private int myDiffusionRate;
+	
 	private int myFoodPheromone;
 	private int myHomePheromone;
 	private boolean myHasFoodItem;
@@ -36,6 +39,11 @@ public class AntCell extends AbstractCell{
 		
 		myHasFoodItem = false;
 	}
+	
+//	public void setParameters(int evaporationRate, int diffusionRate){
+//		myEvaporationRate = evaporationRate;
+//		myDiffusionRate = diffusionRate;
+//	}
 	
 	private void setMyHasFoodItem(boolean b){
 		myHasFoodItem = b;
