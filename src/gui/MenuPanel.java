@@ -1,4 +1,3 @@
-
 package gui;
 
 import javafx.scene.control.Menu;

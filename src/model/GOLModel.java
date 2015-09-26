@@ -1,3 +1,4 @@
+
 package model;
 
 import java.util.HashMap;
@@ -94,3 +95,4 @@ public class GOLModel extends AbstractModel {
 		return stateMap;
 	}
 }
+

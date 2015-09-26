@@ -39,3 +39,4 @@ public class PredDialog extends Dialog {
 	}
 
 }
+

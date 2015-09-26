@@ -331,4 +331,3 @@ public class CellSocietyGUI {
 		return GRID_MARGIN;
 	}
 }
-
