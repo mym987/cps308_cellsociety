@@ -51,7 +51,7 @@ public abstract class Dialog extends javafx.scene.control.Dialog<Map<String, Str
 		addTexts();
 		
 		Node okButton = getDialogPane().lookupButton(ok);
-		okButton.setDisable(true);
+		okButton.setDisable(!validate());
 		
 		getDialogPane().setContent(myGrid);
 		
