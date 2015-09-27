@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import gui.CellGUI;
 import gui.CellSocietyGUI;
 import location.Location;
 import state.AntState;
@@ -32,6 +33,8 @@ public class AntCell extends AbstractCell{
 
 	AntCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
+		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
 		myAntState = (AntState) s;
 		
 		myFoodPheromone = 0;
@@ -223,50 +226,5 @@ public class AntCell extends AbstractCell{
 		}
 	}
 	
-	
-//	public void dropHomePheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors){
-//		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == NEST_STATE){
-//			setMyHomePheromone(MAX_HOME_PHEROMONE);
-//		}else{
-//			int maxHomePheromones = maxPheromoneCell.getMyHomePheromone();
-//			int des = maxHomePheromones-2;
-//			int d = des - this.getMyHomePheromone();
-//			if(d > 0){
-//				this.setMyHomePheromone(d);
-//				
-//				//diffusion -- might want to check if this works correctly
-//				for(int i=0; i<neighbors.size(); i++) {
-//					AntCell chosenCell = (AntCell) neighbors.get(i);
-//					int chosenHomePheromone = chosenCell.getMyHomePheromone();
-//					
-//					chosenCell.setMyHomePheromone(chosenHomePheromone + (d * myDiffusionRate));
-//					chosenCell.getState().setNextState(HOME_PHEROMONE_STATE);
-//				}
-//			}
-//		}
-//	}
-//	
-//	public void dropFoodPheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors){
-//		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == FOOD_SOURCE_STATE){
-//			setMyFoodPheromone(MAX_FOOD_PHEROMONE);
-//		}else{
-//			int maxFoodPheromones = maxPheromoneCell.getMyFoodPheromone();
-//			int des = maxFoodPheromones-2;
-//			int d = des - this.getMyFoodPheromone();
-//			if(d > 0){
-//				this.setMyFoodPheromone(d);
-//				
-//				//diffusion -- might want to check if this works correctly
-//				for(int i=0; i<neighbors.size(); i++) {
-//					AntCell chosenCell = (AntCell) neighbors.get(i);
-//					int chosenFoodPheromone = chosenCell.getMyFoodPheromone();
-//					
-//					chosenCell.setMyFoodPheromone(chosenFoodPheromone + (d * myDiffusionRate));
-//					chosenCell.getState().setNextState(FOOD_PHEROMONE_STATE);
-//				}
-//				
-//			}
-//		}
-//	}
 
 }

@@ -56,6 +56,9 @@ public class CellSocietyGUI {
 	private static final double INCREMENT = 0.5;
 
 	protected Stage myStage;
+	protected String myCellType = "square";
+	protected String myGridType = "square";
+	protected String myWrapType = "false";
 	private Scene myScene;
 	private Group myRoot;
 	private Timeline myAnimation;
@@ -166,6 +169,10 @@ public class CellSocietyGUI {
 		myAnimation = new Timeline();
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
 		myAnimation.getKeyFrames().add(frame);
+	}
+	
+	public void setOutline(boolean value){
+		myManager.setOutline(value);
 	}
 	
 	protected void saveXML(){
@@ -504,5 +511,13 @@ public class CellSocietyGUI {
 	 */
 	public double getGridY() {
 		return GRID_MARGIN;
+	}
+	
+	public String getGridType(){
+		return myGridType;
+	}
+	
+	public String getWrapType(){
+		return myWrapType;
 	}
 }
