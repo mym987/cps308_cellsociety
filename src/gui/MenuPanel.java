@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -95,8 +96,21 @@ public class MenuPanel extends MenuBar {
 	
 	private Menu settingMenu(){
 		Menu menu = new Menu("Settings");
+		CheckMenuItem gridLine = new CheckMenuItem("Enable Gridline");
+		gridLine.setSelected(true);
+		gridLine.disableProperty().bind(myGui.getReadOnlyButtons().get("Step").disabledProperty());
+		gridLine.selectedProperty().addListener((ov,old_val, new_val)-> {myGui.setOutline(new_val.booleanValue());});
+		
+		Menu shape = new Menu("Shape");
+		CheckMenuItem gridLine = new CheckMenuItem("Enable Gridline");
+		
+		Menu grid = new Menu("Grid Type");
+		
+		    
+		menu.getItems().addAll(gridLine);
 		return menu;
 	}
+	
 
 }
 

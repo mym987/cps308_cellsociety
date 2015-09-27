@@ -6,6 +6,7 @@ import java.util.Random;
 import location.Location;
 import state.FireState;
 import state.State;
+import gui.CellGUI;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 
@@ -20,7 +21,7 @@ public class FireCell extends AbstractCell{
 
 	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
-		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
 		addClickListener();
 	}

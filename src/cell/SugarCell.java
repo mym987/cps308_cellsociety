@@ -1,5 +1,6 @@
 package cell;
 
+import gui.CellGUI;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
 import location.Location;
@@ -16,7 +17,7 @@ public class SugarCell extends AbstractCell {
 
 	public SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, 2, l, CSGUI);
-		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);
 	}
 
