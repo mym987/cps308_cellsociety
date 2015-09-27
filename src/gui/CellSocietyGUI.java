@@ -197,7 +197,7 @@ public class CellSocietyGUI {
 	}
 	
 	private File getDataDirectory(){
-		File file = new File(System.getProperty("user.dir")+"/data");
+		File file = new File(System.getProperty("user.dir")+File.separator+"data");
 		if(!file.exists()){
 			file.mkdirs();
 		}
