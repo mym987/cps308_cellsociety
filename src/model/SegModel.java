@@ -32,7 +32,7 @@ public class SegModel extends AbstractModel {
 	public void step() {
 		Stack<Cell> exchangeList = getDissatisfiedCells();
 		if (myCells != null && !myCells.isEmpty())
-			myDissatisfactionRate = 1 - 100.0 * exchangeList.size() / myCells.size();
+			myDissatisfactionRate = 100 - 100.0 * exchangeList.size() / myCells.size();
 		exchangeList.addAll(getVacentCells());
 		Collections.shuffle(exchangeList);
 

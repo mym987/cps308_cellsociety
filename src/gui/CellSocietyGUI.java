@@ -336,7 +336,7 @@ public class CellSocietyGUI {
 		Status prevStat = myAnimation.getStatus();
 		myAnimation.stop();
 		myAnimation.getKeyFrames().setAll(keyFrame);
-		updateSliderLabel((int) fps + BUTTON_NAMES[5]);
+		updateSliderLabel((int) fps + BUTTON_NAMES[4]);
 		if (prevStat == Status.RUNNING)
 			start();
 	}
