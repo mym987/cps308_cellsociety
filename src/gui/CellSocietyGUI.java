@@ -88,10 +88,20 @@ public class CellSocietyGUI {
 		
 	}
 	
+	/**
+	 * Get a list of buttons
+	 * @return
+	 */
 	protected Map<String, Button> getReadOnlyButtons(){
 		return Collections.unmodifiableMap(myButtons);
 	}
 
+	/**
+	 * Initialize the window
+	 * @param width The width of the window
+	 * @param height The height of the window
+	 * @return the Scene that was initialized
+	 */
 	private Scene init(int width, int height) {
 		myWindowWidth = width;
 		myWindowHeight = height;
@@ -100,18 +110,33 @@ public class CellSocietyGUI {
 		return myScene;
 	}
 
+	/**
+	 * Get the title of the application
+	 * @return The title
+	 */
 	public String getTitle() {
 		return TITLE;
 	}
 
-	public void addToScreen(Node e) {
-		myRoot.getChildren().add(e);
+	/**
+	 * Add a node to the window.
+	 * @param n The node
+	 */
+	public void addToScreen(Node n) {
+		myRoot.getChildren().add(n);
 	}
 
-	public void removeFromScreen(Node e) {
-		myRoot.getChildren().remove(e);
+	/**
+	 * Remove a node from the screen
+	 * @param n The node
+	 */
+	public void removeFromScreen(Node n) {
+		myRoot.getChildren().remove(n);
 	}
 
+	/**
+	 * Add the control buttons to the screen
+	 */
 	private void addButtons() {
 		myButtons = new HashMap<>(BUTTON_NAMES.length);
 		EventHandler<ActionEvent>[] events = new EventHandler[4];
@@ -133,6 +158,9 @@ public class CellSocietyGUI {
 		//myButtons.get("LoadXML").setDisable(false);
 	}
 
+	/**
+	 * Create the animation and timeline.
+	 */
 	private void createAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myManager.step());
 		myAnimation = new Timeline();
@@ -202,6 +230,9 @@ public class CellSocietyGUI {
 		return file;
 	}
 
+	/**
+	 * Parse a new XML file
+	 */
 	protected void openXML() {
 		if(myAnimation.getStatus() == Status.RUNNING)
 			pause();
@@ -225,8 +256,8 @@ public class CellSocietyGUI {
 		} catch (Exception e) {
 			showError("Error!","Failed to load "+file.getName(),e);
 		}
-
 	}
+	
 	protected void openModelConfig(String name){
 		if(myAnimation.getStatus() == Status.RUNNING)
 			pause();
@@ -244,6 +275,9 @@ public class CellSocietyGUI {
 		});
 	}
 
+	/**
+	 * Start animating
+	 */
 	public void start() {
 		if(myAnimation!=null){
 			myButtons.get("Start").setDisable(true);
@@ -252,6 +286,9 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Pause the animation
+	 */
 	public void pause() {
 		if(myAnimation!=null){
 			myButtons.get("Pause").setDisable(true);
@@ -260,11 +297,17 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Reset the game to the original position with the current file
+	 */
 	public void reset() {
 		pause();
 		myManager.reset();
 	}
 	
+	/**
+	 * Step to the next frame in the animation
+	 */
 	public void step(){
 		if (myAnimation == null) return;
 		if (myAnimation.getStatus() == Status.RUNNING){
@@ -275,6 +318,10 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Change the amount of time between frames
+	 * @param fps New FPS of the animation
+	 */
 	public void changeTime(final double fps) {
 		int timerInterval = (int) (1000 / fps);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(timerInterval), e -> myManager.step());
@@ -287,6 +334,13 @@ public class CellSocietyGUI {
 			start();
 	}
 
+	/**
+	 * Create the control buttons and place them on the screen
+	 * @param property The button text
+	 * @param yIndex The index of the button
+	 * @param handler The EventHandler associated with the button
+	 * @return
+	 */
 	public Button createAndPlaceButton(String property, double yIndex, EventHandler<ActionEvent> handler) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
 		String label = property;// myResources.getString(property);
@@ -301,6 +355,12 @@ public class CellSocietyGUI {
 		return button;
 	}
 
+	/**
+	 * Add a slider to the screen
+	 * @param yIndex The index of the node from the top of the screen
+	 * @param fps The default value of the slider
+	 * @return The Slider
+	 */
 	public Slider addSlider(double yIndex, double fps) {
 		Slider slider = new Slider(MIN_FPS, MAX_FPS, fps);
 		slider.setMajorTickUnit(1);
@@ -312,6 +372,11 @@ public class CellSocietyGUI {
 		return slider;
 	}
 
+	/**
+	 * Show the label associated with the slider
+	 * @param text The text to set the label to
+	 * @param yIndex The index from the top of the page of the text
+	 */
 	public void showSliderLabel(String text, double yIndex) {
 		mySliderLabel = new Label();
 		myRoot.getChildren().add(mySliderLabel);
@@ -320,6 +385,10 @@ public class CellSocietyGUI {
 		updateSliderLabel(text);
 	}
 
+	/**
+	 * Updates the text of the slider label
+	 * @param text The text to set the label to
+	 */
 	public void updateSliderLabel(String text) {
 		mySliderLabel.setText(text);
 		mySliderLabel.applyCss();
@@ -328,6 +397,9 @@ public class CellSocietyGUI {
 		mySliderLabel.setLayoutX(xPos);
 	}
 
+	/**
+	 * Add a graph to the button area of the screen
+	 */
 	public void addGraph() {
 		// defining the axes
 		final NumberAxis xAxis = new NumberAxis("Frame Number", 0, GRAPH_X_RANGE, 50);
@@ -346,6 +418,11 @@ public class CellSocietyGUI {
 		addToScreen(myLineChart);
 	}
 
+	/**
+	 * Add a series to the graph
+	 * @param index The series index
+	 * @param name The name of the series
+	 */
 	public void addSeries(int index, String name) {
 		XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
 		series.setName(name);
@@ -354,6 +431,9 @@ public class CellSocietyGUI {
 		mySeriesMap.put(index, series);
 	}
 
+	/**
+	 * Reset the graph and remove all lines and series
+	 */
 	public void resetGraph() {
 		myLineChart.getData().clear();
 		if(!GRAPH_AUTO_RANGE){
@@ -363,6 +443,12 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Add a data point to the graph
+	 * @param xVal The x value of the point
+	 * @param yVal The y value of the point
+	 * @param seriesNum The series number to set the point to
+	 */
 	public void addDataPoint(Number xVal, Number yVal, int seriesNum) {
 		ObservableList<Data<Number, Number>> list = mySeriesMap.get(seriesNum).getData();
 		list.add(new XYChart.Data<Number, Number>(xVal, yVal));
@@ -373,6 +459,9 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Create the grid area and add it to the screen
+	 */
 	public void createGridArea() {
 		Rectangle rect = new Rectangle();
 		rect.setX(GRID_MARGIN);
@@ -385,18 +474,34 @@ public class CellSocietyGUI {
 		addToScreen(rect);
 	}
 
+	/**
+	 * Get the width of the screen
+	 * @return The width
+	 */
 	public double getGridWidth() {
 		return myWindowWidth - GRID_MARGIN * 2 - BUTTON_AREA_WIDTH;
 	}
 
+	/**
+	 * Get the height of the grid
+	 * @return The height
+	 */
 	public double getGridHeight() {
 		return myWindowHeight - GRID_MARGIN * 2;
 	}
 
+	/**
+	 * Get the x coordinate of the grid
+	 * @return
+	 */
 	public double getGridX() {
 		return GRID_MARGIN;
 	}
 
+	/**
+	 * Get the y coordinate of the grid
+	 * @return
+	 */
 	public double getGridY() {
 		return GRID_MARGIN;
 	}
