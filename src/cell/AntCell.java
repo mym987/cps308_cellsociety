@@ -6,6 +6,7 @@ import java.util.Map;
 
 import gui.CellGUI;
 import gui.CellSocietyGUI;
+import gui.SquareCellGUI;
 import location.Location;
 import state.AntState;
 import state.State;
@@ -44,6 +45,10 @@ public class AntCell extends AbstractCell{
 		myHomePheromone = 0;
 		
 		myHasFoodItem = false;
+		
+		myCellGUI = new SquareCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
+		addClickListener();
 	}
 	
 	public void setParameters(double evaporationRate, double diffusionRate){
