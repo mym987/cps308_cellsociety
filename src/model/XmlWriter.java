@@ -24,6 +24,11 @@ public class XmlWriter {
 	private Element myRoot;
 	private Model myModel;
 
+	/**
+	 * Initialize with a model
+	 * @param model
+	 * @throws Exception
+	 */
 	public void init(Model model) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -34,6 +39,13 @@ public class XmlWriter {
 		myDoc.appendChild(myRoot);
 	}
 
+	/**
+	 * Add an attribute to root node
+	 * @param root
+	 * @param name
+	 * @param attr
+	 * @return
+	 */
 	private Element addAttribute(Element root, Object name, Object attr) {
 		Element e = myDoc.createElement(name.toString());
 		e.appendChild(myDoc.createTextNode(attr.toString()));

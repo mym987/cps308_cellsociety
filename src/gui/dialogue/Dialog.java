@@ -18,6 +18,11 @@ public abstract class Dialog extends javafx.scene.control.Dialog<Map<String, Str
 	protected Map<String,TextField> myTexts;
 	protected int myNumEntries;
 	
+	/**
+	 * Get a dialog for model selection
+	 * @param modelName
+	 * @return Dialog
+	 */
 	public static Dialog getDialog(String modelName){
 		switch (modelName) {
 		case "GOLModel":
@@ -36,6 +41,11 @@ public abstract class Dialog extends javafx.scene.control.Dialog<Map<String, Str
 			return null;
 		}
 	}
+	
+	/**
+	 * create a model selection dialog
+	 * @param title
+	 */
 	public Dialog(String title) {
 		setTitle("New "+title);
 		setHeaderText("Parameters for "+title+":");
@@ -74,6 +84,14 @@ public abstract class Dialog extends javafx.scene.control.Dialog<Map<String, Str
 		});
 	}
 	
+	/**
+	 * add a textfield to current model selection dialog
+	 * @param name
+	 * @param label
+	 * @param defaultValue
+	 * @param prompt
+	 * @param range
+	 */
 	protected void addTextField(String name,String label,String defaultValue,String prompt, String range){
 		TextField tf = new TextField(defaultValue);
 		tf.setPromptText(prompt);
@@ -84,13 +102,23 @@ public abstract class Dialog extends javafx.scene.control.Dialog<Map<String, Str
 		myNumEntries++;
 	}
 	
+	/**
+	 * add default textfields
+	 */
 	protected void addTexts(){
 		addTextField("width", "Width:", "10", "Number of Columns", "Integer between 1 and 100");
 		addTextField("height", "Height:", "10", "Number of Rows", "Integer between 1 and 100");
 	}
-	
+	/**
+	 * Validate current input
+	 * @return return if current input is valid
+	 */
 	protected abstract boolean validate();
 	
+	/**
+	 * Get the model name associated with this dialog
+	 * @return a string of model name
+	 */
 	protected abstract String getName();
 
 }

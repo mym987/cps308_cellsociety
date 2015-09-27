@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import gui.CellGUI;
 import gui.CellSocietyGUI;
 import location.Location;
 import state.AntState;
@@ -35,6 +36,9 @@ public class AntCell extends AbstractCell{
 	public AntCell(State s, Location l, CellSocietyGUI CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		myAntState = (AntState) s;
+		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
+		myCellGUI.updateState(s);
+		addClickListener();
 		
 		myFoodPheromone = 0;
 		myHomePheromone = 0;

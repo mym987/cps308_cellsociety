@@ -26,14 +26,14 @@ public class FireCell extends AbstractCell{
 		addClickListener();
 	}
 
-	
+	/**
+	 * Set the probability of catching fire
+	 * @param probCatchFire
+	 */
 	public void setProbCatchFire(double probCatchFire) {
 		myProbCatchFire = probCatchFire;
 	}
 	 
-	/**
-         * Determine the next state for the cell to go to
-         */
 	@Override
 	public void determineNextState() {
 		int numBurningNeighbors = getNeighborsInState(new FireState(BURN_STATE)).size();

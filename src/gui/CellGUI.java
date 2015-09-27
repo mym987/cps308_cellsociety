@@ -46,6 +46,10 @@ public abstract class CellGUI {
 		myShape.setFill(color);
 	}
 	
+	/**
+	 * Set the opacity of the cell to a specified double value
+	 * @param double in range 0.0 to 1.0
+	 */
 	private void setOpacity(double opacity){
 		myShape.setOpacity(opacity);
 	}
