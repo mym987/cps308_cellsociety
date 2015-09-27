@@ -55,12 +55,10 @@ public class MenuPanel extends MenuBar {
 			myGui.openModelConfig("SegModel");
 		});
 		MenuItem ant = new MenuItem("Foraging Ants Model");
-		ant.setDisable(true);
 		ant.setOnAction(e -> {
 			myGui.openModelConfig("AntModel");
 		});
 		MenuItem sugar = new MenuItem("Sugarscape Model");
-		sugar.setDisable(true);
 		sugar.setOnAction(e -> {
 			myGui.openModelConfig("SugarModel");
 		});

@@ -25,11 +25,6 @@ public class SugarModel extends AbstractModel{
 		super(CSGUI);
 	}
 	
-	@Override
-	public void step() {
-		// TODO Auto-generated method stub
-		super.step();
-	}
 	
 	@Override
 	protected void setBasicConfig(Map<String, String> parameters){
@@ -70,6 +65,7 @@ public class SugarModel extends AbstractModel{
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
 		myGrid = new SugarGrid(getWidth(), getHeight(), myCells);
+		myGrid.setNeighbors(myVision);
 	}
 
 	@Override

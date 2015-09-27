@@ -61,6 +61,12 @@ public abstract class Grid {
 			cell.setNeighborCells(getAdjacentCells(cell));
 		});
 	}
+	
+	public void setNeighbors(int radius) {
+		myCells.forEach((loc,cell)->{
+			cell.setNeighborCells(getAdjacentCells(cell,radius));
+		});
+	}
 
 	/**
 	 * Get the locations adjacent to the specified location
@@ -68,6 +74,8 @@ public abstract class Grid {
 	 * @return A List of adjacent locations
 	 */
 	public abstract List<Location> getAdjacentLoc(Location loc);
+	
+	public abstract List<Location> getAdjacentLoc(Location loc,int radius);
 
 	/**
 	 * Get cells adjacent to the specified cell
@@ -77,6 +85,14 @@ public abstract class Grid {
 	public List<Cell> getAdjacentCells(Cell cell) {
 		List<Cell> neighbors = new ArrayList<>();
 		getAdjacentLoc(cell.getLocation()).forEach(loc->{
+			neighbors.add(getCell(loc));
+		});
+		return neighbors;
+	}
+	
+	public List<Cell> getAdjacentCells(Cell cell,int radius) {
+		List<Cell> neighbors = new ArrayList<>();
+		getAdjacentLoc(cell.getLocation(),radius).forEach(loc->{
 			neighbors.add(getCell(loc));
 		});
 		return neighbors;

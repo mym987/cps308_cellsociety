@@ -9,7 +9,6 @@ import location.ToroidalLocation;
 import state.PredState;
 import cell.PredCell;
 import grid.SquareGrid;
-import grid.TriangleGrid;
 import gui.CellSocietyGUI;
 
 public class PredModel extends AbstractModel {
@@ -89,7 +88,7 @@ public class PredModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
-		myGrid = new TriangleGrid(getWidth(), getHeight(), myCells);
+		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors();
 	}
 	
