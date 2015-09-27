@@ -35,6 +35,9 @@ public class SegCell extends AbstractCell {
 	public void determineNextState() {
 	}
 	
+        /**
+         * Determine the next state for the cell to go to
+         */
 	public void determineNextState(State s){
 		myState.setNextState(s.getStateInt());
 	}
