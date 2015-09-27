@@ -11,6 +11,7 @@ import location.ToroidalLocation;
 import state.SegState;
 import cell.Cell;
 import cell.SegCell;
+import grid.Grid;
 import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
@@ -89,7 +90,7 @@ public class SegModel extends AbstractModel {
 		});
 		if (myCells.size() < getWidth() * getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
@@ -117,12 +118,13 @@ public class SegModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x, y, mat[x][y]);
-		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
 	private void addCell(int x, int y, int state) {
-		SegCell cell = new SegCell(new SegState(state), new Location(x, y, myWidth, getHeight()), myCSGUI);
+		Location loc = Location.makeLocation(x, y, getWidth(), getHeight(), myCSGUI);
+		SegCell cell = new SegCell(new SegState(state), loc, myCSGUI);
 		cell.setSimilarity(mySimilarity);
 		myCells.add(cell);
 	}

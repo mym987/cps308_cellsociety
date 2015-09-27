@@ -28,7 +28,7 @@ public abstract class CellGUI {
 		case "hexagon":
 			return new HexagonCellGUI(CSGUI, l);
 		default:
-			return null;
+			return new SquareCellGUI(CSGUI,l);
 		}
 	}
 

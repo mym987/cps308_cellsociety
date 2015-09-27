@@ -57,6 +57,8 @@ public class CellSocietyGUI {
 
 	protected Stage myStage;
 	protected String myCellType = "square";
+	protected String myGridType = "square";
+	protected String myWrapType = "false";
 	private Scene myScene;
 	private Group myRoot;
 	private Timeline myAnimation;
@@ -509,5 +511,13 @@ public class CellSocietyGUI {
 	 */
 	public double getGridY() {
 		return GRID_MARGIN;
+	}
+	
+	public String getGridType(){
+		return myGridType;
+	}
+	
+	public String getWrapType(){
+		return myWrapType;
 	}
 }

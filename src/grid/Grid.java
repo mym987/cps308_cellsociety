@@ -8,12 +8,24 @@ import java.util.Set;
 
 import location.Location;
 import cell.Cell;
+import gui.CellSocietyGUI;
 
 public abstract class Grid {
 	
 	protected int myWidth;		// This should be in squareGrid.  Grid doesn't necessarily have rows and columns
 	protected int myHeight;
 	protected Map<Location, Cell> myCells;
+	
+	public static Grid makeGrid(int width,int height,Set<Cell> cells,CellSocietyGUI csGui){
+		switch (csGui.getGridType()) {
+		case "square":
+			return new SquareGrid(width,height,cells);
+		case "squareCardinal":
+			return new SquareCardinalGrid(width,height,cells);
+		default:
+			return new SquareGrid(width,height,cells);
+		}
+	}
 	
 	/**
 	 * 

@@ -13,6 +13,7 @@ import location.ToroidalLocation;
 import state.SugarState;
 import cell.Cell;
 import cell.SugarCell;
+import grid.Grid;
 import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
@@ -72,7 +73,7 @@ public class SugarModel extends AbstractModel{
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors(myVision);
 	}
 
@@ -104,12 +105,13 @@ public class SugarModel extends AbstractModel{
 				}
 			}
 		}
-		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors(myVision);
 	}
 	
 	private void addCell(int x,int y,int sugar, int max, boolean isAgent){
-		SugarCell cell = new SugarCell(new SugarState(sugar,isAgent), new Location(x,y, getWidth(), getHeight()), myCSGUI);
+		Location loc = Location.makeLocation(x, y, getWidth(), getHeight(), myCSGUI);
+		SugarCell cell = new SugarCell(new SugarState(sugar,isAgent),loc, myCSGUI);
 		cell.setParameters(mySugarGrowBackRate, mySugarGrowBackInterval, myMetabolism, max);
 		myCells.add(cell);
 		if(isAgent)myAgents.add(cell);
