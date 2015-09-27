@@ -11,7 +11,7 @@ public abstract class CellGUI {
 
 	private static final double STROKE_WIDTH = 0.2;
 	
-	CellSocietyGUI myCSGUI;
+	protected CellSocietyGUI myCSGUI;
 	protected double myGridXPos;
 	protected double myGridYPos;
 	protected Shape myShape;

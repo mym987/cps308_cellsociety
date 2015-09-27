@@ -39,8 +39,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class CellSocietyGUI {
-	private static final int XSIZE = 800;
-	private static final int YSIZE = 600;
 	private static final String[] BUTTON_NAMES = { "Start", "Pause", "Reset", "Step", " fps" };
 	private static final int FRAMES_PER_SECOND = 10;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
