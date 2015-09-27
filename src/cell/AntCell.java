@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import gui.CellSocietyGUI;
+import gui.SquareCellGUI;
 import location.Location;
 import state.AntState;
 import state.State;
