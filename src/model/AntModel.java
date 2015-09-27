@@ -28,7 +28,6 @@ public class AntModel extends AbstractModel{
 
 	AntModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -83,23 +82,16 @@ public class AntModel extends AbstractModel{
 		
 		double percentNestWidth = 0.3;
 		int nestWidth = (int) (getWidth()*percentNestWidth);
-		
-		
-		for(int i=0;i<mat.length;i++){
-			Arrays.fill(mat[i], EMPTY_STATE);
-		}
-		
 	
 		int t = myRandom.nextInt(total);
 		int x = t % getWidth(), y = t / getWidth();
 		if(mat[x][y]==EMPTY_STATE){
 			mat[x][y] = NEST_STATE;
 		}
-		
 		int i=0;
 		while(i < numAnts){
 			for(int p=0; p<=nestWidth; p++){
-				if ((x+p) < getWidth()){
+				if ((x+p) < getWidth() && y<getHeight()){
 					if(mat[x+p][y]==EMPTY_STATE){
 						mat[x+p][y] = NEST_STATE;
 					}
@@ -111,13 +103,12 @@ public class AntModel extends AbstractModel{
 			if (y < getHeight()) y++;
 			else break;
 		}
-		
 
 
 		for (int x1 = 0; x1 < mat.length; x1++)
 			for (int y1 = 0; y1 < mat[x1].length; y1++)
 				addCell(x1,y1,mat[x1][y1]);	
-		
+		System.out.println(myCells.size());
 		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}

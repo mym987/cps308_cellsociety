@@ -18,6 +18,10 @@ public class MenuPanel extends MenuBar {
         getMenus().addAll(fileMenu(), modelMenu(), controlMenu(),settingMenu());
 	}
 	
+	/**
+	 * create file menu
+	 * @return menu
+	 */
 	private Menu fileMenu() {
 		Menu menu = new Menu("File");
 		
@@ -39,6 +43,10 @@ public class MenuPanel extends MenuBar {
 		return menu;
 	}
 	
+	/**
+	 * create model menu
+	 * @return menu
+	 */
 	private Menu modelMenu() {
 		Menu menu = new Menu("New Model");
 		MenuItem gol = new MenuItem("Game of Live Model");
@@ -69,6 +77,10 @@ public class MenuPanel extends MenuBar {
 		return menu;
 	}
 	
+	/**
+	 * create control menu
+	 * @return menu
+	 */
 	private Menu controlMenu(){
 		Menu menu = new Menu("Control");
 		
@@ -96,6 +108,10 @@ public class MenuPanel extends MenuBar {
 		return menu;
 	}
 	
+	/**
+	 * create setting menu
+	 * @return menu
+	 */
 	private Menu settingMenu(){
 		Menu menu = new Menu("Settings");
 		CheckMenuItem gridLine = new CheckMenuItem("Enable Gridline");

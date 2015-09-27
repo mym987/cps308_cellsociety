@@ -39,13 +39,6 @@ public class XmlWriter {
 		myDoc.appendChild(myRoot);
 	}
 
-	/**
-	 * Add an attribute to root node
-	 * @param root
-	 * @param name
-	 * @param attr
-	 * @return
-	 */
 	private Element addAttribute(Element root, Object name, Object attr) {
 		Element e = myDoc.createElement(name.toString());
 		e.appendChild(myDoc.createTextNode(attr.toString()));
@@ -76,7 +69,13 @@ public class XmlWriter {
 			addAttributes(addRootElement(cells, "cell"), cell.getAttributes());
 		});
 	}
-
+	
+	/**
+	 * create an xml file in given directory
+	 * @param dir
+	 * @return absolute path name of the file created
+	 * @throws Exception
+	 */
 	public String createXml(File dir) throws Exception {
 		createModel();
 		createCells();
