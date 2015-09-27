@@ -119,25 +119,10 @@ public class SegModel extends AbstractModel {
 		int total = myWidth * myHeight;
 		int numTypeA = (int) (total * pA), numTypeB = (int) (total * pB);
 		int mat[][] = new int[getWidth()][getHeight()];
-
-		int i = 0;
-		while (i < numTypeA) {
-			int t = myRandom.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if (mat[x][y] == EMPTY_STATE) {
-				mat[x][y] = STATE_A;
-				i++;
-			}
-		}
-		i = 0;
-		while (i < numTypeB) {
-			int t = myRandom.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if (mat[x][y] == EMPTY_STATE) {
-				mat[x][y] = STATE_B;
-				i++;
-			}
-		}
+		
+		randomFillMatrix(mat, EMPTY_STATE, STATE_A, numTypeA);
+		randomFillMatrix(mat, EMPTY_STATE, STATE_B, numTypeB);
+		
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x, y, mat[x][y]);

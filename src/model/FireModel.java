@@ -73,24 +73,9 @@ public class FireModel extends AbstractModel {
 		for(int i=0;i<mat.length;i++){
 			Arrays.fill(mat[i], TREE_STATE);
 		}
-		int i = 0;
-		while(i < numBurning){
-			int t = myRandom.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==TREE_STATE){
-				mat[x][y] = FIRE_STATE;
-				i++;
-			}
-		}
-		i = 0;
-		while(i < numEmpty){
-			int t = myRandom.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==TREE_STATE){
-				mat[x][y] = EMPTY_STATE;
-				i++;
-			}
-		}
+		randomFillMatrix(mat, TREE_STATE, FIRE_STATE, numBurning);
+		randomFillMatrix(mat, TREE_STATE, EMPTY_STATE, numEmpty);
+
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	

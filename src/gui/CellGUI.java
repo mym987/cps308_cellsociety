@@ -32,12 +32,17 @@ public abstract class CellGUI {
 		myShape.setFill(color);
 	}
 	
+	private void setOpacity(double opacity){
+		myShape.setOpacity(opacity);
+	}
+	
 	/**
 	 * Update the cell's color to the specified state's color
 	 * @param state The state
 	 */
 	public void updateState(State state) {
 		setColor(state.getColor());
+		setOpacity(state.getOpacity());
 	}
 	
 	/**

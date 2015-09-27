@@ -10,9 +10,6 @@ import state.SugarState;
 
 public class SugarCell extends AbstractCell{
 	
-	private static final int NO_AGENT_STATE = 0;
-	private static final int AGENT_STATE = 1;
-	
 	private static final int SUGAR_GROWBACK_RATE = 1;
 	
 	private SugarState mySugarState;

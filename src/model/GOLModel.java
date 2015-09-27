@@ -64,15 +64,8 @@ public class GOLModel extends AbstractModel {
 		int numLiveCells = (int)(total*percentLive);
 		int mat[][] = new int[getWidth()][getHeight()];
 		
-		int i = 0;
-		while(i < numLiveCells){
-			int t = myRandom.nextInt(total);
-			int x = t % getWidth(), y = t / getWidth();
-			if(mat[x][y]==DEAD_STATE){
-				mat[x][y] = LIVE_STATE;
-				i++;
-			}
-		}
+		randomFillMatrix(mat, DEAD_STATE, LIVE_STATE, numLiveCells);
+
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
