@@ -16,7 +16,7 @@ public class AntState extends AbstractState{
 	private boolean containsAnt;
 	
 
-	AntState(int state) {  
+	public AntState(int state) {  
 		super(state);
 		if(state == NEST_STATE){
 			setContainsAnt(true);

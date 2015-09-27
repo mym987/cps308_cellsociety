@@ -1,5 +1,7 @@
 package cell;
 
+import java.util.Map;
+
 import gui.CellGUI;
 import gui.CellSocietyGUI;
 import gui.SquareCellGUI;
@@ -42,4 +44,11 @@ public class SugarCell extends AbstractCell {
 		}
 	}
 
+	@Override
+	public Map<String, String> getAttributes() {
+		Map<String, String> map = super.getAttributes();
+		map.put("agent", ((SugarState)myState).getAgent()?"1":"0");
+		map.put("max",Integer.toString(myMaxSugar));
+		return map;
+	}
 }

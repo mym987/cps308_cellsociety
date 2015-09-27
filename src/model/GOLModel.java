@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import location.Location;
 import location.ToroidalLocation;
 import state.GOLState;
 import cell.Cell;
@@ -75,7 +76,8 @@ public class GOLModel extends AbstractModel {
 	}
 	
 	private void addCell(int x,int y,int state){
-		Cell cell = new GOLCell(new GOLState(state), new ToroidalLocation(x,y, myWidth, getHeight()), myCSGUI);
+		Location loc = Location.makeLocation(x, y, getWidth(), getHeight(), myCSGUI);
+		Cell cell = new GOLCell(new GOLState(state), loc, myCSGUI);
 		myCells.add(cell);
 	}
 
