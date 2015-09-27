@@ -1,43 +1,35 @@
 # cellsociety
 ###Names
-Mike Ma
-Karen Li
-Cameron Givler
+Mike Ma  
+Karen Li  
+Cameron Givler  
 
 ###Dates
 ####Start Date
-September 10
+September 10  
 
 ###Completion Date
-Spetember 19
+Spetember 27  
 
 ###Roles
-Cameron - GUI
-Mike - XML parser, Models
-Karen - Grid, Cells
+Cameron - GUI  
+Mike - XML parser, Models  
+Karen - Grid, Cells  
 
 ###Main Class
-CellSociety.java
-XMLGenerator also has a main class to generate XML files
+gui/CellSociety.java  
+XMLGenerator can be used to generate XML files - It does not have a GUI component  
 
-###Resource Files
-A compatible XML file:
-
-FireModel_50_50.xml
-
-GOLModel_50_50_1250.xml
-
-PredModel_50_50_500_1750.xml
-
-SegModel_50_50_1125_1125.xml
+###Resource File
+None: You can generate an xml file in the program
 
 ###Known Bugs
-None
+Ant model partially works
 
 ###Instructions
 +Run CellSociety.java
 
-+Load an xml file using the "Load XML" button
++Create a new animation using "new model" button or load an animation from a XML file
 
 +Click "Start" to run the animation
 
@@ -45,9 +37,14 @@ None
 
 +Click "Step" to run the animation step by step
 
++Click file->"save" to save current animation to an xml file
+
++Click "settings" to change global settings of the animation(such as shapes, grid, etc.)
+
 +Also, you can generate more XMLs using xmlFactory/XMLGenerator.java!
 
 ###Extra Features
 XML generator class to automatically generate compatible XML files
+A dialog to interact with user to create a new model
 
 ###Impressions
