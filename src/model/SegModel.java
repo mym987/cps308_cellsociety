@@ -28,14 +28,6 @@ public class SegModel extends AbstractModel {
 	}
 
 	@Override
-	public void setParameters(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		super.setParameters(map);
-		if (map.containsKey("similarity"))
-			mySimilarity = Double.parseDouble(map.get("similarity"));
-	}
-
-	@Override
 	public void step() {
 		Stack<Cell> exchangeList = getDissatisfiedCells();
 		if (myCells != null && !myCells.isEmpty())

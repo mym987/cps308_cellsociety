@@ -40,14 +40,7 @@ public class Location {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(myX);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(myY);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+		return 1003 * myWidth + myHeight;
 	}
 
 	@Override

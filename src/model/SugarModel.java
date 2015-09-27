@@ -1,16 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 
 import location.Location;
 import location.ToroidalLocation;
 import state.SugarState;
 import cell.Cell;
 import cell.SugarCell;
-import grid.SugarGrid;
+import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class SugarModel extends AbstractModel{
@@ -19,10 +22,14 @@ public class SugarModel extends AbstractModel{
 	private int mySugarGrowBackInterval = 1;
 	private int myVision = 5;
 	private int myMetabolism = 5;
+	private int myAgentMaxSugar = 50;
+	
+	private Set<SugarCell> myAgents;
 	
 
 	SugarModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
+		myAgents = new HashSet<>();
 	}
 	
 	
@@ -48,6 +55,7 @@ public class SugarModel extends AbstractModel{
 		Map<Integer, String> map = new HashMap<>();
 		map.put(0, "Agents");
 		map.put(1, "Avg Sugar per Agent");
+		map.put(2, "Avg Sugar per Grid");
 		setupGraph(map);	
 	}
 	
@@ -64,7 +72,7 @@ public class SugarModel extends AbstractModel{
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = new SugarGrid(getWidth(), getHeight(), myCells);
+		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
 		myGrid.setNeighbors(myVision);
 	}
 
@@ -96,11 +104,52 @@ public class SugarModel extends AbstractModel{
 				}
 			}
 		}
+		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid.setNeighbors(myVision);
 	}
 	
 	private void addCell(int x,int y,int sugar, int max, boolean isAgent){
 		SugarCell cell = new SugarCell(new SugarState(sugar,isAgent), new Location(x,y, getWidth(), getHeight()), myCSGUI);
+		cell.setParameters(mySugarGrowBackRate, mySugarGrowBackInterval, myMetabolism, max);
 		myCells.add(cell);
+		if(isAgent)myAgents.add(cell);
+	}
+	
+	@Override
+	public void step() {
+		Set<SugarCell> visited = new HashSet<>();
+		myAgents.forEach(agent->{
+			Map<Integer,List<Cell>> map = new HashMap<>();
+			agent.getNeighborCells().forEach(cell->{
+				if(!visited.contains(cell) && !((SugarState)cell.getState()).getAgent()){
+					int sugar = cell.getState().getStateInt();
+					if(!map.containsKey(sugar))
+						map.put(sugar, new ArrayList<>());
+					map.get(sugar).add(cell);
+				}
+			});
+			List<Cell> list = map.get(Collections.max(map.keySet()));
+			if(!list.isEmpty()){
+				SugarCell cell = (SugarCell)list.get(myRandom.nextInt(list.size()));
+				visited.add(cell);
+				int state = cell.getState().getStateInt()+agent.getState().getStateInt()-myMetabolism;
+				if(state>0){
+					cell.getState().setNextState(new SugarState(state>myAgentMaxSugar?myAgentMaxSugar:state,true));
+				}else{
+					cell.getState().setNextState(0);
+				}
+				agent.getState().setNextState(new SugarState(0, false));
+			}
+		});
+		myAgents.clear();
+		myCells.forEach(cell->{cell.determineNextState();});
+		myCells.forEach(cell->{
+			cell.goToNextState();
+			if(((SugarState)cell.getState()).getAgent())
+				myAgents.add((SugarCell)cell);
+			});
+		myStepNum++;
+		updateGraph();
 	}
 
 	@Override

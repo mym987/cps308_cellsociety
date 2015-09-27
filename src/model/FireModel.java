@@ -24,14 +24,6 @@ public class FireModel extends AbstractModel {
 	public FireModel(CellSocietyGUI csGui) {
 		super(csGui);
 	}
-	
-	@Override
-	public void setParameters(Map<String,String> map){
-		// TODO Auto-generated method stub
-		super.setParameters(map);
-		if(map.containsKey("probCatchFire"))
-			myProbCatchFire = Double.parseDouble(map.get("probCatchFire"));
-	}
 
 	@Override
 	protected void setBasicConfig(Map<String, String> parameters){

@@ -67,8 +67,8 @@ public abstract class AbstractModel implements Model {
 	protected void randomFillMatrix(int[][] mat,int initialState,int finalState, int totalToFill){
 		int i = 0;
 		while(i < totalToFill){
-			int t = myRandom.nextInt(mat.length*mat[0].length);
-			int x = t % mat[0].length, y = t / mat[0].length;
+			int t = myRandom.nextInt(myWidth*myHeight);
+			int x = t % myWidth, y = t / myWidth;
 			if(mat[x][y]==initialState){
 				mat[x][y] = finalState;
 				i++;

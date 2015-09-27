@@ -37,9 +37,9 @@ public class SugarState extends AbstractState{
 	@Override
 	public Color getColor() {
 		if(isAgent)
-			return Color.DARKORANGE;
-		else
 			return Color.RED;
+		else
+			return Color.DARKORANGE;
 	}
 
 }
