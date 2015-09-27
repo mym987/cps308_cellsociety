@@ -88,6 +88,12 @@ public class CellSocietyGUI {
 		return Collections.unmodifiableMap(myButtons);
 	}
 
+	/**
+	 * Initialize the window
+	 * @param width The width of the window
+	 * @param height The height of the window
+	 * @return the Scene that was initialized
+	 */
 	private Scene init(int width, int height) {
 		myWindowWidth = width;
 		myWindowHeight = height;
@@ -96,18 +102,33 @@ public class CellSocietyGUI {
 		return myScene;
 	}
 
+	/**
+	 * Get the title of the application
+	 * @return The title
+	 */
 	public String getTitle() {
 		return TITLE;
 	}
 
-	public void addToScreen(Node e) {
-		myRoot.getChildren().add(e);
+	/**
+	 * Add a node to the window.
+	 * @param n The node
+	 */
+	public void addToScreen(Node n) {
+		myRoot.getChildren().add(n);
 	}
 
-	public void removeFromScreen(Node e) {
-		myRoot.getChildren().remove(e);
+	/**
+	 * Remove a node from the screen
+	 * @param n The node
+	 */
+	public void removeFromScreen(Node n) {
+		myRoot.getChildren().remove(n);
 	}
 
+	/**
+	 * Add the control buttons to the screen
+	 */
 	private void addButtons() {
 		myButtons = new HashMap<>(BUTTON_NAMES.length);
 		EventHandler<ActionEvent>[] events = new EventHandler[5];
@@ -130,6 +151,9 @@ public class CellSocietyGUI {
 		myButtons.get("LoadXML").setDisable(false);
 	}
 
+	/**
+	 * Create the animation and timeline.
+	 */
 	private void createAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myManager.step());
 		myAnimation = new Timeline();
@@ -137,6 +161,9 @@ public class CellSocietyGUI {
 		myAnimation.getKeyFrames().add(frame);
 	}
 
+	/**
+	 * Parse a new XML file
+	 */
 	protected void openXML() {
 		if(myAnimation.getStatus() == Status.RUNNING)
 			pause();
@@ -154,8 +181,8 @@ public class CellSocietyGUI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+	
 	protected void openModelConfig(String name){
 		if(myAnimation.getStatus() == Status.RUNNING)
 			pause();
@@ -174,6 +201,9 @@ public class CellSocietyGUI {
 		});
 	}
 
+	/**
+	 * Start animating
+	 */
 	public void start() {
 		if(myAnimation!=null){
 			myButtons.get("Start").setDisable(true);
@@ -182,6 +212,9 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Pause the animation
+	 */
 	public void pause() {
 		if(myAnimation!=null){
 			myButtons.get("Pause").setDisable(true);
@@ -190,11 +223,17 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Reset the game to the original position with the current file
+	 */
 	public void reset() {
 		pause();
 		myManager.reset();
 	}
 	
+	/**
+	 * Step to the next frame in the animation
+	 */
 	public void step(){
 		if (myAnimation == null) return;
 		if (myAnimation.getStatus() == Status.RUNNING){
@@ -205,6 +244,10 @@ public class CellSocietyGUI {
 		}
 	}
 
+	/**
+	 * Change the amount of time between frames
+	 * @param fps New FPS of the animation
+	 */
 	public void changeTime(final double fps) {
 		int timerInterval = (int) (1000 / fps);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(timerInterval), e -> myManager.step());
@@ -217,6 +260,13 @@ public class CellSocietyGUI {
 			start();
 	}
 
+	/**
+	 * Create the control buttons and place them on the screen
+	 * @param property The button text
+	 * @param yIndex The index of the button
+	 * @param handler The EventHandler associated with the button
+	 * @return
+	 */
 	public Button createAndPlaceButton(String property, double yIndex, EventHandler<ActionEvent> handler) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
 		String label = property;// myResources.getString(property);
@@ -231,6 +281,12 @@ public class CellSocietyGUI {
 		return button;
 	}
 
+	/**
+	 * Add a slider to the screen
+	 * @param yIndex The index of the node from the top of the screen
+	 * @param fps The default value of the slider
+	 * @return The Slider
+	 */
 	public Slider addSlider(double yIndex, double fps) {
 		Slider slider = new Slider(MIN_FPS, MAX_FPS, fps);
 		slider.setMajorTickUnit(1);
