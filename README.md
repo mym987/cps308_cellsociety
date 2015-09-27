@@ -44,6 +44,8 @@ Ant model partially works
 +Also, you can generate more XMLs using xmlFactory/XMLGenerator.java!
 
 ###Extra Features
+You can change the state of a cell by just left clicking on it!  
+
 XML generator class to automatically generate compatible XML files
 A dialog to interact with user to create a new model
 
