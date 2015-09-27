@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +14,30 @@ import grid.SugarGrid;
 import gui.CellSocietyGUI;
 
 public class SugarModel extends AbstractModel{
-	
-	private static String STATE_NAMES[] = {"State 0", "State 1", "State 2", "State 3", "State 4"};
 
 	SugarModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
+	}
+	
+	@Override
+	protected void setBasicConfig(Map<String, String> parameters){
+		super.setBasicConfig(parameters);
+		if(parameters.containsKey("FISH_ENERGY")){
+			int tmp = Integer.parseInt(parameters.get("FISH_ENERGY"));
+			myFishEnergy = tmp>0?tmp:myFishEnergy;
+		}
+		if(parameters.containsKey("SHARK_ENERGY")){
+			int tmp = Integer.parseInt(parameters.get("SHARK_ENERGY"));
+			myMaxSharkEnergy = tmp>0?tmp:myMaxSharkEnergy;
+		}	
+		if(parameters.containsKey("LIVES_REPRODUCE")){
+			int tmp = Integer.parseInt(parameters.get("LIVES_REPRODUCE"));
+			myLivesReproduce = tmp>0?tmp:myLivesReproduce;
+		}
+		Map<Integer, String> map = new HashMap<>();
+		map.put(FISH_STATE, "Fish");
+		map.put(SHARK_STATE, "Shark");
+		setupGraph(map);	
 	}
 	
 	@Override
