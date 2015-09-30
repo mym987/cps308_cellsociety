@@ -1,15 +1,13 @@
 package model;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import location.ToroidalLocation;
+import location.Location;
 import state.AntState;
 import cell.AntCell;
 import grid.Grid;
-import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class AntModel extends AbstractModel{
@@ -27,11 +25,6 @@ public class AntModel extends AbstractModel{
 
 	AntModel(CellSocietyGUI CSGUI) {
 		super(CSGUI);
-	}
-
-	@Override
-	public void setParameters(Map<String,String> parameters){
-		super.setParameters(parameters);
 	}
 	
 	@Override
@@ -67,7 +60,7 @@ public class AntModel extends AbstractModel{
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = new SquareGrid(getWidth(), getHeight(), myCells);
+		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
@@ -89,7 +82,6 @@ public class AntModel extends AbstractModel{
 	
 		int t = myRandom.nextInt(total);
 		int x = t % getWidth(), y = t / getWidth();
-		System.out.println(x + " hi");
 		if(mat[x][y]==EMPTY_STATE){
 			mat[x][y] = NEST_STATE;
 		}
@@ -134,7 +126,8 @@ public class AntModel extends AbstractModel{
 	}
 	
 	private void addCell(int x,int y,int state){
-		AntCell cell = new AntCell(new AntState(state), new ToroidalLocation(x,y, myWidth, getHeight()), myCSGUI);
+		Location loc = Location.makeLocation(x, y, getWidth(), getHeight(), myCSGUI);
+		AntCell cell = new AntCell(new AntState(state), loc, myCSGUI);
 		cell.setParameters(myEvaporationRate, myDiffusionRate);
 		myCells.add(cell);
 	}

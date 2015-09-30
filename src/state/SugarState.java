@@ -10,7 +10,7 @@ public class SugarState extends AbstractState{
 	public SugarState(int s,boolean isAgent) {
 		super(s);
 		this.isAgent = isAgent;
-		if(myStateInt>maxSugar)
+		if(!this.isAgent && myStateInt>maxSugar)
 			maxSugar = myStateInt;
 	}
 	

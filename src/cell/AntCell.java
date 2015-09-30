@@ -45,10 +45,6 @@ public class AntCell extends AbstractCell{
 		myHomePheromone = 0;
 		
 		myHasFoodItem = false;
-		
-		myCellGUI = new SquareCellGUI(CSGUI, l);
-		myCellGUI.updateState(s);
-		addClickListener();
 	}
 	
 	public void setParameters(double evaporationRate, double diffusionRate){

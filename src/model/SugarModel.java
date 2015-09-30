@@ -130,18 +130,21 @@ public class SugarModel extends AbstractModel{
 					map.get(sugar).add(cell);
 				}
 			});
-			List<Cell> list = map.get(Collections.max(map.keySet()));
-			if(!list.isEmpty()){
-				SugarCell cell = (SugarCell)list.get(myRandom.nextInt(list.size()));
-				visited.add(cell);
-				int state = cell.getState().getStateInt()+agent.getState().getStateInt()-myMetabolism;
-				if(state>0){
-					cell.getState().setNextState(new SugarState(state>myAgentMaxSugar?myAgentMaxSugar:state,true));
-				}else{
-					cell.getState().setNextState(0);
+			if(!map.isEmpty()){
+				List<Cell> list = map.get(Collections.max(map.keySet()));
+				if(!list.isEmpty()){
+					SugarCell cell = (SugarCell)list.get(myRandom.nextInt(list.size()));
+					visited.add(cell);
+					int state = cell.getState().getStateInt()+agent.getState().getStateInt()-myMetabolism;
+					if(state>0){
+						cell.getState().setNextState(new SugarState(state>myAgentMaxSugar?myAgentMaxSugar:state,true));
+					}else{
+						cell.getState().setNextState(0);
+					}
+					agent.getState().setNextState(new SugarState(0, false));
 				}
-				agent.getState().setNextState(new SugarState(0, false));
 			}
+			
 		});
 		myAgents.clear();
 		myCells.forEach(cell->{cell.determineNextState();});
