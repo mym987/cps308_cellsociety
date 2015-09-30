@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Cameron Givler
 package grid;
 
 import java.util.ArrayList;

@@ -97,7 +97,7 @@ public abstract class CellGUI {
 	
 	/**
 	 * Draw a circle in the middle of the cell
-	 * @param red The color to draw the circle
+	 * @param color The color to draw the circle
 	 */
 	public abstract void drawCircle(Color color);
 
