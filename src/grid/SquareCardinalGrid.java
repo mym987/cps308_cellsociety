@@ -7,7 +7,7 @@ import java.util.Set;
 import location.Location;
 import cell.Cell;
 
-public class SquareCardinalGrid extends Grid{
+public class SquareCardinalGrid extends AbstractGrid{
 
 	public SquareCardinalGrid(int width, int height, Set<Cell> cells) {
 		super(width, height, cells);

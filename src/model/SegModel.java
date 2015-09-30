@@ -1,17 +1,24 @@
+// This entire file is part of my masterpiece.
+// Mike Ma (ym67)
+
 package model;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import location.Location;
 import location.ToroidalLocation;
 import state.SegState;
+import state.State;
 import cell.Cell;
 import cell.SegCell;
 import grid.Grid;
+import grid.GridFactory;
 import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
@@ -30,10 +37,11 @@ public class SegModel extends AbstractModel {
 
 	@Override
 	public void step() {
-		Stack<Cell> exchangeList = getDissatisfiedCells();
+		Stack<Cell> exchangeList = new Stack<>();
+		exchangeList.addAll(getDissatisfiedCells());
 		if (myCells != null && !myCells.isEmpty())
 			myDissatisfactionRate = 100 - 100.0 * exchangeList.size() / myCells.size();
-		exchangeList.addAll(getVacentCells());
+		exchangeList.addAll(getCellsInState(EMPTY_STATE));
 		Collections.shuffle(exchangeList);
 
 		while (exchangeList.size() >= 2) {
@@ -48,23 +56,26 @@ public class SegModel extends AbstractModel {
 		myStepNum++;
 		updateGraph();
 	}
-
-	private Stack<Cell> getDissatisfiedCells() {
-		Stack<Cell> list = new Stack<>();
+	
+	private Set<Cell> getDissatisfiedCells(){
+		Set<Cell> set = new HashSet<>();
 		myCells.forEach(cell -> {
-			if (!((SegCell) cell).isEmpty() && !((SegCell) cell).isSatisfied())
-				list.add(cell);
+			SegCell tmp = (SegCell)cell;
+			if (!tmp.isEmpty() && !tmp.isSatisfied())
+				set.add(tmp);
 		});
-		return list;
+		return set;
 	}
-
-	private Stack<Cell> getVacentCells() {
-		Stack<Cell> list = new Stack<>();
+	
+	
+	private Set<Cell> getCellsInState(int s){
+		Set<Cell> set = new HashSet<>();
 		myCells.forEach(cell -> {
-			if (((SegCell) cell).isEmpty())
-				list.add(cell);
+			SegCell tmp = (SegCell)cell;
+			if (!tmp.isEmpty() && tmp.isInState(new SegState(s)))
+				set.add(tmp);
 		});
-		return list;
+		return set;
 	}
 
 	@Override
@@ -80,7 +91,7 @@ public class SegModel extends AbstractModel {
 	};
 
 	@Override
-	public void initialize(Map<String, String> parameters, List<Map<String, String>> cells) {
+	public void initialize(Map<String, String> parameters, List<Map<String, String>> cells) throws Exception{
 		setBasicConfig(parameters);
 		cells.forEach(map -> {
 			int x = Integer.parseInt(map.get("x"));
@@ -89,27 +100,27 @@ public class SegModel extends AbstractModel {
 			addCell(x, y, state);
 		});
 		if (myCells.size() < getWidth() * getHeight())
-			System.err.println("Missing Cell Info!");
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+			throw new Exception("Missing Cell Info!");
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
 	@Override
 	public void initialize(Map<String, String> parameters) {
 		setBasicConfig(parameters);
-		double pA = 0.5, pB = 0.5;
+		double percentA = 0.5, percentB = 0.5;
 		if (myParameters.containsKey("percentA")) {
 			double tmp = Double.parseDouble(myParameters.get("percentA"));
-			pA = (tmp >= 0 && tmp <= 1) ? tmp : pA;
-			pB = 1 - pA;
+			percentA = (tmp >= 0 && tmp <= 1) ? tmp : percentA;
+			percentB = 1 - percentA;
 		}
 		if (myParameters.containsKey("percentB")) {
 			double tmp = Double.parseDouble(myParameters.get("percentB"));
-			pB = (tmp >= 0 && tmp <= pB) ? tmp : pB;
+			percentB = (tmp >= 0 && tmp <= percentB) ? tmp : percentB;
 		}
 
 		int total = myWidth * myHeight;
-		int numTypeA = (int) (total * pA), numTypeB = (int) (total * pB);
+		int numTypeA = (int) (total * percentA), numTypeB = (int) (total * percentB);
 		int mat[][] = new int[getWidth()][getHeight()];
 		
 		randomFillMatrix(mat, EMPTY_STATE, STATE_A, numTypeA);
@@ -118,7 +129,7 @@ public class SegModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x, y, mat[x][y]);
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
