@@ -7,7 +7,7 @@ import java.util.Map;
 import location.Location;
 import state.AntState;
 import cell.AntCell;
-import grid.Grid;
+import grid.GridFactory;
 import gui.CellSocietyGUI;
 
 public class AntModel extends AbstractModel{
@@ -60,7 +60,7 @@ public class AntModel extends AbstractModel{
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
@@ -121,7 +121,7 @@ public class AntModel extends AbstractModel{
 		for (int x1 = 0; x1 < mat.length; x1++)
 			for (int y1 = 0; y1 < mat[x1].length; y1++)
 				addCell(x1,y1,mat[x1][y1]);	
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 	

@@ -12,14 +12,10 @@ import java.util.Set;
 import java.util.Stack;
 
 import location.Location;
-import location.ToroidalLocation;
 import state.SegState;
-import state.State;
 import cell.Cell;
 import cell.SegCell;
-import grid.Grid;
 import grid.GridFactory;
-import grid.SquareGrid;
 import gui.CellSocietyGUI;
 
 public class SegModel extends AbstractModel {

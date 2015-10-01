@@ -1,15 +1,12 @@
 package cell;
 
 import java.util.List;
-import java.util.Map;
 
 import location.Location;
 import state.PredState;
 import state.State;
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.SquareCellGUI;
-import javafx.scene.input.MouseEvent;
 
 public class PredCell extends AbstractCell {
 	private static int EMPTY_STATE = 0;

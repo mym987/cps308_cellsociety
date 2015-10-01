@@ -4,11 +4,8 @@ import location.Location;
 import state.SegState;
 import state.State;
 
-import java.util.Map;
-
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.SquareCellGUI;
 
 public class SegCell extends AbstractCell {
 	public static final double CELL_SIZE = 70;

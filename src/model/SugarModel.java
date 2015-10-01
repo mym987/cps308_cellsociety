@@ -9,12 +9,10 @@ import java.util.Map;
 import java.util.Set;
 
 import location.Location;
-import location.ToroidalLocation;
 import state.SugarState;
 import cell.Cell;
 import cell.SugarCell;
-import grid.Grid;
-import grid.SquareGrid;
+import grid.GridFactory;
 import gui.CellSocietyGUI;
 
 public class SugarModel extends AbstractModel{
@@ -73,7 +71,7 @@ public class SugarModel extends AbstractModel{
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors(myVision);
 	}
 
@@ -105,7 +103,7 @@ public class SugarModel extends AbstractModel{
 				}
 			}
 		}
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors(myVision);
 	}
 	

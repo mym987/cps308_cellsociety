@@ -11,7 +11,6 @@ import java.util.Set;
 
 import location.Location;
 import cell.Cell;
-import gui.CellSocietyGUI;
 
 public abstract class AbstractGrid implements Grid{
 	
@@ -73,6 +72,21 @@ public abstract class AbstractGrid implements Grid{
 		});
 	}
 
+	/**
+	 * Get the locations adjacent to the specified location
+	 * @param loc The location
+	 * @return A List of adjacent locations
+	 */
+	public abstract List<Location> getAdjacentLoc(Location loc);
+	
+	/**
+	 * Get the locations with in a radius from the specified location
+	 * @param loc The location
+	 * @return A List of locations with in the radius
+	 */
+	public abstract List<Location> getAdjacentLoc(Location loc,int radius);
+
+	
 	/**
 	 * Get cells adjacent to the specified cell
 	 * @param cell The cell

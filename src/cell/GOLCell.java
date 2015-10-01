@@ -4,14 +4,8 @@ import location.Location;
 import state.GOLState;
 import state.State;
 
-import java.util.Map;
-
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.HexagonCellGUI;
-import gui.SquareCellGUI;
-import gui.TriangleCellGUI;
-import javafx.scene.paint.Color;
 
 public class GOLCell extends AbstractCell{
 	

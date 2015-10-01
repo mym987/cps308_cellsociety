@@ -1,12 +1,9 @@
 package cell;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.SquareCellGUI;
 import location.Location;
 import state.AntState;
 import state.State;
@@ -192,7 +189,7 @@ public class AntCell extends AbstractCell{
 	
 	
 	
-	public void dropPheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors, int state){
+	private void dropPheromones(AntCell maxPheromoneCell, ArrayList<Cell> neighbors, int state){
 		if(myAntState.getContainsAnt() == true && myAntState.getStateInt() == state){
 			if(state == NEST_STATE) setMyHomePheromone(MAX_HOME_PHEROMONE);
 			else setMyFoodPheromone(MAX_FOOD_PHEROMONE);

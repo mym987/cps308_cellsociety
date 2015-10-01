@@ -1,6 +1,5 @@
 package cell;
 
-import java.util.Map;
 import java.util.Random;
 
 import location.Location;
@@ -8,7 +7,6 @@ import state.FireState;
 import state.State;
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.SquareCellGUI;
 
 public class FireCell extends AbstractCell{
 	
