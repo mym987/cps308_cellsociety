@@ -6,7 +6,6 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import cellsociety_team11.CSManager;
 import gui.dialogue.Dialog;
@@ -16,7 +15,6 @@ import javafx.animation.Animation.Status;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -63,7 +61,6 @@ public class CellSocietyGUI {
 	private Group myRoot;
 	private Timeline myAnimation;
 	private CSManager myManager;
-	private ResourceBundle myResources;
 
 	private HashMap<Integer, XYChart.Series<Number, Number>> mySeriesMap;
 	private LineChart<Number, Number> myLineChart;
@@ -117,7 +114,7 @@ public class CellSocietyGUI {
 	 * Get the title of the application
 	 * @return The title
 	 */
-	public String getTitle() {
+	protected String getTitle() {
 		return TITLE;
 	}
 
@@ -140,6 +137,7 @@ public class CellSocietyGUI {
 	/**
 	 * Add the control buttons to the screen
 	 */
+	@SuppressWarnings("unchecked")
 	private void addButtons() {
 		myButtons = new HashMap<>(BUTTON_NAMES.length);
 		EventHandler<ActionEvent>[] events = new EventHandler[4];
@@ -329,7 +327,7 @@ public class CellSocietyGUI {
 	 * Change the amount of time between frames
 	 * @param fps New FPS of the animation
 	 */
-	public void changeTime(final double fps) {
+	private void changeTime(final double fps) {
 		int timerInterval = (int) (1000 / fps);
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(timerInterval), e -> myManager.step());
 
@@ -348,7 +346,7 @@ public class CellSocietyGUI {
 	 * @param handler The EventHandler associated with the button
 	 * @return
 	 */
-	public Button createAndPlaceButton(String property, double yIndex, EventHandler<ActionEvent> handler) {
+	private Button createAndPlaceButton(String property, double yIndex, EventHandler<ActionEvent> handler) {
 		int buttonArea = myWindowWidth - BUTTON_AREA_WIDTH;
 		String label = property;// myResources.getString(property);
 		Button button = new Button(label);
@@ -368,7 +366,7 @@ public class CellSocietyGUI {
 	 * @param fps The default value of the slider
 	 * @return The Slider
 	 */
-	public Slider addSlider(double yIndex, double fps) {
+	private Slider addSlider(double yIndex, double fps) {
 		Slider slider = new Slider(MIN_FPS, MAX_FPS, fps);
 		slider.setMajorTickUnit(1);
 		slider.setBlockIncrement(INCREMENT);
@@ -384,7 +382,7 @@ public class CellSocietyGUI {
 	 * @param text The text to set the label to
 	 * @param yIndex The index from the top of the page of the text
 	 */
-	public void showSliderLabel(String text, double yIndex) {
+	private void showSliderLabel(String text, double yIndex) {
 		mySliderLabel = new Label();
 		myRoot.getChildren().add(mySliderLabel);
 		mySliderLabel.applyCss();
@@ -396,7 +394,7 @@ public class CellSocietyGUI {
 	 * Updates the text of the slider label
 	 * @param text The text to set the label to
 	 */
-	public void updateSliderLabel(String text) {
+	private void updateSliderLabel(String text) {
 		mySliderLabel.setText(text);
 		mySliderLabel.applyCss();
 		double xPos = myWindowWidth - BUTTON_AREA_WIDTH
@@ -407,7 +405,7 @@ public class CellSocietyGUI {
 	/**
 	 * Add a graph to the button area of the screen
 	 */
-	public void addGraph() {
+	private void addGraph() {
 		// defining the axes
 		final NumberAxis xAxis = new NumberAxis("Frame Number", 0, GRAPH_X_RANGE, 50);
 		xAxis.setAutoRanging(GRAPH_AUTO_RANGE);
@@ -469,7 +467,7 @@ public class CellSocietyGUI {
 	/**
 	 * Create the grid area and add it to the screen
 	 */
-	public void createGridArea() {
+	private void createGridArea() {
 		Rectangle rect = new Rectangle();
 		rect.setX(GRID_MARGIN);
 		rect.setY(GRID_MARGIN);
@@ -485,7 +483,7 @@ public class CellSocietyGUI {
 	 * Get the width of the screen
 	 * @return The width
 	 */
-	public double getGridWidth() {
+	protected double getGridWidth() {
 		return myWindowWidth - GRID_MARGIN * 2 - BUTTON_AREA_WIDTH;
 	}
 
@@ -493,7 +491,7 @@ public class CellSocietyGUI {
 	 * Get the height of the grid
 	 * @return The height
 	 */
-	public double getGridHeight() {
+	protected double getGridHeight() {
 		return myWindowHeight - GRID_MARGIN * 2;
 	}
 
@@ -501,7 +499,7 @@ public class CellSocietyGUI {
 	 * Get the x coordinate of the grid
 	 * @return
 	 */
-	public double getGridX() {
+	protected double getGridX() {
 		return GRID_MARGIN;
 	}
 
@@ -509,7 +507,7 @@ public class CellSocietyGUI {
 	 * Get the y coordinate of the grid
 	 * @return
 	 */
-	public double getGridY() {
+	protected double getGridY() {
 		return GRID_MARGIN;
 	}
 	

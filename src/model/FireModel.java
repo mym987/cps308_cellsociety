@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import location.Location;
-import location.ToroidalLocation;
 import state.FireState;
 import cell.FireCell;
-import grid.Grid;
-import grid.SquareCardinalGrid;
-import grid.SquareGrid;
+import grid.GridFactory;
 import gui.CellSocietyGUI;
 
 public class FireModel extends AbstractModel {
@@ -51,7 +48,7 @@ public class FireModel extends AbstractModel {
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
@@ -59,7 +56,6 @@ public class FireModel extends AbstractModel {
 	public void initialize(Map<String, String> parameters) throws Exception{
 		setBasicConfig(parameters);
 		int mat[][] = new int[getWidth()][getHeight()];
-		int total = getWidth()*getHeight();
 		int numBurning = Integer.parseInt(parameters.get("numBurning"));
 		int numEmpty = Integer.parseInt(parameters.get("numEmpty"));
 		for(int i=0;i<mat.length;i++){
@@ -71,7 +67,7 @@ public class FireModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 	

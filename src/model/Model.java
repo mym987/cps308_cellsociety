@@ -1,7 +1,6 @@
 package model;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +19,6 @@ public interface Model {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Model getModel(String name, CellSocietyGUI csGui) throws Exception {
-		String tmp = "GOLModel PredModel SegModel FireModel SugarModel";
-		List<String> models = Arrays.asList(tmp.split("\\s+"));
 		name = Model.class.getPackage().getName() + "." + name;
 		Class[] types = { CellSocietyGUI.class };
 		Constructor constructor;

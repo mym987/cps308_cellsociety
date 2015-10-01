@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import location.Location;
-import location.ToroidalLocation;
 import state.GOLState;
 import cell.Cell;
 import cell.GOLCell;
-import grid.Grid;
-import grid.SquareGrid;
+import grid.GridFactory;
 import gui.CellSocietyGUI;
 
 public class GOLModel extends AbstractModel {
@@ -49,7 +47,7 @@ public class GOLModel extends AbstractModel {
 		});
 		if(myCells.size()<getWidth()*getHeight())
 			System.err.println("Missing Cell Info!");
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 
@@ -71,7 +69,7 @@ public class GOLModel extends AbstractModel {
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)
 				addCell(x,y,mat[x][y]);	
-		myGrid = Grid.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
+		myGrid = GridFactory.makeGrid(getWidth(), getHeight(), myCells, myCSGUI);
 		myGrid.setNeighbors();
 	}
 	

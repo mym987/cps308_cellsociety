@@ -4,7 +4,6 @@ import java.util.Map;
 
 import gui.CellGUI;
 import gui.CellSocietyGUI;
-import gui.SquareCellGUI;
 import location.Location;
 import state.State;
 import state.SugarState;

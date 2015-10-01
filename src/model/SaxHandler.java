@@ -9,8 +9,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import gui.CellSocietyGUI;
-
 public class SaxHandler extends DefaultHandler {
 	
 	private String myNodeName;

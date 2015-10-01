@@ -7,7 +7,7 @@ import java.util.Set;
 import location.Location;
 import cell.Cell;
 
-public class SquareGrid extends Grid {
+public class SquareGrid extends AbstractGrid {
 //	public static final int EMPTY_STATE = 0;
 	
 	public SquareGrid(int width, int height, Set<Cell> cells) {
