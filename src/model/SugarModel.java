@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.util.ArrayList;
@@ -13,9 +16,9 @@ import state.SugarState;
 import cell.Cell;
 import cell.SugarCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class SugarModel extends AbstractModel{
+public class SugarModel extends Model{
 	
 	private int mySugarGrowBackRate = 1;
 	private int mySugarGrowBackInterval = 1;
@@ -26,7 +29,7 @@ public class SugarModel extends AbstractModel{
 	private Set<SugarCell> myAgents;
 	
 
-	SugarModel(CellSocietyGUI CSGUI) {
+	SugarModel(CSViewer CSGUI) {
 		super(CSGUI);
 		myAgents = new HashSet<>();
 	}
@@ -92,7 +95,7 @@ public class SugarModel extends AbstractModel{
 			if (tmp>0) initialAgentSugar = tmp;
 		}
 		int mat[][] = new int[getWidth()][getHeight()];
-		randomFillMatrix(mat, 0, -1, numAgent);
+		randomFill(mat, 0, -1, numAgent);
 		for(int x = 0;x<mat.length;x++){
 			for(int y=0;y<mat[x].length;y++){
 				if(mat[x][y]==-1)

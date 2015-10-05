@@ -1,6 +1,6 @@
 package location;
 
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
 public class Location {
 	
@@ -8,7 +8,7 @@ public class Location {
 	protected int myWidth;
 	protected int myHeight;
 	
-	public static Location makeLocation(int x, int y, int width, int height, CellSocietyGUI csGui){
+	public static Location makeLocation(int x, int y, int width, int height, CSViewer csGui){
 		switch (csGui.getWrapType()) {
 		case "false":
 			return new Location(x,y,width,height);

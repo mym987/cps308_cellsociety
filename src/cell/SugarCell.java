@@ -1,14 +1,17 @@
+/**
+ * @author Mike Ma
+ */
 package cell;
 
 import java.util.Map;
 
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 import location.Location;
 import state.State;
 import state.SugarState;
 
-public class SugarCell extends AbstractCell {
+public class SugarCell extends Cell {
 
 	private int mySugarGrowBackRate = 1;
 	private int mySugarGrowBackInterval = 1;
@@ -16,7 +19,7 @@ public class SugarCell extends AbstractCell {
 	private int myMaxSugar = 5;
 	private int myTick;
 
-	public SugarCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public SugarCell(State s, Location l, CSViewer CSGUI) {
 		super(s, 2, l, CSGUI);
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);

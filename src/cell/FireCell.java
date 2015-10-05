@@ -6,9 +6,9 @@ import location.Location;
 import state.FireState;
 import state.State;
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class FireCell extends AbstractCell{
+public class FireCell extends Cell{
 	
 	private static final int EMPTY_STATE = 0;
 	private static final int LIVE_STATE = 1;
@@ -17,7 +17,7 @@ public class FireCell extends AbstractCell{
 	
 	private double myProbCatchFire;
 
-	public FireCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public FireCell(State s, Location l, CSViewer CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);

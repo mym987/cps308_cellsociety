@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.io.File;

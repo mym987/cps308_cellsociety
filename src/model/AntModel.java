@@ -8,9 +8,9 @@ import location.Location;
 import state.AntState;
 import cell.AntCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class AntModel extends AbstractModel{
+public class AntModel extends Model{
 	
 	private double myEvaporationRate = 0.25; //default value
 	private double myDiffusionRate = 0.25; //default value
@@ -23,7 +23,7 @@ public class AntModel extends AbstractModel{
 	
 	private static final int ANT_STATE = 5;
 
-	AntModel(CellSocietyGUI CSGUI) {
+	AntModel(CSViewer CSGUI) {
 		super(CSGUI);
 	}
 	

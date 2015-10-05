@@ -1,5 +1,6 @@
-// This entire file is part of my masterpiece.
-// Mike Ma (ym67)
+/**
+ * @author Mike Ma
+ */
 
 package model;
 
@@ -16,9 +17,9 @@ import state.SegState;
 import cell.Cell;
 import cell.SegCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class SegModel extends AbstractModel {
+public class SegModel extends Model {
 
 	private static final int EMPTY_STATE = 0;
 	private static final int STATE_A = 1;
@@ -27,7 +28,7 @@ public class SegModel extends AbstractModel {
 	private double mySimilarity = 0.7; // default value
 	private double myDissatisfactionRate;
 
-	public SegModel(CellSocietyGUI csGui) {
+	public SegModel(CSViewer csGui) {
 		super(csGui);
 	}
 
@@ -119,8 +120,8 @@ public class SegModel extends AbstractModel {
 		int numTypeA = (int) (total * percentA), numTypeB = (int) (total * percentB);
 		int mat[][] = new int[getWidth()][getHeight()];
 		
-		randomFillMatrix(mat, EMPTY_STATE, STATE_A, numTypeA);
-		randomFillMatrix(mat, EMPTY_STATE, STATE_B, numTypeB);
+		randomFill(mat, EMPTY_STATE, STATE_A, numTypeA);
+		randomFill(mat, EMPTY_STATE, STATE_B, numTypeB);
 		
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)

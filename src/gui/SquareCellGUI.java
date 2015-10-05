@@ -12,7 +12,7 @@ public class SquareCellGUI extends CellGUI {
 	private double myXPos;
 	private double myYPos;
 
-	public SquareCellGUI(CellSocietyGUI CSGUI, Location loc) {
+	public SquareCellGUI(CSViewer CSGUI, Location loc) {
 		super(CSGUI);
 		myCellWidth = CSGUI.getGridWidth() / loc.getWidth();
 		myCellHeight = CSGUI.getGridHeight() / loc.getHeight();

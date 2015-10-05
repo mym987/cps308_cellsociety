@@ -13,7 +13,7 @@ public class TriangleCellGUI extends CellGUI {
 	private double myCenterY;
 	private double myRadius;
 	
-	public TriangleCellGUI(CellSocietyGUI CSGUI, Location loc) {
+	public TriangleCellGUI(CSViewer CSGUI, Location loc) {
 		super(CSGUI);
 		myCellWidth = CSGUI.getGridWidth() / (loc.getWidth() + 1) * 2;
 		myCellHeight = CSGUI.getGridHeight() / loc.getHeight();

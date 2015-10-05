@@ -12,14 +12,14 @@ public abstract class CellGUI {
 
 	private static final double STROKE_WIDTH = 0.5;
 	
-	protected CellSocietyGUI myCSGUI;
+	protected CSViewer myCSGUI;
 	protected double myGridXPos;
 	protected double myGridYPos;
 	protected Shape myShape;
 	protected Circle myCircle;
 	protected EventHandler<? super MouseEvent> myClickCallback;
 	
-	public static CellGUI makeCellGUI(CellSocietyGUI CSGUI,Location l){
+	public static CellGUI makeCellGUI(CSViewer CSGUI,Location l){
 		switch (CSGUI.myCellType) {
 		case "square":
 			return new SquareCellGUI(CSGUI,l);
@@ -32,7 +32,7 @@ public abstract class CellGUI {
 		}
 	}
 
-	public CellGUI(CellSocietyGUI CSGUI) {
+	public CellGUI(CSViewer CSGUI) {
 		myCSGUI = CSGUI;
 		myGridXPos = CSGUI.getGridX();
 		myGridYPos = CSGUI.getGridY();

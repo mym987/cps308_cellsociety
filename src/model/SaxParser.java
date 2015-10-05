@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.io.File;
@@ -11,15 +14,15 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
 public class SaxParser {
 
-	private CellSocietyGUI myCsGui;
+	private CSViewer myCsGui;
 	private Map<String, String> myModelConfig;
 	private List<Map<String, String>> myCells;
 
-	public SaxParser(CellSocietyGUI csGui) {
+	public SaxParser(CSViewer csGui) {
 		myCsGui = csGui;
 	}
 

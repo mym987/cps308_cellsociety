@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package gui;
 
 import javafx.scene.control.CheckMenuItem;
@@ -11,9 +14,9 @@ import javafx.scene.input.KeyCombination;
 
 public class MenuPanel extends MenuBar {
 	
-	private CellSocietyGUI myGui;
+	private CSViewer myGui;
 
-	public MenuPanel(CellSocietyGUI csGui){
+	public MenuPanel(CSViewer csGui){
         myGui = csGui;
         getMenus().addAll(fileMenu(), modelMenu(), controlMenu(),settingMenu());
 	}

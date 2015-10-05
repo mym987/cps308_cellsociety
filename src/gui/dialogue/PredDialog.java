@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package gui.dialogue;
 
 public class PredDialog extends Dialog {

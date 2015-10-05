@@ -3,12 +3,12 @@ package cell;
 import java.util.ArrayList;
 
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 import location.Location;
 import state.AntState;
 import state.State;
 
-public class AntCell extends AbstractCell{
+public class AntCell extends Cell{
 	private static final int MAX_HOME_PHEROMONE = 10;
 	private static final int MAX_FOOD_PHEROMONE = 10;
 	
@@ -31,7 +31,7 @@ public class AntCell extends AbstractCell{
 	private double myHomePheromone;
 	private boolean myHasFoodItem;
 
-	public AntCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public AntCell(State s, Location l, CSViewer CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		myAntState = (AntState) s;
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);

@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package xmlFactory;
 
 import java.util.ArrayList;

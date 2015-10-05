@@ -1,4 +1,6 @@
-
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.util.HashMap;
@@ -10,15 +12,15 @@ import state.GOLState;
 import cell.Cell;
 import cell.GOLCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class GOLModel extends AbstractModel {
+public class GOLModel extends Model {
 	
 	private static final double DEFAULT_PERCENT_LIVE_CELLS = 0.5;
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
 	
-	public GOLModel(CellSocietyGUI csGui) {
+	public GOLModel(CSViewer csGui) {
 		super(csGui);
 	}
 
@@ -64,7 +66,7 @@ public class GOLModel extends AbstractModel {
 		int numLiveCells = (int)(total*percentLive);
 		int mat[][] = new int[getWidth()][getHeight()];
 		
-		randomFillMatrix(mat, DEAD_STATE, LIVE_STATE, numLiveCells);
+		randomFill(mat, DEAD_STATE, LIVE_STATE, numLiveCells);
 
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)

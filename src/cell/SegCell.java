@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package cell;
 
 import location.Location;
@@ -5,9 +8,9 @@ import state.SegState;
 import state.State;
 
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class SegCell extends AbstractCell {
+public class SegCell extends Cell {
 	public static final double CELL_SIZE = 70;
 
 	private static final int EMPTY_STATE = 0;
@@ -17,7 +20,7 @@ public class SegCell extends AbstractCell {
 	
 	private double mySimilarity = 0.50;
 
-	public SegCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public SegCell(State s, Location l, CSViewer CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);

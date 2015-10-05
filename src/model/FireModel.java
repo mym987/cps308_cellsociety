@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.util.Arrays;
@@ -9,9 +12,9 @@ import location.Location;
 import state.FireState;
 import cell.FireCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class FireModel extends AbstractModel {
+public class FireModel extends Model {
 	
 	private static final int EMPTY_STATE = 0;
 	private static final int TREE_STATE = 1;
@@ -19,7 +22,7 @@ public class FireModel extends AbstractModel {
 	
 	private double myProbCatchFire = 0.5; //default value
 
-	public FireModel(CellSocietyGUI csGui) {
+	public FireModel(CSViewer csGui) {
 		super(csGui);
 	}
 
@@ -61,8 +64,8 @@ public class FireModel extends AbstractModel {
 		for(int i=0;i<mat.length;i++){
 			Arrays.fill(mat[i], TREE_STATE);
 		}
-		randomFillMatrix(mat, TREE_STATE, FIRE_STATE, numBurning);
-		randomFillMatrix(mat, TREE_STATE, EMPTY_STATE, numEmpty);
+		randomFill(mat, TREE_STATE, FIRE_STATE, numBurning);
+		randomFill(mat, TREE_STATE, EMPTY_STATE, numEmpty);
 
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)

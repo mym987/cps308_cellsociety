@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package model;
 
 import java.util.HashMap;
@@ -8,9 +11,9 @@ import location.Location;
 import state.PredState;
 import cell.PredCell;
 import grid.GridFactory;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class PredModel extends AbstractModel {
+public class PredModel extends Model {
 	
 	private static final int EMPTY_STATE = 0;
 	private static final int SHARK_STATE = 1;
@@ -20,7 +23,7 @@ public class PredModel extends AbstractModel {
 	private int myMaxSharkEnergy = 5;
 	private int myLivesReproduce = 5;
 	
-	public PredModel(CellSocietyGUI CSGUI) {
+	public PredModel(CSViewer CSGUI) {
 		super(CSGUI);
 	}
 	
@@ -81,8 +84,8 @@ public class PredModel extends AbstractModel {
 		int numFish = (int)(total*pF),numShark = (int)(total*pS);
 		int mat[][] = new int[getWidth()][getHeight()];
 		
-		randomFillMatrix(mat, EMPTY_STATE, FISH_STATE, numFish);
-		randomFillMatrix(mat, EMPTY_STATE, SHARK_STATE, numShark);
+		randomFill(mat, EMPTY_STATE, FISH_STATE, numFish);
+		randomFill(mat, EMPTY_STATE, SHARK_STATE, numShark);
 
 		for (int x = 0; x < mat.length; x++)
 			for (int y = 0; y < mat[x].length; y++)

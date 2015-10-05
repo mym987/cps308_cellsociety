@@ -6,9 +6,9 @@ import location.Location;
 import state.PredState;
 import state.State;
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class PredCell extends AbstractCell {
+public class PredCell extends Cell {
 	private static int EMPTY_STATE = 0;
 	private static int SHARK_STATE = 1;
 	private static int FISH_STATE = 2;
@@ -22,7 +22,7 @@ public class PredCell extends AbstractCell {
 	private int mySharkEnergy = 0;
 	private boolean visited;
 
-	public PredCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public PredCell(State s, Location l, CSViewer CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);
 		myCellGUI.updateState(s);

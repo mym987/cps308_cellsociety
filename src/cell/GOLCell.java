@@ -5,15 +5,15 @@ import state.GOLState;
 import state.State;
 
 import gui.CellGUI;
-import gui.CellSocietyGUI;
+import gui.CSViewer;
 
-public class GOLCell extends AbstractCell{
+public class GOLCell extends Cell{
 	
 	private static final int DEAD_STATE = 0;
 	private static final int LIVE_STATE = 1;
 	private static final int NUM_STATES = 2;
 
-	public GOLCell(State s, Location l, CellSocietyGUI CSGUI) {
+	public GOLCell(State s, Location l, CSViewer CSGUI) {
 		super(s, NUM_STATES, l, CSGUI);
 		
 		myCellGUI = CellGUI.makeCellGUI(CSGUI, l);

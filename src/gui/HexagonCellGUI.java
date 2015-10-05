@@ -1,3 +1,6 @@
+/**
+ * @author Mike Ma
+ */
 package gui;
 
 import javafx.scene.paint.Color;
@@ -6,7 +9,7 @@ import location.Location;
 
 public class HexagonCellGUI extends CellGUI {
 
-	public HexagonCellGUI(CellSocietyGUI CSGUI, Location loc) {
+	public HexagonCellGUI(CSViewer CSGUI, Location loc) {
 		super(CSGUI);
 		myShape = createHexagon(loc);
 		addShapeToScreen();

@@ -1,79 +1,172 @@
 package cell;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import location.Location;
 import state.State;
+import gui.CellGUI;
+import gui.CSViewer;
 
-public interface Cell {
+public abstract class Cell{
 
-	/**
-	 * returns the State of a Cell
-	 */
-	public State getState();
+	protected State myState;
+	protected Location myLoc;
+	protected List<Cell> myNeighborCells;
+	protected CSViewer myCSGUI;
+	protected CellGUI myCellGUI;
+	protected int myNumStates;
 
-	/**
-	 * returns true if in State s
-	 */
-	public boolean isInState(State s);
+	Cell(State s, int numStates, Location l, CSViewer CSGUI) {
+		myState = s;
+		myLoc = l;
+		myCSGUI = CSGUI;
+		myNumStates = numStates;
+	}
+	
+	Cell(State s,Location l, CSViewer CSGUI) {
+		myState = s;
+		myLoc = l;
+		myCSGUI = CSGUI;
+	}
 	
 	/**
-	 * sets State of Cell
+	 * Associates a click listener with the current cell
 	 */
-	public void setState(State s);
+	protected void addClickListener() {
+		myCellGUI.addClickListener(e->incrementState());
+	}
 
 	/**
-	 * returns the Location of the Cell
+	 * Return the current state
 	 */
-	public Location getLocation();
+	public State getState() {
+		return myState;
+	}
 
 	/**
-	 * set the Neighboring Cells
-	 * 
+	 * Return true if the cell is in the specified state
 	 */
-	public void setNeighborCells(List<Cell> neighbors);
+	public boolean isInState(State s) {
+		return getState().equals(s);
+	}
+
+	/**
+	 * Returns true if the cell has the specified state int
+	 * @param s
+	 * @return
+	 */
+	protected boolean isInState(int s) {
+		return getState().getStateInt() == s;
+	}
+
+	/**
+	 * Set the current state to the specified state
+	 */
+	public void setState(State s) {
+		myState = s;
+	}
+
+	/**
+	 * Return the cell's location
+	 */
+	public Location getLocation() {
+		return myLoc;
+	}
+
+	/**
+	 * Set the cell's neighbors
+	 */
+	public void setNeighborCells(List<Cell> neighbors) {
+		myNeighborCells = neighbors;
+	}
 	
 	/**
-	 * Get the neighboring cells
-	 * @return A List of the neighbor cells
+	 * Returns the cell's neighbors
 	 */
-	public List<Cell> getNeighborCells();
+	public List<Cell> getNeighborCells() {
+		return myNeighborCells;
+	}
+
+	/**
+	 * Determines which neighbors are in the specified state and returns them
+	 * @param s The state
+	 * @return List of the neighbors in that state
+	 */
+	protected List<Cell> getNeighborsInState(State s) {
+		List<Cell> neighbors = new ArrayList<>();
+		myNeighborCells.forEach(cell -> {
+			if (cell.isInState(s))
+				neighbors.add(cell);
+		});
+		return neighbors;
+	}
 	
 	/**
-	 * determines what the next State of a Cell should be based on simulation rules
-	 * 
+	 * Get neighbors which have the specified state int
+	 * @param stateInt The state int to check
+	 * @return The neighbors in that state
+	 */
+	protected List<Cell> getNeighborsInStateInt(int stateInt) {
+		List<Cell> neighbors = new ArrayList<>();
+		myNeighborCells.forEach(cell->{
+			if(cell.getState().getStateInt() == stateInt)
+				neighbors.add(cell);
+		});
+		return neighbors;
+	}
+	
+	/**
+	 * Use the cell-specific logic to determine the next state
 	 */
 	public abstract void determineNextState();
 
 	/**
-	 * sets State's next state
+	 * Go to the state that had previously been determined
 	 */
-	public void goToNextState();
+	public void goToNextState() {
+		myState.goToNextState();
+		myCellGUI.updateState(myState);
+	}
 
 	/**
-	 * remove the cell from the grid
+	 * Remove the cell
 	 */
-	public void remove();
+	public final void remove(){
+		myCellGUI.remove();
+	}
 
 	/**
-	 * Increment to the next state
+	 * Increment the state to the next state in order
 	 */
-	public void incrementState();
+	public void incrementState() {
+		int nextState = (myState.getStateInt() + 1) % myNumStates;
+		myState.setNextState(nextState);
+		myState.goToNextState();
+		myCellGUI.updateState(myState);
+	}
+
+	/**
+	 * remove the cell's outlines
+	 */
+	public void removeOutlines() {
+		myCellGUI.removeOutlines();
+	}
 
 	/**
 	 * Add outlines to the cell
 	 */
-	public void removeOutlines();
-
-	/**
-	 * Remove outlines from the cell
-	 */
-	public void addOutlines();
+	public void addOutlines() {
+		myCellGUI.addOutlines();
+	}
 	
-	/**
-	 * get a map of attributes for XML creating purpose
-	 * @return Map<String,String>
-	 */
-	public Map<String,String> getAttributes();
+	public Map<String, String> getAttributes() {
+		Map<String,String> map = new HashMap<>();
+		map.put("x", Integer.toString(myLoc.getX()));
+		map.put("y", Integer.toString(myLoc.getY()));
+		map.put("state", myState.toString());
+		return map;
+	}
 }
