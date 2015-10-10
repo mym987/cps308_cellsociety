@@ -48,10 +48,11 @@ public class SegCell extends Cell {
 
 	public boolean isSatisfied() {
 		if (getState().getStateInt() == EMPTY_STATE)
-			return false;
+			return true;
 		int otherState = BLUE_STATE + YELLOW_STATE - getState().getStateInt();
 		int sameNeighborSize = getNeighborsInState(myState).size();
 		int otherNeighborSize = getNeighborsInState(new SegState(otherState)).size();
+		if(sameNeighborSize+otherNeighborSize==0)return true;
 		return ((double)sameNeighborSize)/(sameNeighborSize+otherNeighborSize)>=mySimilarity;
 	}
 	

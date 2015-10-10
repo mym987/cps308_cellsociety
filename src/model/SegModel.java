@@ -58,7 +58,7 @@ public class SegModel extends Model {
 		Set<Cell> set = new HashSet<>();
 		myCells.forEach(cell -> {
 			SegCell tmp = (SegCell)cell;
-			if (!tmp.isEmpty() && !tmp.isSatisfied())
+			if (!tmp.isSatisfied())
 				set.add(tmp);
 		});
 		return set;
@@ -69,7 +69,7 @@ public class SegModel extends Model {
 		Set<Cell> set = new HashSet<>();
 		myCells.forEach(cell -> {
 			SegCell tmp = (SegCell)cell;
-			if (!tmp.isEmpty() && tmp.isInState(new SegState(s)))
+			if (tmp.isInState(new SegState(s)))
 				set.add(tmp);
 		});
 		return set;
